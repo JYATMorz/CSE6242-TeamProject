@@ -65,7 +65,8 @@ button {
     min-width: 800px;
     min-height: 600px;
     text-align: center;
-    outline: 1px solid red;
+    outline: 2px solid lightsteelblue;
+    border-radius: 25px;
 }
 
 #zoom-selection {
@@ -179,4 +180,11 @@ button {
 
 .middle-selection {
     max-height: 60px;
+}
+
+.notification-text {
+    text-anchor: middle;
+    font-size: x-large;
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
