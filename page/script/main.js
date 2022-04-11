@@ -134,10 +134,10 @@ function createMap(region, crimeData, selectedRegion) {
             .attr("stroke-width", "0.2px")
             .attr("stroke", "white")
             .attr("fill", "gray")
-            .on("mouseover", function (d, i) {
+            .on("mouseover", function (event, d) { // changed in d3.js v6 ↓
                 d3.select(this).raise()
                     .attr("fill", "lightgray")
-            }).on("mouseout", function (d, i) {
+            }).on("mouseout", function (event, d) { // ↑ (replaced data, index, element)
                 d3.select(this).raise()
                     .attr("fill", "gray")
             });
