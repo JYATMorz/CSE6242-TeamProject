@@ -19,15 +19,9 @@
         </div>
         <div id="main-div" class="grid-container">
             <div id="left-div" class="vertical-div grid-container">
-                <div id="attr-selection" class="user-selection">
+                <div id="attr-selection" class="user-selection grid-container">
                     <!--Put Clickable (Vertically) Element Here To Choose Data Attribute-->
-                    <ul id="vertical-navigator" class="navigator">
-                        <li><button type="button" class="navigator-bar">Attribute Range 1</button></li>
-                        <li><button type="button" class="navigator-bar">Attribute Range 2</button></li>
-                        <li><button type="button" class="navigator-bar">Attribute Range 3</button></li>
-                        <li><button type="button" class="navigator-bar">Attribute Range 4</button></li>
-                        <li><button type="button" class="navigator-bar">Attribute Range 5</button></li>
-                    </ul>
+                    <!--d3.js-->
                 </div>
                 <div id="zoom-selection" class="user-selection grid-container">
                     <!--Put Buttons/Slides (Vertically) Here to Zoom In|Out Map-->
@@ -38,7 +32,7 @@
                     <div class="zoom-btn">
                         <button type="button" id="zoom-in">+</button>
                     </div>
-                    <input type="range" id="zoom-slide" title="Zoom" min="1" max="9" step="1"/>
+                    <input type="range" id="zoom-slide" title="Zoom" min="1" max="9" step="1" />
                 </div>
             </div>
 
@@ -47,20 +41,16 @@
                     <!--Check User Location and AutoSet Location in Dropdown-->
                     You are looking for: <select id="location-select" title="Region">
                         <option class="region-select" selected disabled>Please select the region ...</option>
-                    </select>
+                        <!--d3.js-->
+                </select>
                 </div>
                 <div id="svg-div">
                     <!--Loading Your Map ... Please Wait ...-->
                     <!--progress element is optional-->
                 </div>
-                <div id="time-selection" class="middle-selection">
-                    <ul id="horizon-navigator" class="navigator">
-                        <li><button type="button" class="navigator-bar">Time Range 1</button></li>
-                        <li><button type="button" class="navigator-bar">Time Range 2</button></li>
-                        <li><button type="button" class="navigator-bar">Time Range 3</button></li>
-                        <li><button type="button" class="navigator-bar">Time Range 4</button></li>
-                        <li><button type="button" class="navigator-bar">Time Range 5</button></li>
-                    </ul>
+                <div id="time-selection" class="middle-selection grid-container">
+                    <input type="range" id="time-slide" title="Data Range"/>
+                    <output for="time-slide" id="time-output">From 2000-01<br/>To 2020-12</output>
                 </div>
             </div>
 

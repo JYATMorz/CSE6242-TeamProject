@@ -69,6 +69,21 @@ button {
     border-radius: 25px;
 }
 
+#time-selection {
+    text-align: center;
+    grid-template-columns: 4fr 1fr;
+}
+
+#time-slide {
+    margin: auto;
+    width: 95%;
+}
+
+#time-output {
+    margin: auto;
+    font-size: large;
+}
+
 #zoom-selection {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
@@ -121,17 +136,15 @@ button {
     right: 0;
 }
 
-.navigator {
-    list-style-type: none;
-    padding: 0;
-}
-
-#vertical-navigator {
+#attr-selection {
     margin: 10% auto;
     width: 90%;
+    grid-auto-rows: auto;
 }
 
-/*#horizon-navigator {}*/
+#attr-selection .navigator-bar {
+    margin: 10px 0px;
+}
 
 .navigator-bar {
     background-color: azure;
@@ -143,17 +156,6 @@ button {
     box-shadow: 0 3px lightgray;
 }
 
-#vertical-navigator .navigator-bar {
-    margin: 10px;
-    padding: 10px 5px;
-}
-
-#horizon-navigator .navigator-bar {
-    float: left;
-    margin: 5px;
-    padding: 5px 10px;
-}
-
 .navigator-bar:hover {
     background-color: gray;
     color: white;
@@ -162,6 +164,12 @@ button {
 .navigator-bar:active {
     box-shadow: 0 1px lightgray;
     transform: translateY(2px);
+}
+
+.selectedBtn {
+    box-shadow: 0 1px lightgray;
+    transform: translateY(2px);
+    background-color: cadetblue;
 }
 
 #location-selection {

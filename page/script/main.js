@@ -7,6 +7,13 @@ const regionNameObj = {
     China: ["Shenzhen", "Shanghai"],
     USA: ["Atlanta", "Los Angeles"]
 };
+const attrBtn = new Array(5);
+for (let i = 0; i < attrBtn.length; i++) {
+    attrBtn[i] = {
+        attrName: "Attrbute Type " + (i + 1),
+        attrSelected: false
+    };
+}
 
 // enter code to define margin and dimensions for svg
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
@@ -23,6 +30,21 @@ const legendColor = new Array(colorHue.length);
 for (let i = 0; i < legendColor.length; i++) {
     legendColor[i] = { index: i, colorHex: colorHue[i] };
 }
+
+// enter code to control Attribute Buttons
+const attrBtnList = d3.select("#attr-selection")
+attrBtnList.selectAll("button")
+    .data(attrBtn).enter()
+    .append("button").attr("class", "navigator-bar")
+    .attr("type", "button")
+    .text(d => d.attrName)
+    .classed("selectedBtn", d => d.attrSelected)
+    .on("click", function(event, d) {
+        d.attrSelected = !d.attrSelected;
+        d3.select(this)
+            .classed("selectedBtn", d.attrSelected);
+        // call map update function here to select chosen Attribute(s)
+    });
 
 // enter code to control zoom
 const zoomIn = d3.select("#zoom-in");
@@ -91,8 +113,7 @@ function ready(error, region, crimeData, regionNameObj) {
         // enter code to append the region options to the dropdown
         regionDropdown.selectAll("optgroup")
             .data(Object.keys(regionNameObj)).enter()
-            .append("optgroup")
-            .attr("class", "region-select")
+            .append("optgroup").attr("class", "region-select")
             .attr("label", d => d);
         for (let country in regionNameObj) {
             if (Object.hasOwnProperty.call(regionNameObj, country)) {
@@ -101,8 +122,7 @@ function ready(error, region, crimeData, regionNameObj) {
                     .filter((d, i) => d == country)
                     .selectAll("option")
                     .data(regionArr).enter()
-                    .append("option")
-                    .attr("class", "region-select")
+                    .append("option").attr("class", "region-select")
                     .attr("value", d => d)
                     .text(d => d);
             }
