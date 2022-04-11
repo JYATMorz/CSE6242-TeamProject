@@ -13,7 +13,10 @@ for (let i = 0; i < attrBtn.length; i++) {
         attrName: "Attrbute Type " + (i + 1),
         attrSelected: false
     };
-}
+};
+const zoomSlideRange = { min: 2, max: 8 };
+const timeSlideRange = { min: new Date("2010-01"), max: new Date("2020-12") };
+
 
 // enter code to define margin and dimensions for svg
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
@@ -32,38 +35,38 @@ for (let i = 0; i < legendColor.length; i++) {
 }
 
 // enter code to control Attribute Buttons
-const attrBtnList = d3.select("#attr-selection")
+const attrBtnList = d3.select("#attr-selection");
 attrBtnList.selectAll("button")
     .data(attrBtn).enter()
     .append("button").attr("class", "navigator-bar")
     .attr("type", "button")
     .text(d => d.attrName)
     .classed("selectedBtn", d => d.attrSelected)
-    .on("click", function(event, d) {
+    .on("click", function (event, d) {
         d.attrSelected = !d.attrSelected;
         d3.select(this)
             .classed("selectedBtn", d.attrSelected);
         // call map update function here to select chosen Attribute(s)
+        updateAttr(d);
     });
 
 // enter code to control zoom
 const zoomIn = d3.select("#zoom-in");
 const zoomOut = d3.select("#zoom-out");
-const slideRange = { min: 2, max: 8 }
 const zoomSlide = d3.select("#zoom-slide")
-    .property("min", slideRange.min)
-    .property("max", slideRange.max);
+    .property("min", zoomSlideRange.min)
+    .property("max", zoomSlideRange.max);
 
 zoomIn.on("click", function () {
     zoomLevel = zoomSlide.property("value");
-    if (zoomLevel < slideRange.max) {
+    if (zoomLevel < zoomSlideRange.max) {
         zoomSlide.property("value", ++zoomLevel);
     }
     console.log("Call Zoom In Function Here");
 });
 zoomOut.on("click", function () {
     zoomLevel = zoomSlide.property("value");
-    if (zoomLevel > slideRange.min) {
+    if (zoomLevel > zoomSlideRange.min) {
         zoomSlide.property("value", --zoomLevel);
     }
     console.log("Call Zoom Out Function Here");
@@ -72,8 +75,20 @@ zoomSlide.on("input", function () {
     console.log("Call Zoom Function Here");
 });
 
+// enter code to control time range
+const timeSlide = d3.select("#time-slide")
+    .property("min", 1)
+    .property("max", findMonthDiff(timeSlideRange.min, timeSlideRange.max));
+const timeOutput = d3.select("#time-output");
+timeSlide.on("input", function () {
+    console.log("Call Time Selection Function Here");
+    outputStr = "From " + dateToString(timeSlideRange.min) + "\nTo "
+        + dateToString(findMonthAfter(timeSlideRange.min, timeSlide.property("value")));
+    timeOutput.text(outputStr);
+});
+
 // enter code to control region selection dropdown
-const regionDropdown = d3.select("#location-select")
+const regionDropdown = d3.select("#location-select");
 
 // enter code to create svg
 const svg = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap")
@@ -106,7 +121,7 @@ function ready(error, region, crimeData, regionNameObj) {
         alert(error);
     } else if (Object.keys(region).length == 0 || Object.keys(regionNameObj).length == 0) {
         console.log("Error:\nNo error in Promise.\nBut some data is empty!");
-        alert("Error:\nNo error in Promise.\nBut some data is empty!")
+        alert("Error:\nNo error in Promise.\nBut some data is empty!");
     } else {
         // enter code to extract all datas from crimeData
 
@@ -162,4 +177,29 @@ function createMap(region, crimeData, selectedRegion) {
                     .attr("fill", "gray")
             });
     }
+}
+
+function updateAttr(attrBtnObj) {
+    console.log(attrBtnObj);
+    console.log("Update Information Box Using Given Object");
+}
+
+function findMonthDiff(startDate, endDate) {
+    startDateMonths = startDate.getUTCFullYear() * 12 + startDate.getUTCMonth();
+    endDateMonths = endDate.getUTCFullYear() * 12 + endDate.getUTCMonth();
+    return endDateMonths - startDateMonths;
+}
+
+function findMonthAfter(startDate, months) {
+    endYear = startDate.getUTCFullYear() + parseInt(months / 12);
+    endMonth = months % 12;
+    endDate = new Date(endYear, endMonth);
+    endDate.setUTCFullYear(endYear);
+    endDate.setUTCMonth(endMonth);
+    return endDate;
+}
+
+function dateToString(date) {
+    return date.getUTCFullYear() + "-"
+        + String(date.getUTCMonth() + 1).padStart(2, "0");
 }
