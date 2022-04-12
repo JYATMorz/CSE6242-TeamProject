@@ -25,14 +25,14 @@
                 </div>
                 <div id="zoom-selection" class="user-selection grid-container">
                     <!--Put Buttons/Slides (Vertically) Here to Zoom In|Out Map-->
-                    <div class="zoom-btn">
-                        <button type="button" id="zoom-out">-</button>
-                    </div>
-                    <div id="zoom-label">Zoom</div>
+                    <input type="range" id="zoom-slide" title="Zoom" min="0" value="0" step="1" orient="vertical" />
                     <div class="zoom-btn">
                         <button type="button" id="zoom-in">+</button>
                     </div>
-                    <input type="range" id="zoom-slide" title="Zoom" min="1" max="9" step="1" />
+                    <div id="zoom-label">Zoom</div>
+                    <div class="zoom-btn">
+                        <button type="button" id="zoom-out">-</button>
+                    </div>
                 </div>
             </div>
 
@@ -42,15 +42,15 @@
                     You are looking for: <select id="location-select" title="Region">
                         <option class="region-select" selected disabled>Please select the region ...</option>
                         <!--d3.js-->
-                </select>
+                    </select>
                 </div>
                 <div id="svg-div">
                     <!--Loading Your Map ... Please Wait ...-->
                     <!--progress element is optional-->
                 </div>
                 <div id="time-selection" class="middle-selection grid-container">
-                    <input type="range" id="time-slide" title="Data Range" step="1"/>
-                    <output for="time-slide" id="time-output">From 2000-01<br/>To 2020-12</output>
+                    <input type="range" id="time-slide" title="Data Range" step="1" />
+                    <output for="time-slide" id="time-output">Choose The Time Range</output>
                 </div>
             </div>
 

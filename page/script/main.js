@@ -77,14 +77,13 @@ zoomSlide.on("input", function () {
 
 // enter code to control time range
 const timeSlide = d3.select("#time-slide")
-    .property("min", 1)
-    .property("max", findMonthDiff(timeSlideRange.min, timeSlideRange.max));
-const timeOutput = d3.select("#time-output");
+    .property("max", -1)
+    .property("min", -findMonthDiff(timeSlideRange.min, timeSlideRange.max))
+    .property("value", -findMonthDiff(timeSlideRange.min, timeSlideRange.max));
+const timeOutput = d3.select("#time-output").text(outputStr());
 timeSlide.on("input", function () {
     console.log("Call Time Selection Function Here");
-    outputStr = "From " + dateToString(timeSlideRange.min) + "\nTo "
-        + dateToString(findMonthAfter(timeSlideRange.min, timeSlide.property("value")));
-    timeOutput.text(outputStr);
+    timeOutput.text(outputStr());
 });
 
 // enter code to control region selection dropdown
@@ -190,16 +189,20 @@ function findMonthDiff(startDate, endDate) {
     return endDateMonths - startDateMonths;
 }
 
-function findMonthAfter(startDate, months) {
-    endYear = startDate.getUTCFullYear() + parseInt(months / 12);
-    endMonth = months % 12;
-    endDate = new Date(endYear, endMonth);
-    endDate.setUTCFullYear(endYear);
-    endDate.setUTCMonth(endMonth);
-    return endDate;
+function findMonthAfter(endDate, months) {
+    let startYear = endDate.getUTCFullYear() + parseInt(months / 12);
+    let startMonth = endDate.getUTCMonth() + months % 12;
+    let startDate = new Date(Date.UTC(startYear, startMonth));
+    return startDate;
 }
 
 function dateToString(date) {
     return date.getUTCFullYear() + "-"
         + String(date.getUTCMonth() + 1).padStart(2, "0");
+}
+
+function outputStr() {
+    return "From "
+        + dateToString(findMonthAfter(timeSlideRange.max, timeSlide.property("value")))
+        + "\nTo " + dateToString(timeSlideRange.max);
 }
