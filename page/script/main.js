@@ -82,8 +82,9 @@ const timeSlide = d3.select("#time-slide")
     .property("value", -findMonthDiff(timeSlideRange.min, timeSlideRange.max));
 const timeOutput = d3.select("#time-output").text(outputStr());
 timeSlide.on("input", function () {
-    console.log("Call Time Selection Function Here");
+    timeSlideColor();
     timeOutput.text(outputStr());
+    console.log("Call Time Selection Function Here");
 });
 
 // enter code to control region selection dropdown
@@ -205,4 +206,12 @@ function outputStr() {
     return "From "
         + dateToString(findMonthAfter(timeSlideRange.max, timeSlide.property("value")))
         + "\nTo " + dateToString(timeSlideRange.max);
+}
+
+function timeSlideColor() {
+    let value = (timeSlide.property("value") - timeSlide.property("min") + 1)
+        / (timeSlide.property("max") - timeSlide.property("min") + 1) * 100;
+    let style = "linear-gradient(to right, azure " + value
+        + "%, cadetblue " + value + "% 100%)";
+    timeSlide.style("background", style);
 }

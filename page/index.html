@@ -24,13 +24,14 @@
                     <!--d3.js-->
                 </div>
                 <div id="zoom-selection" class="user-selection grid-container">
-                    <!--Put Buttons/Slides (Vertically) Here to Zoom In|Out Map-->
-                    <input type="range" id="zoom-slide" title="Zoom" min="0" value="0" step="1" orient="vertical" />
-                    <div class="zoom-btn">
+                    <div id="zoom-div">
+                        <input type="range" id="zoom-slide" title="Zoom" min="0" value="0" step="1" />
+                    </div>
+                    <div class="zoom-btn" id="zoom-in-btn">
                         <button type="button" id="zoom-in">+</button>
                     </div>
                     <div id="zoom-label">Zoom</div>
-                    <div class="zoom-btn">
+                    <div class="zoom-btn" id="zoom-out-btn">
                         <button type="button" id="zoom-out">-</button>
                     </div>
                 </div>

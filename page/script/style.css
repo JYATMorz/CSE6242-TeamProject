@@ -6,6 +6,14 @@ button {
     -webkit-transition-duration: 0.2s;
     -moz-transition-duration: 0.2s;
     transition-duration: 0.2s;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input[type=range]:focus {
+    outline: none;
 }
 
 #title {
@@ -72,39 +80,71 @@ button {
 
 #time-selection {
     text-align: center;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 6fr 1fr;
 }
 
 #time-slide {
-    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    appearance: none;
     margin: auto;
     width: 95%;
-    height: 10px;
+    height: 16px;
+    border-radius: 10px;
     outline: none;
-    border-radius: 50%;
-    background: none;
+    background: linear-gradient(to right, azure 0%, cadetblue 0% 100%);
+}
+
+#time-slide::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px lightsteelblue;
+}
+
+#time-slide::-moz-range-track {
+    width: 100%;
+    height: 16px;
+    cursor: pointer;
+    background: cadetblue;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px lightsteelblue;
+}
+
+#time-slide::-moz-range-progress {
+    background: linear-gradient(azure, azure) no-repeat;
+    height: 12px;
+    border-radius: 10px;
 }
 
 #time-slide::-webkit-slider-thumb {
-    appearance: none;
     -webkit-appearance: none;
-    height: 25px;
-    width: 25px;
-    border: none;
+    appearance: none;
+    height: 36px;
+    width: 20px;
+    border: 1px solid whitesmoke;
     background-color: slategray;
-    border-radius: 50%;
+    border-radius: 10px;
+    margin-top: -10px;
+}
+
+#time-slide::-webkit-slider-thumb:active {
+    background-color: darkslategray;
 }
 
 #time-slide::-moz-range-thumb {
-    appearance: none;
     -moz-appearance: none;
-    height: 25px;
-    width: 25px;
-    border: none;
+    appearance: none;
+    height: 30px;
+    width: 20px;
+    border: 1px solid lightgray;
     background-color: slategray;
-    border-radius: 50%;
+    border-radius: 10px;
+}
+
+#time-slide::-moz-range-thumb:active {
+    background-color: darkslategray;
 }
 
 #time-output {
@@ -114,26 +154,96 @@ button {
 }
 
 #zoom-selection {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     padding: 5px;
 }
 
-#zoom-slide {
+#zoom-label {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.zoom-btn {
+    grid-column: 3;
+}
+
+#zoom-in-btn {
+    grid-row: 1;
+}
+
+#zoom-out-btn {
+    grid-row: 3;
+}
+
+#zoom-div {
+    grid-column: 2;
     grid-row: 1 / span 3;
-    width: 50%;
-    margin: 10% auto;
-    writing-mode: bt-lr;
-    -webkit-appearance: slider-vertical;
+    display: inline-block;
+    height: 160px;
+    width: 40px;
+    padding: 0;
+    margin: auto;
+    text-align: right;
+}
+
+#zoom-slide {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: none;
+    width: 160px;
+    height: 40px;
+    margin: 0;
+    transform-origin: 80px 80px;
+    transform: rotate(-90deg);
+}
+
+#zoom-slide::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    background: azure;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px lightsteelblue;
+}
+
+#zoom-slide::-moz-range-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    background: azure;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px lightsteelblue;
 }
 
 #zoom-slide::-webkit-slider-thumb {
+    -webkit-appearance: none;
     appearance: none;
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 15px;
     border: none;
     background-color: slategray;
-    border-radius: 50%;
+    border-radius: 5px;
+    margin-top: -9px;
+}
+
+#zoom-slide::-webkit-slider-thumb:active {
+    background-color: darkslategray;
+}
+
+#zoom-slide::-moz-range-thumb {
+    -moz-appearance: none;
+    appearance: none;
+    height: 30px;
+    width: 15px;
+    border: none;
+    background-color: slategray;
+    border-radius: 5px;
+}
+
+#zoom-slide::-moz-range-thumb:active {
+    background-color: darkslategray;
 }
 
 #zoom-label {
