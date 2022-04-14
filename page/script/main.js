@@ -16,7 +16,7 @@ for (let i = 0; i < attrBtn.length; i++) {
 };
 const zoomSlideRange = { min: 2, max: 8 };
 const timeSlideRange = { min: new Date("2010-01"), max: new Date("2020-12") };
-
+let selectedPath = { selectedValue: null, path: null };
 
 // enter code to define margin and dimensions for svg
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
@@ -25,6 +25,10 @@ const height = 600 - margin.top - margin.bottom;
 
 // define any other global variables 
 const pathToJSON = "data/la-county-neighborhoods-v6.geojson";
+const pathToCSV = "";
+const zoom = d3.zoom()
+    .scaleExtent([zoomSlideRange.min, zoomSlideRange.max])
+    .on("zoom", zoomed);
 
 // enter code to create color scale
 const colorHue = ["#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"];
@@ -44,8 +48,7 @@ attrBtnList.selectAll("button")
     .classed("selectedBtn", d => d.attrSelected)
     .on("click", function (event, d) {
         d.attrSelected = !d.attrSelected;
-        d3.select(this)
-            .classed("selectedBtn", d.attrSelected);
+        d3.select(this).classed("selectedBtn", d.attrSelected);
         // call map update function here to select chosen Attribute(s)
         updateAttr(d);
     });
@@ -63,6 +66,7 @@ zoomIn.on("click", function () {
         zoomSlide.property("value", ++zoomLevel);
     }
     console.log("Call Zoom In Function Here");
+    svg.transition().call(zoom.scaleBy, 1.25);
 });
 zoomOut.on("click", function () {
     zoomLevel = zoomSlide.property("value");
@@ -70,6 +74,7 @@ zoomOut.on("click", function () {
         zoomSlide.property("value", --zoomLevel);
     }
     console.log("Call Zoom Out Function Here");
+    svg.transition().call(zoom.scaleBy, 0.8);
 });
 zoomSlide.on("input", function () {
     console.log("Call Zoom Function Here");
@@ -94,8 +99,9 @@ const regionDropdown = d3.select("#location-select");
 const svg = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
+const translateStr = "translate(" + margin.left + "," + margin.top + ")";
 const gRegion = svg.append("g").attr("id", "svgGeoRegion")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", translateStr);
 
 // enter code to define projection and path required for Choropleth
 const projection = d3.geoAlbers();
@@ -142,46 +148,89 @@ function ready(error, region, crimeData, regionNameObj) {
                     .text(d => d);
             }
         }
-        // event listener for the dropdown. 
-        // Update geoMap when selection changes.
-        regionDropdown.on("change", function () {
-            selectedRegion = this.options[this.selectedIndex].value;
-            createMap(region, crimeData, selectedRegion);
-        });
+        regionDropdown.on("change", dropdownChange);
     }
 }
 
-function createMap(region, crimeData, selectedRegion) {
+function regionClicked(event, d) {
+    if (d.values.selected) {
+        changeRegionColor(false);
+    } else {
+        if (selectedPath.path !== null) {
+            changeRegionColor(false);
+        }
+        selectedPath.path = d3.select(this);
+        selectedPath.selectedValue = d.values;
+        changeRegionColor(true);
+    }
+}
+
+function changeRegionColor(boo) {
+    if (boo) {
+        selectedPath.path.raise().transition().style("fill", "goldenrod");
+    } else {
+        selectedPath.path.raise().transition().style("fill", null);
+    }
+    selectedPath.selectedValue.selected = boo;
+}
+
+function dropdownChange(event, d) {
+    let selectedRegion = this.options[this.selectedIndex].value;
     gRegion.selectAll("path").remove();
     gRegion.selectAll("text").remove();
-    if (selectedRegion != "Los Angeles") {
-        gRegion.append("text")
-            .attr("class", "notification-text")
-            .attr("x", 0.5 * width)
-            .attr("y", 0.5 * height)
-            .text("No Data");
-    } else {
-        projection.fitSize([width, height], region);
-        gRegion.selectAll("path")
-            .data(region.features).enter()
-            .append("path")
-            .attr("d", path)
-            .attr("stroke-width", "0.2px")
-            .attr("stroke", "white")
-            .attr("fill", "gray")
-            .on("mouseover", function (event, d) { // changed in d3.js v6 ↓
-                d3.select(this).raise()
-                    .attr("fill", "lightgray")
-            }).on("mouseout", function (event, d) { // ↑ (replaced data, index, element)
-                d3.select(this).raise()
-                    .attr("fill", "gray")
-            });
+    svg.call(
+        zoom.transform,
+        d3.zoomIdentity,
+        d3.zoomTransform(svg.node()).invert([width / 2, height / 2])
+    );
+    switch (selectedRegion) {
+        case "Los Angeles":
+            createMap(region, crimeData);
+            break;
+        default:
+            noData();
+            break;
     }
+}
+
+function createMap(region, crimeData) {
+    projection.fitSize([width, height], region);
+
+    let regionFeatures = [...region.features];
+    regionFeatures.forEach(feature => {
+        feature.values = {
+            selected: false
+            // more crime data here
+        };
+    });
+
+    gRegion.selectAll("path")
+        .data(regionFeatures).enter()
+        .append("path")
+        .attr("d", path)
+        .attr("id", "gRegion")
+        .attr("fill", "gray")
+        .on("mouseover", mapMouseOver)
+        .on("mouseout", mapMouseOut)
+        .on("click", regionClicked);
+
+    svg.call(zoom)
+        .on("wheel.zoom", null);
+}
+
+function noData() {
+    gRegion.append("text")
+        .attr("class", "notification-text")
+        .attr("x", 0.5 * width)
+        .attr("y", 0.5 * height)
+        .text("No Data");
 }
 
 function updateAttr(attrBtnObj) {
-    console.log(attrBtnObj);
-    console.log("Update Information Box Using Given Object");
+    if (attrBtnObj.attrSelected) {
+        console.log(attrBtnObj);
+        console.log("Update Information Box Using Given Object");
+    }
 }
 
 function findMonthDiff(startDate, endDate) {
@@ -214,4 +263,16 @@ function timeSlideColor() {
     let style = "linear-gradient(to right, azure " + value
         + "%, cadetblue " + value + "% 100%)";
     timeSlide.style("background", style);
+}
+
+function mapMouseOver(event, d) {
+    d3.select(this).raise().attr("fill", "lightgray");
+}
+
+function mapMouseOut(event, d) {
+    d3.select(this).raise().attr("fill", "gray");
+}
+
+function zoomed({ transform }) {
+    gRegion.attr("transform", translateStr + " " + transform);
 }

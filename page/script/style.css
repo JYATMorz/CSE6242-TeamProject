@@ -342,3 +342,8 @@ input[type=range]:focus {
     font-style: italic;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+#gRegion {
+    stroke: white;
+    stroke-width: 0.2px;
+}
