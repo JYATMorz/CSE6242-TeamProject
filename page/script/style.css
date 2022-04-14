@@ -72,15 +72,20 @@ input[type=range]:focus {
 
 #svg-div {
     min-width: 800px;
-    min-height: 600px;
-    text-align: center;
+    height: 600px;
     outline: 2px solid lightsteelblue;
     border-radius: 25px;
+    overflow: hidden;
+}
+
+#svgGeoMap {
+    width: 100%;
+    height: 100%;
 }
 
 #time-selection {
     text-align: center;
-    grid-template-columns: 6fr 1fr;
+    grid-template-columns: 5fr 1fr;
 }
 
 #time-slide {
@@ -346,4 +351,9 @@ input[type=range]:focus {
 #gRegion {
     stroke: white;
     stroke-width: 0.2px;
+    fill: gray;
+}
+
+#gRegion:hover {
+    fill: lightgray;
 }
