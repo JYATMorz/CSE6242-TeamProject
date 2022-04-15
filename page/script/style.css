@@ -352,8 +352,32 @@ input[type=range]:focus {
     stroke: white;
     stroke-width: 0.2px;
     fill: gray;
+    cursor: pointer;
 }
 
 #gRegion:hover {
     fill: lightgray;
+    stroke: blanchedalmond;
+    stroke-width: 1px;
+}
+
+#gRegion:active {
+    transition: 500ms;
+    stroke-width: 2px;
+}
+
+.moveableDiv {
+    position: absolute;
+    display: none;
+    pointer-events: none;
+}
+
+#region-title {
+    padding: 5px;
+    font-size: larger;
+    color: white;
+    outline-width: 1px;
+    border-radius: 5px;
+    background-color: darkolivegreen;
+    opacity: 80%;
 }

@@ -33,6 +33,10 @@ for (let i = 0; i < legendColor.length; i++) {
     legendColor[i] = { index: i, colorHex: colorHue[i] };
 }
 
+// enter code to control region title & tip
+const titleDiv = d3.select("#region-title");
+const tipDiv = d3.select("#region-tip");
+
 // enter code to control Attribute Buttons
 const attrBtnList = d3.select("#attr-selection");
 attrBtnList.selectAll("button")
@@ -146,11 +150,6 @@ function dropdownChange(event, d) {
     let selectedRegion = this.options[this.selectedIndex].value;
     gRegion.selectAll("path").remove();
     gRegion.selectAll("text").remove();
-    svg.call(
-        zoom.transform,
-        d3.zoomIdentity,
-        d3.zoomTransform(svg.node()).invert([svgSize().width / 2, svgSize().height / 2])
-    );
     switch (selectedRegion) {
         case "Los Angeles":
             createMap(region, crimeData);
@@ -179,8 +178,9 @@ function createMap(region, crimeData) {
         .attr("d", path)
         .attr("id", "gRegion")
         .classed("selectedRegion", false)
-        .on("mouseover", mapMouseOver)
-        .on("mouseout", mapMouseOut)
+        .on("pointerover", mapPointerOver)
+        .on("pointerout", mapPointerOut)
+        .on("pointermove", mapPointerMove)
         .on("click", regionClicked);
 
     svg.call(zoom)
@@ -235,12 +235,21 @@ function timeSlideColor() {
     timeSlide.style("background", style);
 }
 
-function mapMouseOver(event, d) {
-    // some tooltips here
+function mapPointerOver(event, d) {
+    titleDiv.style("display", "block").text(d.properties.name);
 }
 
-function mapMouseOut(event, d) {
-    // some tooltips here
+function mapPointerOut(event, d) {
+    titleDiv.style("display", "none").text("");
+}
+
+function mapPointerMove(event, d) {
+    let coordinate = d3.pointer(event, d3.select("body"));
+    let title = {
+        x: coordinate[0] - 30 + "px",
+        y: coordinate[1] - 50 + "px"
+    }
+    titleDiv.style("left", title.x).style("top", title.y);
 }
 
 function regionClicked(event, d) {
