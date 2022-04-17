@@ -14,13 +14,17 @@ for (let i = 0; i < attrBtn.length; i++) {
         attrSelected: false
     };
 };
-const zoomSlideRange = { min: 1, max: 8 };
+const zoomSlideRange = { min: 1, max: 6 };
 const timeSlideRange = { min: new Date("2010-01"), max: new Date("2020-12") };
-let selectedPath = { selectedValue: null, path: null };
+const selectedPath = { selectedValue: null, path: null };
+
+// enter code to create svg
+const svg = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
+const gRegion = svg.append("g").attr("id", "svgGeoRegion");
 
 // define any other global variables 
-const pathToJSON = "data/la-county-neighborhoods-v6.geojson";
-const pathToCSV = "";
+const pathToJSON = "data/lapd_divisions.geojson";
+const pathToCSV = "data/crime_clean_v1.0.csv";
 const zoom = d3.zoom()
     .scaleExtent([zoomSlideRange.min, zoomSlideRange.max])
     .on("zoom", zoomed);
@@ -36,6 +40,14 @@ for (let i = 0; i < legendColor.length; i++) {
 // enter code to control region title & tip
 const titleDiv = d3.select("#region-title");
 const tipDiv = d3.select("#region-tip");
+d3.select(window).on("resize", function () {
+    const svgRect = svgPos();
+    tipDiv
+        .style("left", svgRect.svgLeft + svgRect.width / 2 + "px")
+        .style("top", svgRect.svgTop + "px")
+        .style("width", svgRect.svgWidth / 2 + "px")
+        .style("height", svgRect.svgHeight + "px");
+});
 
 // enter code to control Attribute Buttons
 const attrBtnList = d3.select("#attr-selection");
@@ -59,22 +71,27 @@ const zoomSlide = d3.select("#zoom-slide")
     .property("min", zoomSlideRange.min)
     .property("max", zoomSlideRange.max);
 
-zoomIn.on("click", function () {
-    zoomLevel = zoomSlide.property("value");
+zoomIn.on("click", function (event, d) {
+    let zoomLevel = zoomSlide.property("value");
     if (zoomLevel < zoomSlideRange.max) {
         zoomSlide.property("value", ++zoomLevel);
-        svg.transition().call(zoom.scaleTo, zoomLevel);
+        if (selectedPath.path !== null) {
+            // adjust zoom center point here !!!
+            svg.transition().call(zoom.scaleTo, zoomLevel);
+        } else {
+            svg.transition().call(zoom.scaleTo, zoomLevel);
+        }
     }
 });
-zoomOut.on("click", function () {
-    zoomLevel = zoomSlide.property("value");
+zoomOut.on("click", function (event, d) {
+    let zoomLevel = zoomSlide.property("value");
     if (zoomLevel > zoomSlideRange.min) {
         zoomSlide.property("value", --zoomLevel);
         svg.transition().call(zoom.scaleTo, zoomLevel);
     }
 });
-zoomSlide.on("input", function () {
-    zoomLevel = zoomSlide.property("value");
+zoomSlide.on("input", function (event, d) {
+    let zoomLevel = zoomSlide.property("value");
     svg.transition().call(zoom.scaleTo, zoomLevel);
 });
 
@@ -93,27 +110,33 @@ timeSlide.on("input", function () {
 // enter code to control region selection dropdown
 const regionDropdown = d3.select("#location-select");
 
-// enter code to create svg
-const svg = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
-const gRegion = svg.append("g").attr("id", "svgGeoRegion");
-
 // enter code to define projection and path required for Choropleth
 const projection = d3.geoAlbers();
 const path = d3.geoPath(projection);
 
 // import csv/json data
-let error = "", region = {}, crimeData = [];
-// const csvPromise = new Promise((resolve, reject) => {});
+const csvPromise = new Promise((resolve, reject) => {
+    d3.dsv(",", pathToCSV, d => {
+        return d["area"];
+    })
+        .then(temp => resolve(temp))
+        .catch(err => reject("CSV\n" + err));
+});
 const jsonPromise = new Promise((resolve, reject) => {
     d3.json(pathToJSON)
         .then(temp => resolve(temp))
         .catch(err => reject("JSON\n" + err));
 });
-Promise.all([jsonPromise]).then(value => {
+
+
+let error = "", region = {}, crimeData = [];
+Promise.all([jsonPromise, csvPromise]).then(value => {
     region = value[0];
+    crimeData = value[1];
 }).catch(err => {
     error = "Error in " + err;
 }).then(() => ready(error, region, crimeData, regionNameObj));
+
 
 function ready(error, region, crimeData, regionNameObj) {
     if (error.length != 0) {
@@ -124,6 +147,8 @@ function ready(error, region, crimeData, regionNameObj) {
         alert("Error:\nNo error in Promise.\nBut some data is empty!");
     } else {
         // enter code to extract all datas from crimeData
+        
+        console.log(new Set(crimeData));
 
         // enter code to append the region options to the dropdown
         regionDropdown.selectAll("optgroup")
@@ -147,7 +172,7 @@ function ready(error, region, crimeData, regionNameObj) {
 }
 
 function dropdownChange(event, d) {
-    let selectedRegion = this.options[this.selectedIndex].value;
+    const selectedRegion = this.options[this.selectedIndex].value;
     gRegion.selectAll("path").remove();
     gRegion.selectAll("text").remove();
     switch (selectedRegion) {
@@ -162,9 +187,10 @@ function dropdownChange(event, d) {
 }
 
 function createMap(region, crimeData) {
-    projection.fitSize([svgSize().width, svgSize().height], region);
+    const svgRect = svgPos();
+    projection.fitSize([svgRect.svgWidth, svgRect.svgHeight], region);
 
-    let regionFeatures = [...region.features];
+    const regionFeatures = [...region.features];
     regionFeatures.forEach(feature => {
         feature.values = {
             selected: false
@@ -189,10 +215,11 @@ function createMap(region, crimeData) {
 }
 
 function noData() {
+    const svgRect = svgPos();
     gRegion.append("text")
         .attr("class", "notification-text")
-        .attr("x", 0.5 * svgSize().width)
-        .attr("y", 0.5 * svgSize().height)
+        .attr("x", 0.5 * svgRect.svgWidth)
+        .attr("y", 0.5 * svgRect.svgHeight)
         .text("No Data");
 }
 
@@ -210,9 +237,9 @@ function findMonthDiff(startDate, endDate) {
 }
 
 function findMonthAfter(endDate, months) {
-    let startYear = endDate.getUTCFullYear() + parseInt(months / 12);
-    let startMonth = endDate.getUTCMonth() + months % 12;
-    let startDate = new Date(Date.UTC(startYear, startMonth));
+    const startYear = endDate.getUTCFullYear() + parseInt(months / 12);
+    const startMonth = endDate.getUTCMonth() + months % 12;
+    const startDate = new Date(Date.UTC(startYear, startMonth));
     return startDate;
 }
 
@@ -228,9 +255,9 @@ function outputStr() {
 }
 
 function timeSlideColor() {
-    let value = (timeSlide.property("value") - timeSlide.property("min") + 1)
+    const value = (timeSlide.property("value") - timeSlide.property("min") + 1)
         / (timeSlide.property("max") - timeSlide.property("min") + 1) * 100;
-    let style = "linear-gradient(to right, azure " + value
+    const style = "linear-gradient(to right, azure " + value
         + "%, cadetblue " + value + "% 100%)";
     timeSlide.style("background", style);
 }
@@ -240,12 +267,12 @@ function mapPointerOver(event, d) {
 }
 
 function mapPointerOut(event, d) {
-    titleDiv.style("display", "none").text("");
+    titleDiv.style("display", null).text(null);
 }
 
 function mapPointerMove(event, d) {
-    let coordinate = d3.pointer(event, d3.select("body"));
-    let title = {
+    const coordinate = d3.pointer(event, d3.select("body"));
+    const title = {
         x: coordinate[0] - 30 + "px",
         y: coordinate[1] - 50 + "px"
     }
@@ -253,8 +280,21 @@ function mapPointerMove(event, d) {
 }
 
 function regionClicked(event, d) {
+    const translate = translateValue(d3.pointer(event, svg));
+    const svgRect = svgPos();
     if (d.values.selected) {
         changeRegionColor(false);
+        svg.transition().duration(800)
+            .call(zoom.translateBy, translate.xHallf, translate.y);
+        tipDiv.text(null)
+            .transition().duration(800)
+            .style("transform", "translateX(800px)")
+            .style("left", null).style("top", null)
+            .style("width", null).style("height", null)
+            .on("end", function () {
+                tipDiv.style("display", null)
+                    .style("transform", null);
+            });
     } else {
         if (selectedPath.path !== null) {
             changeRegionColor(false);
@@ -262,6 +302,17 @@ function regionClicked(event, d) {
         selectedPath.path = d3.select(this);
         selectedPath.selectedValue = d.values;
         changeRegionColor(true);
+        svg.transition().duration(800)
+            .call(zoom.translateBy, translate.xLeft, translate.y);
+        tipDiv.style("display", "block")
+            .transition().duration(800)
+            .style("left", svgRect.svgLeft + svgRect.width / 2 + "px")
+            .style("top", svgRect.svgTop + "px")
+            .style("width", svgRect.svgWidth / 2 + "px")
+            .style("height", svgRect.svgHeight + "px")
+            .on("end", function () {
+                tipDiv.text(d.properties.name);
+            });
     }
 }
 
@@ -270,20 +321,37 @@ function changeRegionColor(boo) {
         selectedPath.path.raise().transition()
             .style("stroke-width", "1px")
             .style("fill", "goldenrod");
+        selectedPath.selectedValue.selected = boo;
     } else {
         selectedPath.path.raise().transition()
             .style("stroke-width", null)
             .style("fill", null);
+        selectedPath.selectedValue.selected = boo;
+        selectedPath.path = null;
+        selectedPath.selectedValue = null;
     }
-    selectedPath.selectedValue.selected = boo;
+}
+
+function translateValue([pointerX, pointerY]) {
+    const svgRect = svg.node().getBoundingClientRect();
+    const zoomLevel = zoomSlide.property("value");
+    return {
+        xHallf: (svgRect.width / 2 - (pointerX - svgRect.x)) / zoomLevel,
+        xLeft: (svgRect.width / 4 - (pointerX - svgRect.x)) / zoomLevel,
+        y: (svgRect.height / 2 - (pointerY - svgRect.y)) / zoomLevel,
+    };
+}
+
+function svgPos() {
+    const svgRect = svg.node().getBoundingClientRect();
+    return {
+        svgLeft: svgRect.x + window.scrollX,
+        svgTop: svgRect.y + window.scrollY,
+        svgWidth: svgRect.width,
+        svgHeight: svgRect.height
+    };
 }
 
 function zoomed({ transform }) {
     gRegion.attr("transform", transform);
-}
-
-function svgSize() {
-    let width = parseFloat(svg.style("width"));
-    let height = parseFloat(svg.style("height"));
-    return { width: width, height: height };
 }

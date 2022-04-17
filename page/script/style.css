@@ -1,5 +1,5 @@
 body {
-    min-width: 500px;
+    min-width: 1000px;
 }
 
 button {
@@ -43,7 +43,7 @@ input[type=range]:focus {
     width: 100%;
     min-height: 60%;
     overflow: auto;
-    grid-template-columns: 3fr 15fr 2fr;
+    grid-template-columns: 3fr 16fr;
 }
 
 #footer-div {
@@ -362,7 +362,6 @@ input[type=range]:focus {
 }
 
 #gRegion:active {
-    transition: 500ms;
     stroke-width: 2px;
 }
 
@@ -380,4 +379,15 @@ input[type=range]:focus {
     border-radius: 5px;
     background-color: darkolivegreen;
     opacity: 80%;
+}
+
+#region-tip {
+    top: 200px;
+    right: 0px;
+    height: 500px;
+    background-color: white;
+    opacity: 75%;
+    border-radius: 0px 25px 25px 0px;
+    text-align: center;
+    font-size: larger;
 }
