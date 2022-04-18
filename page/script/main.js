@@ -15,7 +15,7 @@ for (let i = 0; i < attrBtn.length; i++) {
     };
 };
 const zoomSlideRange = { min: 1, max: 6 };
-const timeSlideRange = { min: new Date("2010-01"), max: new Date("2020-12") };
+const timeSlideRange = { min: new Date("2010"), max: new Date("2020") };
 const selectedPath = { selected: null, path: null, pointer: null };
 
 // enter code to create svg
@@ -24,7 +24,7 @@ const gRegion = svg.append("g").attr("id", "svgGeoRegion");
 
 // define any other global variables 
 const pathToJSON = "data/la-county-neighborhoods-v6.geojson";
-const pathToCSV = "data/crime_clean_v1.0.csv";
+const pathToCSV = "data/crime_clean.csv";
 const zoom = d3.zoom()
     .scaleExtent([zoomSlideRange.min, zoomSlideRange.max])
     .on("zoom", zoomed);
@@ -60,7 +60,6 @@ attrBtnList.selectAll("button")
     .on("click", function (event, d) {
         d.attrSelected = !d.attrSelected;
         d3.select(this).classed("selectedBtn", d.attrSelected);
-        // call map update function here to select chosen Attribute(s)
         updateAttr(d);
     });
 
@@ -92,14 +91,15 @@ zoomSlide.on("input", function (event, d) {
 
 // enter code to control time range
 const timeSlide = d3.select("#time-slide")
-    .property("max", -1)
-    .property("min", -findMonthDiff(timeSlideRange.min, timeSlideRange.max))
-    .property("value", -findMonthDiff(timeSlideRange.min, timeSlideRange.max));
-const timeOutput = d3.select("#time-output").text(outputStr());
+    .property("max", 0)
+    .property("min", 0);
+const timeOutput = d3.select("#time-output").text("Please Select\nThe Location");
 timeSlide.on("input", function () {
-    timeSlideColor();
-    timeOutput.text(outputStr());
-    console.log("Call Time Selection Function Here");
+    if (timeSlide.property("max") !== timeSlide.property("min")) {
+        timeSlideColor();
+        timeOutput.text(outputStr());
+        console.log("Call Time Selection Function Here");
+    }
 });
 
 // enter code to control region selection dropdown
@@ -112,8 +112,12 @@ const path = d3.geoPath(projection);
 // import csv/json data
 const csvPromise = new Promise((resolve, reject) => {
     d3.dsv(",", pathToCSV, d => {
-        return;
-        // data configuration here
+        return {
+            year: parseInt(d["Year"]),
+            crimeViolent: parseInt(d["Violent_sum"]),
+            crimeProperty: parseInt(d["Property_sum"]),
+            city: d["City"]
+        };
     })
         .then(temp => resolve(temp))
         .catch(err => reject("CSV\n" + err));
@@ -125,16 +129,16 @@ const jsonPromise = new Promise((resolve, reject) => {
 });
 
 
-let error = "", region = {}, crimeData = [];
+let error = "", region = {}, crimeTemp = [], crimeData = {};
 Promise.all([jsonPromise, csvPromise]).then(value => {
     region = value[0];
-    // crimeData = value[1];
+    crimeTemp = value[1];
 }).catch(err => {
     error = "Error in " + err;
-}).then(() => ready(error, region, crimeData, regionNameObj));
+}).then(() => ready(error, region, crimeTemp, regionNameObj));
 
 
-function ready(error, region, crimeData, regionNameObj) {
+function ready(error, region, crimeTemp, regionNameObj) {
     if (error.length != 0) {
         console.log(error);
         alert(error);
@@ -142,9 +146,26 @@ function ready(error, region, crimeData, regionNameObj) {
         console.log("Error:\nNo error in Promise.\nBut some data is empty!");
         alert("Error:\nNo error in Promise.\nBut some data is empty!");
     } else {
-        // enter code to extract all datas from crimeData
-
-        // console.log(new Set(crimeData));
+        /*
+        crimeData = {
+            cityName1: {
+                date1: {violent: 1, property: 2},
+                date2: {violent: 1, property: 2}
+            }, cityName2: {
+                date1: {violent: 1, property: 2},
+                date2: {violent: 1, property: 2}
+            }
+        };*/
+        crimeTemp.forEach(data => {
+            if (!crimeData.hasOwnProperty(data.city)) {
+                crimeData[data.city] = {};
+            }
+            crimeData[data.city][data.year] = {
+                violent: data.crimeViolent,
+                property: data.crimeProperty
+            };
+        });
+        // could redefine timeSlideRange{min, max} here
 
         // enter code to append the region options to the dropdown
         regionDropdown.selectAll("optgroup")
@@ -168,15 +189,20 @@ function ready(error, region, crimeData, regionNameObj) {
 }
 
 function dropdownChange(event, d) {
+    const svgRect = svgPos();
+    clearSVG(svgRect);
     const selectedRegion = this.options[this.selectedIndex].value;
-    gRegion.selectAll("path").remove();
-    gRegion.selectAll("text").remove();
+
     switch (selectedRegion) {
         case "Los Angeles":
-            createMap(region, crimeData);
+            createMap(region, crimeTemp);
+            timeSlide.property("max", -1)
+                .property("min", -findYearDiff(timeSlideRange.min, timeSlideRange.max))
+                .property("value", -findYearDiff(timeSlideRange.min, timeSlideRange.max));
+            timeOutput.text(outputStr());
             break;
         default:
-            noData();
+            noData(svgRect);
             break;
     }
     svg.call(zoom.scaleTo, zoomSlide.property("value"));
@@ -185,12 +211,13 @@ function dropdownChange(event, d) {
 function createMap(region, crimeData) {
     const svgRect = svgPos();
     projection.fitSize([svgRect.svgWidth, svgRect.svgHeight], region);
+    // console.log(region); Too Many Regions find 88 !!!
 
     const regionFeatures = [...region.features];
     regionFeatures.forEach(feature => {
         feature.values = {
             selected: false
-            // more crime data here
+            // more crime data here !!!
         };
     });
 
@@ -210,8 +237,8 @@ function createMap(region, crimeData) {
         .on("dblclick.zoom", null);
 }
 
-function noData() {
-    const svgRect = svgPos();
+function noData(svgRect) {
+    svg.call(zoom.translateTo, svgRect.svgWidth / 2, svgRect.svgHeight / 2);
     gRegion.append("text")
         .attr("class", "notification-text")
         .attr("x", 0.5 * svgRect.svgWidth)
@@ -219,40 +246,50 @@ function noData() {
         .text("No Data");
 }
 
-function updateAttr(attrBtnObj) {
-    if (attrBtnObj.attrSelected) {
-        console.log(attrBtnObj);
+function clearSVG(svgRect) {
+    titleDiv.style("display", null).text(null);
+    removeTooltip(svgRect, 0, 0);
+    gRegion.selectAll("path").remove();
+    gRegion.selectAll("text").remove();
+    timeSlide.property("max", 0).property("min", 0);
+    timeSlideColor();
+    timeOutput.text("Please Select\nThe Location");
+}
+
+function updateAttr(d) {
+    if (d.attrSelected) {
+        // upadte chart !!!
+        console.log(d);
         console.log("Update Information Box Using Given Object");
     }
 }
 
-function findMonthDiff(startDate, endDate) {
-    startDateMonths = startDate.getUTCFullYear() * 12 + startDate.getUTCMonth();
-    endDateMonths = endDate.getUTCFullYear() * 12 + endDate.getUTCMonth();
-    return endDateMonths - startDateMonths;
+function findYearDiff(startDate, endDate) {
+    const startDateYear = startDate.getUTCFullYear();
+    const endDateYear = endDate.getUTCFullYear();
+    return endDateYear - startDateYear;
 }
 
-function findMonthAfter(endDate, months) {
-    const startYear = endDate.getUTCFullYear() + parseInt(months / 12);
-    const startMonth = endDate.getUTCMonth() + months % 12;
-    const startDate = new Date(Date.UTC(startYear, startMonth));
+function findYearBefore(endDate, years) {
+    const startYear = endDate.getUTCFullYear() + parseInt(years);
+    const startDate = new Date(startYear.toString());
     return startDate;
-}
-
-function dateToString(date) {
-    return date.getUTCFullYear() + "-"
-        + String(date.getUTCMonth() + 1).padStart(2, "0");
 }
 
 function outputStr() {
     return "From "
-        + dateToString(findMonthAfter(timeSlideRange.max, timeSlide.property("value")))
-        + "\nTo " + dateToString(timeSlideRange.max);
+        + findYearBefore(timeSlideRange.max, timeSlide.property("value")).getUTCFullYear()
+        + "\nTo " + timeSlideRange.max.getUTCFullYear();
 }
 
 function timeSlideColor() {
-    const value = (timeSlide.property("value") - timeSlide.property("min") + 1)
-        / (timeSlide.property("max") - timeSlide.property("min") + 1) * 100;
+    let value = 0;
+    if (timeSlide.property("max") === timeSlide.property("min")) {
+        value = 0;
+    } else {
+        value = (timeSlide.property("value") - timeSlide.property("min"))
+            / (timeSlide.property("max") - timeSlide.property("min")) * 100;
+    }
     const style = "linear-gradient(to right, azure " + value
         + "%, cadetblue " + value + "% 100%)";
     timeSlide.style("background", style);
