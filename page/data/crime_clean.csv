@@ -1,969 +1,969 @@
-Year,Violent_sum,Property_sum,City
-2010,185,2075,Alhambra
-2010,88,1737,Arcadia
-2010,64,265,Artesia
-2010,24,75,Avalon
-2010,226,1136,Azusa
-2010,253,1752,Baldwin Park
-2010,241,601,Bell
-2010,415,1776,Bellflower
-2010,210,940,Bell Gardens
-2010,7,81,La Habra Heights
-2010,6,143,Westlake Village
-2010,75,985,Beverly Hills
-2010,0,11,Bradbury
-2010,221,2687,Burbank
-2010,49,877,Claremont
-2010,142,1000,Commerce
-2010,1327,2784,Compton
-2010,171,1643,Covina
-2010,161,475,Cudahy
-2010,149,1638,Culver City
-2010,93,1696,Cerritos
-2010,18,240,Agoura Hills
-2010,389,1545,West Hollywood
-2010,375,2670,Santa Clarita
-2010,48,808,Diamond Bar
-2010,394,3956,Downey
-2010,72,440,Duarte
-2010,600,2598,El Monte
-2010,34,541,El Segundo
-2010,347,1446,Gardena
-2010,277,3717,Glendale
-2010,62,1249,Glendora
-2010,83,237,Hawaiian Gardens
-2010,653,2200,Hawthorne
-2010,40,553,Hermosa Beach
-2010,13,321,Calabasas
-2010,26,350,Malibu
-2010,3,18,Hidden Hills
-2010,559,2095,Huntington Park
-2010,77,1183,Industry
-2010,843,2672,Inglewood
-2010,19,136,Irwindale
-2010,296,1876,Lakewood
-2010,74,726,La Mirada
-2010,162,581,La Puente
-2010,56,643,La Verne
-2010,228,513,Lawndale
-2010,86,330,Lomita
-2010,2720,11642,Long Beach
-2010,21484,89704,Los Angeles
-2010,615,1328,Lynwood
-2010,48,839,Manhattan Beach
-2010,151,483,Maywood
-2010,72,1080,Monrovia
-2010,214,1941,Montebello
-2010,96,860,Monterey Park
-2010,449,2072,Norwalk
-2010,832,3334,Palmdale
-2010,5,116,Palos Verdes Estates
-2010,343,1554,Paramount
-2010,554,4074,Pasadena
-2010,247,1553,Pico Rivera
-2010,877,4504,Pomona
-2010,210,1557,Redondo Beach
-2010,4,8,Rolling Hills
-2010,15,137,Rolling Hills Estates
-2010,167,1118,Rosemead
-2010,80,663,San Dimas
-2010,63,379,San Fernando
-2010,85,566,San Gabriel
-2010,13,224,San Marino
-2010,73,1206,Santa Fe Springs
-2010,392,3120,Santa Monica
-2010,14,186,Sierra Madre
-2010,40,428,Signal Hill
-2010,134,477,South El Monte
-2010,598,2603,South Gate
-2010,25,423,South Pasadena
-2010,61,430,Temple City
-2010,290,2859,Torrance
-2010,26,316,Vernon
-2010,29,447,Walnut
-2010,318,2979,West Covina
-2010,343,2433,Whittier
-2010,499,2326,Carson
-2010,42,422,Rancho Palos Verdes
-2010,21,346,La Canada-Flintridge
-2010,900,3411,Lancaster
-2011,152,1891,Alhambra
-2011,68,1699,Arcadia
-2011,66,327,Artesia
-2011,18,51,Avalon
-2011,239,1048,Azusa
-2011,242,1601,Baldwin Park
-2011,291,801,Bell
-2011,286,1832,Bellflower
-2011,170,794,Bell Gardens
-2011,7,71,La Habra Heights
-2011,4,181,Westlake Village
-2011,58,974,Beverly Hills
-2011,0,12,Bradbury
-2011,191,2555,Burbank
-2011,32,850,Claremont
-2011,116,949,Commerce
-2011,1067,2865,Compton
-2011,142,1719,Covina
-2011,167,371,Cudahy
-2011,146,1669,Culver City
-2011,84,1761,Cerritos
-2011,15,255,Agoura Hills
-2011,337,1437,West Hollywood
-2011,262,2568,Santa Clarita
-2011,58,778,Diamond Bar
-2011,390,3876,Downey
-2011,60,427,Duarte
-2011,421,2286,El Monte
-2011,38,550,El Segundo
-2011,281,1453,Gardena
-2011,258,3452,Glendale
-2011,65,1309,Glendora
-2011,67,216,Hawaiian Gardens
-2011,623,2124,Hawthorne
-2011,62,605,Hermosa Beach
-2011,11,291,Calabasas
-2011,15,268,Malibu
-2011,0,15,Hidden Hills
-2011,487,2100,Huntington Park
-2011,44,1136,Industry
-2011,808,2582,Inglewood
-2011,26,194,Irwindale
-2011,214,1899,Lakewood
-2011,81,807,La Mirada
-2011,157,594,La Puente
-2011,63,647,La Verne
-2011,175,447,Lawndale
-2011,87,334,Lomita
-2011,2857,12816,Long Beach
-2011,20045,86330,Los Angeles
-2011,609,1393,Lynwood
-2011,44,891,Manhattan Beach
-2011,155,358,Maywood
-2011,75,904,Monrovia
-2011,174,1837,Montebello
-2011,102,1039,Monterey Park
-2011,371,2274,Norwalk
-2011,785,3273,Palmdale
-2011,5,118,Palos Verdes Estates
-2011,255,1621,Paramount
-2011,434,3712,Pasadena
-2011,243,1568,Pico Rivera
-2011,928,4442,Pomona
-2011,168,1601,Redondo Beach
-2011,0,14,Rolling Hills
-2011,6,162,Rolling Hills Estates
-2011,170,1140,Rosemead
-2011,78,562,San Dimas
-2011,103,430,San Fernando
-2011,107,553,San Gabriel
-2011,11,192,San Marino
-2011,107,1133,Santa Fe Springs
-2011,369,2971,Santa Monica
-2011,10,137,Sierra Madre
-2011,32,471,Signal Hill
-2011,122,376,South El Monte
-2011,580,2893,South Gate
-2011,33,480,South Pasadena
-2011,50,344,Temple City
-2011,185,2767,Torrance
-2011,32,308,Vernon
-2011,40,354,Walnut
-2011,280,3249,West Covina
-2011,334,2468,Whittier
-2011,444,2492,Carson
-2011,36,550,Rancho Palos Verdes
-2011,14,349,La Canada-Flintridge
-2011,851,3216,Lancaster
-2012,149,1919,Alhambra
-2012,57,1388,Arcadia
-2012,60,262,Artesia
-2012,13,64,Avalon
-2012,220,1204,Azusa
-2012,261,1585,Baldwin Park
-2012,225,662,Bell
-2012,304,1802,Bellflower
-2012,125,728,Bell Gardens
-2012,6,44,La Habra Heights
-2012,3,154,Westlake Village
-2012,89,1081,Beverly Hills
-2012,0,10,Bradbury
-2012,243,2493,Burbank
-2012,40,901,Claremont
-2012,112,1010,Commerce
-2012,1218,2399,Compton
-2012,151,1651,Covina
-2012,151,347,Cudahy
-2012,179,1760,Culver City
-2012,120,1870,Cerritos
-2012,12,236,Agoura Hills
-2012,338,1642,West Hollywood
-2012,342,2742,Santa Clarita
-2012,55,952,Diamond Bar
-2012,381,3537,Downey
-2012,71,507,Duarte
-2012,395,2230,El Monte
-2012,38,595,El Segundo
-2012,287,1321,Gardena
-2012,233,3043,Glendale
-2012,59,1293,Glendora
-2012,69,193,Hawaiian Gardens
-2012,637,2181,Hawthorne
-2012,54,678,Hermosa Beach
-2012,13,238,Calabasas
-2012,15,329,Malibu
-2012,0,4,Hidden Hills
-2012,373,1917,Huntington Park
-2012,68,1110,Industry
-2012,780,2673,Inglewood
-2012,15,243,Irwindale
-2012,227,2062,Lakewood
-2012,98,776,La Mirada
-2012,121,521,La Puente
-2012,50,823,La Verne
-2012,167,397,Lawndale
-2012,95,391,Lomita
-2012,2705,14131,Long Beach
-2012,18547,87478,Los Angeles
-2012,541,1373,Lynwood
-2012,62,855,Manhattan Beach
-2012,175,286,Maywood
-2012,81,948,Monrovia
-2012,146,1775,Montebello
-2012,75,1022,Monterey Park
-2012,433,2609,Norwalk
-2012,812,3393,Palmdale
-2012,6,136,Palos Verdes Estates
-2012,244,1536,Paramount
-2012,433,3379,Pasadena
-2012,261,1780,Pico Rivera
-2012,1021,5055,Pomona
-2012,190,1596,Redondo Beach
-2012,0,27,Rolling Hills
-2012,9,129,Rolling Hills Estates
-2012,143,913,Rosemead
-2012,51,668,San Dimas
-2012,77,380,San Fernando
-2012,88,550,San Gabriel
-2012,13,183,San Marino
-2012,99,1272,Santa Fe Springs
-2012,395,3398,Santa Monica
-2012,4,112,Sierra Madre
-2012,43,536,Signal Hill
-2012,88,399,South El Monte
-2012,553,2545,South Gate
-2012,27,443,South Pasadena
-2012,38,354,Temple City
-2012,190,2690,Torrance
-2012,27,311,Vernon
-2012,37,382,Walnut
-2012,281,3224,West Covina
-2012,247,2502,Whittier
-2012,520,2709,Carson
-2012,35,498,Rancho Palos Verdes
-2012,12,324,La Canada-Flintridge
-2012,859,3498,Lancaster
-2013,163,1774,Alhambra
-2013,77,1518,Arcadia
-2013,63,323,Artesia
-2013,4,88,Avalon
-2013,246,1098,Azusa
-2013,220,1370,Baldwin Park
-2013,208,535,Bell
-2013,279,1882,Bellflower
-2013,120,763,Bell Gardens
-2013,3,55,La Habra Heights
-2013,11,148,Westlake Village
-2013,77,1179,Beverly Hills
-2013,1,16,Bradbury
-2013,171,2430,Burbank
-2013,37,894,Claremont
-2013,83,893,Commerce
-2013,1242,2538,Compton
-2013,138,1344,Covina
-2013,111,320,Cudahy
-2013,161,1616,Culver City
-2013,82,1802,Cerritos
-2013,19,306,Agoura Hills
-2013,216,1435,West Hollywood
-2013,276,2713,Santa Clarita
-2013,62,886,Diamond Bar
-2013,326,3292,Downey
-2013,41,366,Duarte
-2013,340,2182,El Monte
-2013,37,538,El Segundo
-2013,245,1331,Gardena
-2013,181,3198,Glendale
-2013,65,1340,Glendora
-2013,56,205,Hawaiian Gardens
-2013,580,2242,Hawthorne
-2013,27,549,Hermosa Beach
-2013,20,313,Calabasas
-2013,28,350,Malibu
-2013,2,7,Hidden Hills
-2013,359,1812,Huntington Park
-2013,51,1041,Industry
-2013,739,2718,Inglewood
-2013,20,229,Irwindale
-2013,225,2062,Lakewood
-2013,72,841,La Mirada
-2013,143,493,La Puente
-2013,37,753,La Verne
-2013,162,419,Lawndale
-2013,66,414,Lomita
-2013,2346,12999,Long Beach
-2013,16524,85844,Los Angeles
-2013,436,1528,Lynwood
-2013,64,853,Manhattan Beach
-2013,112,320,Maywood
-2013,57,806,Monrovia
-2013,183,1756,Montebello
-2013,104,1162,Monterey Park
-2013,407,2246,Norwalk
-2013,759,3344,Palmdale
-2013,6,147,Palos Verdes Estates
-2013,222,1633,Paramount
-2013,434,3779,Pasadena
-2013,207,1521,Pico Rivera
-2013,809,4394,Pomona
-2013,160,1588,Redondo Beach
-2013,0,11,Rolling Hills
-2013,3,118,Rolling Hills Estates
-2013,149,1067,Rosemead
-2013,65,706,San Dimas
-2013,85,399,San Fernando
-2013,103,724,San Gabriel
-2013,20,224,San Marino
-2013,75,1206,Santa Fe Springs
-2013,324,3544,Santa Monica
-2013,13,129,Sierra Madre
-2013,32,554,Signal Hill
-2013,88,444,South El Monte
-2013,496,2698,South Gate
-2013,29,568,South Pasadena
-2013,48,476,Temple City
-2013,187,2786,Torrance
-2013,22,321,Vernon
-2013,37,463,Walnut
-2013,231,3370,West Covina
-2013,223,2383,Whittier
-2013,400,2251,Carson
-2013,30,580,Rancho Palos Verdes
-2013,12,303,La Canada-Flintridge
-2013,832,3495,Lancaster
-2014,168,1743,Alhambra
-2014,60,1159,Arcadia
-2014,49,294,Artesia
-2014,20,89,Avalon
-2014,165,1065,Azusa
-2014,219,1342,Baldwin Park
-2014,217,718,Bell
-2014,293,1623,Bellflower
-2014,108,710,Bell Gardens
-2014,8,49,La Habra Heights
-2014,7,173,Westlake Village
-2014,111,1071,Beverly Hills
-2014,2,9,Bradbury
-2014,150,2426,Burbank
-2014,39,853,Claremont
-2014,77,965,Commerce
-2014,1129,2619,Compton
-2014,110,1108,Covina
-2014,81,332,Cudahy
-2014,169,1693,Culver City
-2014,86,1525,Cerritos
-2014,17,234,Agoura Hills
-2014,267,1325,West Hollywood
-2014,307,2437,Santa Clarita
-2014,49,722,Diamond Bar
-2014,281,2897,Downey
-2014,54,352,Duarte
-2014,333,2213,El Monte
-2014,48,538,El Segundo
-2014,276,1389,Gardena
-2014,186,3073,Glendale
-2014,66,1241,Glendora
-2014,55,183,Hawaiian Gardens
-2014,658,2588,Hawthorne
-2014,37,543,Hermosa Beach
-2014,19,252,Calabasas
-2014,25,312,Malibu
-2014,0,12,Hidden Hills
-2014,409,1806,Huntington Park
-2014,72,1047,Industry
-2014,783,2740,Inglewood
-2014,18,169,Irwindale
-2014,202,1737,Lakewood
-2014,89,635,La Mirada
-2014,136,440,La Puente
-2014,46,820,La Verne
-2014,157,398,Lawndale
-2014,77,355,Lomita
-2014,2304,12438,Long Beach
-2014,19171,83139,Los Angeles
-2014,401,1424,Lynwood
-2014,37,878,Manhattan Beach
-2014,88,250,Maywood
-2014,47,718,Monrovia
-2014,134,1449,Montebello
-2014,91,1039,Monterey Park
-2014,316,2001,Norwalk
-2014,840,3219,Palmdale
-2014,5,121,Palos Verdes Estates
-2014,239,1408,Paramount
-2014,394,3469,Pasadena
-2014,275,1360,Pico Rivera
-2014,777,4403,Pomona
-2014,158,1447,Redondo Beach
-2014,1,18,Rolling Hills
-2014,7,114,Rolling Hills Estates
-2014,147,1186,Rosemead
-2014,69,631,San Dimas
-2014,75,406,San Fernando
-2014,83,555,San Gabriel
-2014,5,221,San Marino
-2014,74,1124,Santa Fe Springs
-2014,338,3026,Santa Monica
-2014,13,92,Sierra Madre
-2014,40,500,Signal Hill
-2014,120,647,South El Monte
-2014,506,2687,South Gate
-2014,30,475,South Pasadena
-2014,45,428,Temple City
-2014,155,2623,Torrance
-2014,25,312,Vernon
-2014,29,294,Walnut
-2014,225,2832,West Covina
-2014,239,2247,Whittier
-2014,339,2116,Carson
-2014,24,472,Rancho Palos Verdes
-2014,18,306,La Canada-Flintridge
-2014,891,3661,Lancaster
-2015,168,1929,Alhambra
-2015,68,1272,Arcadia
-2015,84,468,Artesia
-2015,12,56,Avalon
-2015,173,1212,Azusa
-2015,299,1442,Baldwin Park
-2015,221,772,Bell
-2015,373,1825,Bellflower
-2015,137,782,Bell Gardens
-2015,2,55,La Habra Heights
-2015,6,195,Westlake Village
-2015,99,1236,Beverly Hills
-2015,1,10,Bradbury
-2015,159,2656,Burbank
-2015,64,985,Claremont
-2015,93,1247,Commerce
-2015,988,2410,Compton
-2015,108,1129,Covina
-2015,78,307,Cudahy
-2015,156,1919,Culver City
-2015,91,1899,Cerritos
-2015,15,310,Agoura Hills
-2015,280,1400,West Hollywood
-2015,351,2925,Santa Clarita
-2015,58,804,Diamond Bar
-2015,335,2892,Downey
-2015,72,367,Duarte
-2015,400,2132,El Monte
-2015,41,621,El Segundo
-2015,301,1519,Gardena
-2015,195,3513,Glendale
-2015,55,1336,Glendora
-2015,86,318,Hawaiian Gardens
-2015,628,2482,Hawthorne
-2015,44,585,Hermosa Beach
-2015,15,272,Calabasas
-2015,25,360,Malibu
-2015,1,8,Hidden Hills
-2015,386,2027,Huntington Park
-2015,68,1050,Industry
-2015,775,2612,Inglewood
-2015,27,166,Irwindale
-2015,222,2198,Lakewood
-2015,74,857,La Mirada
-2015,119,483,La Puente
-2015,68,928,La Verne
-2015,196,502,Lawndale
-2015,67,401,Lomita
-2015,2766,14337,Long Beach
-2015,25156,93503,Los Angeles
-2015,414,1419,Lynwood
-2015,70,947,Manhattan Beach
-2015,73,358,Maywood
-2015,47,702,Monrovia
-2015,158,1682,Montebello
-2015,103,1349,Monterey Park
-2015,400,1910,Norwalk
-2015,830,2988,Palmdale
-2015,7,169,Palos Verdes Estates
-2015,283,1692,Paramount
-2015,428,3693,Pasadena
-2015,199,1451,Pico Rivera
-2015,792,4507,Pomona
-2015,185,1757,Redondo Beach
-2015,1,13,Rolling Hills
-2015,9,109,Rolling Hills Estates
-2015,155,1247,Rosemead
-2015,81,679,San Dimas
-2015,94,509,San Fernando
-2015,89,635,San Gabriel
-2015,17,225,San Marino
-2015,85,1254,Santa Fe Springs
-2015,445,3834,Santa Monica
-2015,11,117,Sierra Madre
-2015,58,784,Signal Hill
-2015,125,649,South El Monte
-2015,561,3278,South Gate
-2015,30,708,South Pasadena
-2015,66,474,Temple City
-2015,214,2881,Torrance
-2015,28,290,Vernon
-2015,31,322,Walnut
-2015,263,2982,West Covina
-2015,238,2531,Whittier
-2015,433,2146,Carson
-2015,41,551,Rancho Palos Verdes
-2015,20,287,La Canada-Flintridge
-2015,1005,3818,Lancaster
-2016,146,2107,Alhambra
-2016,83,1642,Arcadia
-2016,89,622,Artesia
-2016,10,37,Avalon
-2016,175,1139,Azusa
-2016,291,1514,Baldwin Park
-2016,233,782,Bell
-2016,392,1990,Bellflower
-2016,155,942,Bell Gardens
-2016,4,109,La Habra Heights
-2016,16,204,Westlake Village
-2016,106,1416,Beverly Hills
-2016,0,6,Bradbury
-2016,210,2927,Burbank
-2016,59,960,Claremont
-2016,130,1223,Commerce
-2016,1129,2528,Compton
-2016,164,1289,Covina
-2016,76,246,Cudahy
-2016,213,2060,Culver City
-2016,111,2264,Cerritos
-2016,15,253,Agoura Hills
-2016,275,1601,West Hollywood
-2016,331,3005,Santa Clarita
-2016,66,931,Diamond Bar
-2016,373,3371,Downey
-2016,72,373,Duarte
-2016,448,2501,El Monte
-2016,53,731,El Segundo
-2016,338,1482,Gardena
-2016,227,3450,Glendale
-2016,70,1361,Glendora
-2016,73,305,Hawaiian Gardens
-2016,654,2533,Hawthorne
-2016,47,539,Hermosa Beach
-2016,15,291,Calabasas
-2016,38,402,Malibu
-2016,1,16,Hidden Hills
-2016,463,1988,Huntington Park
-2016,96,1175,Industry
-2016,830,2456,Inglewood
-2016,18,206,Irwindale
-2016,223,2521,Lakewood
-2016,85,889,La Mirada
-2016,131,560,La Puente
-2016,41,561,La Verne
-2016,194,528,Lawndale
-2016,69,347,Lomita
-2016,2846,14224,Long Beach
-2016,28817,99151,Los Angeles
-2016,469,1713,Lynwood
-2016,53,1030,Manhattan Beach
-2016,122,441,Maywood
-2016,60,832,Monrovia
-2016,214,1978,Montebello
-2016,131,1704,Monterey Park
-2016,419,1963,Norwalk
-2016,697,2728,Palmdale
-2016,4,111,Palos Verdes Estates
-2016,313,1744,Paramount
-2016,477,3446,Pasadena
-2016,220,1621,Pico Rivera
-2016,767,4676,Pomona
-2016,160,1742,Redondo Beach
-2016,0,11,Rolling Hills
-2016,11,126,Rolling Hills Estates
-2016,167,1249,Rosemead
-2016,82,764,San Dimas
-2016,132,450,San Fernando
-2016,98,655,San Gabriel
-2016,15,261,San Marino
-2016,112,1184,Santa Fe Springs
-2016,475,4039,Santa Monica
-2016,25,114,Sierra Madre
-2016,69,856,Signal Hill
-2016,109,580,South El Monte
-2016,660,3435,South Gate
-2016,27,667,South Pasadena
-2016,49,580,Temple City
-2016,258,3221,Torrance
-2016,28,376,Vernon
-2016,25,516,Walnut
-2016,265,2811,West Covina
-2016,258,2790,Whittier
-2016,505,2424,Carson
-2016,27,417,Rancho Palos Verdes
-2016,13,303,La Canada-Flintridge
-2016,1103,3488,Lancaster
-2017,172,1877,Alhambra
-2017,110,1534,Arcadia
-2017,103,460,Artesia
-2017,20,58,Avalon
-2017,147,1203,Azusa
-2017,348,1405,Baldwin Park
-2017,228,652,Bell
-2017,363,1988,Bellflower
-2017,100,749,Bell Gardens
-2017,4,95,La Habra Heights
-2017,14,208,Westlake Village
-2017,118,1819,Beverly Hills
-2017,1,7,Bradbury
-2017,253,2944,Burbank
-2017,74,940,Claremont
-2017,106,1174,Commerce
-2017,1164,2583,Compton
-2017,172,1180,Covina
-2017,74,214,Cudahy
-2017,183,1886,Culver City
-2017,127,2268,Cerritos
-2017,16,278,Agoura Hills
-2017,254,1705,West Hollywood
-2017,352,3081,Santa Clarita
-2017,57,1043,Diamond Bar
-2017,382,3222,Downey
-2017,64,352,Duarte
-2017,451,2816,El Monte
-2017,40,687,El Segundo
-2017,393,1393,Gardena
-2017,274,3118,Glendale
-2017,129,1533,Glendora
-2017,86,324,Hawaiian Gardens
-2017,587,2273,Hawthorne
-2017,28,590,Hermosa Beach
-2017,30,330,Calabasas
-2017,38,366,Malibu
-2017,1,12,Hidden Hills
-2017,427,1817,Huntington Park
-2017,73,928,Industry
-2017,785,2760,Inglewood
-2017,12,212,Irwindale
-2017,318,2422,Lakewood
-2017,104,906,La Mirada
-2017,148,444,La Puente
-2017,92,766,La Verne
-2017,178,433,Lawndale
-2017,56,402,Lomita
-2017,3101,12598,Long Beach
-2017,30507,101618,Los Angeles
-2017,458,1681,Lynwood
-2017,71,875,Manhattan Beach
-2017,115,364,Maywood
-2017,66,848,Monrovia
-2017,203,1644,Montebello
-2017,112,1613,Monterey Park
-2017,437,1956,Norwalk
-2017,681,2659,Palmdale
-2017,3,125,Palos Verdes Estates
-2017,324,1613,Paramount
-2017,574,2946,Pasadena
-2017,236,1432,Pico Rivera
-2017,853,4484,Pomona
-2017,176,1570,Redondo Beach
-2017,0,6,Rolling Hills
-2017,12,153,Rolling Hills Estates
-2017,173,1327,Rosemead
-2017,67,735,San Dimas
-2017,120,360,San Fernando
-2017,114,666,San Gabriel
-2017,14,255,San Marino
-2017,106,1048,Santa Fe Springs
-2017,705,4374,Santa Monica
-2017,8,108,Sierra Madre
-2017,63,749,Signal Hill
-2017,121,684,South El Monte
-2017,674,3131,South Gate
-2017,18,504,South Pasadena
-2017,54,552,Temple City
-2017,267,3206,Torrance
-2017,35,424,Vernon
-2017,43,485,Walnut
-2017,275,2733,West Covina
-2017,300,2507,Whittier
-2017,475,2250,Carson
-2017,33,446,Rancho Palos Verdes
-2017,16,287,La Canada-Flintridge
-2017,1219,3318,Lancaster
-2018,193,1930,Alhambra
-2018,76,1420,Arcadia
-2018,82,335,Artesia
-2018,4,41,Avalon
-2018,193,1122,Azusa
-2018,287,1386,Baldwin Park
-2018,184,495,Bell
-2018,335,1688,Bellflower
-2018,117,633,Bell Gardens
-2018,6,66,La Habra Heights
-2018,12,200,Westlake Village
-2018,106,1757,Beverly Hills
-2018,2,13,Bradbury
-2018,229,2625,Burbank
-2018,66,930,Claremont
-2018,128,995,Commerce
-2018,1174,2559,Compton
-2018,188,1117,Covina
-2018,90,187,Cudahy
-2018,188,1756,Culver City
-2018,162,1794,Cerritos
-2018,27,274,Agoura Hills
-2018,301,2100,West Hollywood
-2018,292,2437,Santa Clarita
-2018,58,936,Diamond Bar
-2018,367,2615,Downey
-2018,62,403,Duarte
-2018,362,2242,El Monte
-2018,62,714,El Segundo
-2018,326,1306,Gardena
-2018,202,3110,Glendale
-2018,122,1523,Glendora
-2018,81,250,Hawaiian Gardens
-2018,617,1705,Hawthorne
-2018,30,477,Hermosa Beach
-2018,26,363,Calabasas
-2018,37,380,Malibu
-2018,0,15,Hidden Hills
-2018,429,1800,Huntington Park
-2018,87,979,Industry
-2018,683,2744,Inglewood
-2018,12,194,Irwindale
-2018,270,1848,Lakewood
-2018,89,829,La Mirada
-2018,162,501,La Puente
-2018,87,742,La Verne
-2018,129,348,Lawndale
-2018,66,312,Lomita
-2018,3284,11922,Long Beach
-2018,30126,101267,Los Angeles
-2018,426,1438,Lynwood
-2018,57,844,Manhattan Beach
-2018,87,302,Maywood
-2018,69,914,Monrovia
-2018,218,1643,Montebello
-2018,124,1589,Monterey Park
-2018,449,1948,Norwalk
-2018,591,2442,Palmdale
-2018,6,104,Palos Verdes Estates
-2018,329,1427,Paramount
-2018,547,2928,Pasadena
-2018,228,1159,Pico Rivera
-2018,877,4697,Pomona
-2018,171,1452,Redondo Beach
-2018,0,5,Rolling Hills
-2018,8,108,Rolling Hills Estates
-2018,194,1274,Rosemead
-2018,80,751,San Dimas
-2018,102,312,San Fernando
-2018,136,691,San Gabriel
-2018,11,203,San Marino
-2018,105,991,Santa Fe Springs
-2018,797,4732,Santa Monica
-2018,7,95,Sierra Madre
-2018,86,690,Signal Hill
-2018,126,621,South El Monte
-2018,634,2364,South Gate
-2018,32,522,South Pasadena
-2018,64,472,Temple City
-2018,267,2702,Torrance
-2018,27,383,Vernon
-2018,22,483,Walnut
-2018,292,2513,West Covina
-2018,233,2225,Whittier
-2018,435,1971,Carson
-2018,32,389,Rancho Palos Verdes
-2018,13,330,La Canada-Flintridge
-2018,1193,3805,Lancaster
-2019,161,1749,Alhambra
-2019,84,1348,Arcadia
-2019,72,284,Artesia
-2019,10,40,Avalon
-2019,144,959,Azusa
-2019,188,1110,Baldwin Park
-2019,168,441,Bell
-2019,327,1506,Bellflower
-2019,147,630,Bell Gardens
-2019,4,79,La Habra Heights
-2019,13,189,Westlake Village
-2019,103,1499,Beverly Hills
-2019,1,10,Bradbury
-2019,189,2617,Burbank
-2019,51,774,Claremont
-2019,138,1004,Commerce
-2019,1104,2346,Compton
-2019,171,1189,Covina
-2019,89,214,Cudahy
-2019,182,1647,Culver City
-2019,127,1634,Cerritos
-2019,21,306,Agoura Hills
-2019,294,1898,West Hollywood
-2019,277,2059,Santa Clarita
-2019,72,908,Diamond Bar
-2019,352,2473,Downey
-2019,55,305,Duarte
-2019,304,1787,El Monte
-2019,82,625,El Segundo
-2019,324,1202,Gardena
-2019,231,3305,Glendale
-2019,155,1501,Glendora
-2019,76,225,Hawaiian Gardens
-2019,636,1485,Hawthorne
-2019,51,449,Hermosa Beach
-2019,35,331,Calabasas
-2019,44,416,Malibu
-2019,1,18,Hidden Hills
-2019,458,1595,Huntington Park
-2019,72,1180,Industry
-2019,671,2321,Inglewood
-2019,26,240,Irwindale
-2019,222,1846,Lakewood
-2019,86,701,La Mirada
-2019,151,449,La Puente
-2019,51,627,La Verne
-2019,125,411,Lawndale
-2019,67,254,Lomita
-2019,2369,11297,Long Beach
-2019,29400,95704,Los Angeles
-2019,454,1419,Lynwood
-2019,55,851,Manhattan Beach
-2019,90,296,Maywood
-2019,43,845,Monrovia
-2019,178,1448,Montebello
-2019,126,1355,Monterey Park
-2019,432,1571,Norwalk
-2019,658,2230,Palmdale
-2019,4,88,Palos Verdes Estates
-2019,347,1246,Paramount
-2019,613,2866,Pasadena
-2019,234,1052,Pico Rivera
-2019,940,4208,Pomona
-2019,160,1370,Redondo Beach
-2019,1,8,Rolling Hills
-2019,10,126,Rolling Hills Estates
-2019,175,942,Rosemead
-2019,78,833,San Dimas
-2019,80,243,San Fernando
-2019,98,715,San Gabriel
-2019,14,208,San Marino
-2019,105,1035,Santa Fe Springs
-2019,664,3964,Santa Monica
-2019,15,79,Sierra Madre
-2019,95,678,Signal Hill
-2019,102,500,South El Monte
-2019,622,2754,South Gate
-2019,29,566,South Pasadena
-2019,64,331,Temple City
-2019,280,2853,Torrance
-2019,27,485,Vernon
-2019,38,386,Walnut
-2019,260,2369,West Covina
-2019,213,1901,Whittier
-2019,444,2004,Carson
-2019,29,313,Rancho Palos Verdes
-2019,15,323,La Canada-Flintridge
-2019,1359,3346,Lancaster
-2020,175,1551,Alhambra
-2020,87,1034,Arcadia
-2020,50,306,Artesia
-2020,7,52,Avalon
-2020,155,975,Azusa
-2020,161,862,Baldwin Park
-2020,182,502,Bell
-2020,348,1799,Bellflower
-2020,150,618,Bell Gardens
-2020,3,55,La Habra Heights
-2020,9,129,Westlake Village
-2020,111,1244,Beverly Hills
-2020,0,7,Bradbury
-2020,174,2474,Burbank
-2020,51,696,Claremont
-2020,136,1069,Commerce
-2020,1125,2249,Compton
-2020,152,1110,Covina
-2020,91,292,Cudahy
-2020,196,1600,Culver City
-2020,100,1362,Cerritos
-2020,23,243,Agoura Hills
-2020,205,1205,West Hollywood
-2020,291,2013,Santa Clarita
-2020,62,793,Diamond Bar
-2020,301,2153,Downey
-2020,51,348,Duarte
-2020,348,1775,El Monte
-2020,114,775,El Segundo
-2020,269,1324,Gardena
-2020,206,3197,Glendale
-2020,101,1200,Glendora
-2020,52,197,Hawaiian Gardens
-2020,675,1631,Hawthorne
-2020,47,475,Hermosa Beach
-2020,39,255,Calabasas
-2020,40,355,Malibu
-2020,1,13,Hidden Hills
-2020,421,1720,Huntington Park
-2020,58,794,Industry
-2020,679,2495,Inglewood
-2020,17,182,Irwindale
-2020,236,1707,Lakewood
-2020,92,698,La Mirada
-2020,124,387,La Puente
-2020,44,642,La Verne
-2020,154,484,Lawndale
-2020,78,319,Lomita
-2020,2343,12707,Long Beach
-2020,28882,85932,Los Angeles
-2020,441,1511,Lynwood
-2020,46,784,Manhattan Beach
-2020,117,459,Maywood
-2020,69,914,Monrovia
-2020,178,1064,Montebello
-2020,113,1230,Monterey Park
-2020,437,1771,Norwalk
-2020,744,2134,Palmdale
-2020,4,86,Palos Verdes Estates
-2020,263,1309,Paramount
-2020,414,3021,Pasadena
-2020,173,1166,Pico Rivera
-2020,780,4759,Pomona
-2020,167,1422,Redondo Beach
-2020,0,6,Rolling Hills
-2020,11,119,Rolling Hills Estates
-2020,189,895,Rosemead
-2020,83,761,San Dimas
-2020,86,254,San Fernando
-2020,75,525,San Gabriel
-2020,12,238,San Marino
-2020,92,1039,Santa Fe Springs
-2020,541,3852,Santa Monica
-2020,14,86,Sierra Madre
-2020,94,738,Signal Hill
-2020,118,567,South El Monte
-2020,637,2946,South Gate
-2020,26,631,South Pasadena
-2020,49,322,Temple City
-2020,274,2935,Torrance
-2020,48,860,Vernon
-2020,38,326,Walnut
-2020,206,2212,West Covina
-2020,237,1634,Whittier
-2020,392,2044,Carson
-2020,43,335,Rancho Palos Verdes
-2020,14,262,La Canada-Flintridge
-2020,1198,2690,Lancaster
+City,Year,Violent_sum,Property_sum
+Alhambra,2010,185,2075
+Arcadia,2010,88,1737
+Artesia,2010,64,265
+Avalon,2010,24,75
+Azusa,2010,226,1136
+Baldwin Park,2010,253,1752
+Bell,2010,241,601
+Bellflower,2010,415,1776
+Bell Gardens,2010,210,940
+La Habra Heights,2010,7,81
+Westlake Village,2010,6,143
+Beverly Hills,2010,75,985
+Bradbury,2010,0,11
+Burbank,2010,221,2687
+Claremont,2010,49,877
+Commerce,2010,142,1000
+Compton,2010,1327,2784
+Covina,2010,171,1643
+Cudahy,2010,161,475
+Culver City,2010,149,1638
+Cerritos,2010,93,1696
+Agoura Hills,2010,18,240
+West Hollywood,2010,389,1545
+Santa Clarita,2010,375,2670
+Diamond Bar,2010,48,808
+Downey,2010,394,3956
+Duarte,2010,72,440
+El Monte,2010,600,2598
+El Segundo,2010,34,541
+Gardena,2010,347,1446
+Glendale,2010,277,3717
+Glendora,2010,62,1249
+Hawaiian Gardens,2010,83,237
+Hawthorne,2010,653,2200
+Hermosa Beach,2010,40,553
+Calabasas,2010,13,321
+Malibu,2010,26,350
+Hidden Hills,2010,3,18
+Huntington Park,2010,559,2095
+Industry,2010,77,1183
+Inglewood,2010,843,2672
+Irwindale,2010,19,136
+Lakewood,2010,296,1876
+La Mirada,2010,74,726
+La Puente,2010,162,581
+La Verne,2010,56,643
+Lawndale,2010,228,513
+Lomita,2010,86,330
+Long Beach,2010,2720,11642
+Los Angeles,2010,21484,89704
+Lynwood,2010,615,1328
+Manhattan Beach,2010,48,839
+Maywood,2010,151,483
+Monrovia,2010,72,1080
+Montebello,2010,214,1941
+Monterey Park,2010,96,860
+Norwalk,2010,449,2072
+Palmdale,2010,832,3334
+Palos Verdes Estates,2010,5,116
+Paramount,2010,343,1554
+Pasadena,2010,554,4074
+Pico Rivera,2010,247,1553
+Pomona,2010,877,4504
+Redondo Beach,2010,210,1557
+Rolling Hills,2010,4,8
+Rolling Hills Estates,2010,15,137
+Rosemead,2010,167,1118
+San Dimas,2010,80,663
+San Fernando,2010,63,379
+San Gabriel,2010,85,566
+San Marino,2010,13,224
+Santa Fe Springs,2010,73,1206
+Santa Monica,2010,392,3120
+Sierra Madre,2010,14,186
+Signal Hill,2010,40,428
+South El Monte,2010,134,477
+South Gate,2010,598,2603
+South Pasadena,2010,25,423
+Temple City,2010,61,430
+Torrance,2010,290,2859
+Vernon,2010,26,316
+Walnut,2010,29,447
+West Covina,2010,318,2979
+Whittier,2010,343,2433
+Carson,2010,499,2326
+Rancho Palos Verdes,2010,42,422
+La Canada Flintridge,2010,21,346
+Lancaster,2010,900,3411
+Alhambra,2011,152,1891
+Arcadia,2011,68,1699
+Artesia,2011,66,327
+Avalon,2011,18,51
+Azusa,2011,239,1048
+Baldwin Park,2011,242,1601
+Bell,2011,291,801
+Bellflower,2011,286,1832
+Bell Gardens,2011,170,794
+La Habra Heights,2011,7,71
+Westlake Village,2011,4,181
+Beverly Hills,2011,58,974
+Bradbury,2011,0,12
+Burbank,2011,191,2555
+Claremont,2011,32,850
+Commerce,2011,116,949
+Compton,2011,1067,2865
+Covina,2011,142,1719
+Cudahy,2011,167,371
+Culver City,2011,146,1669
+Cerritos,2011,84,1761
+Agoura Hills,2011,15,255
+West Hollywood,2011,337,1437
+Santa Clarita,2011,262,2568
+Diamond Bar,2011,58,778
+Downey,2011,390,3876
+Duarte,2011,60,427
+El Monte,2011,421,2286
+El Segundo,2011,38,550
+Gardena,2011,281,1453
+Glendale,2011,258,3452
+Glendora,2011,65,1309
+Hawaiian Gardens,2011,67,216
+Hawthorne,2011,623,2124
+Hermosa Beach,2011,62,605
+Calabasas,2011,11,291
+Malibu,2011,15,268
+Hidden Hills,2011,0,15
+Huntington Park,2011,487,2100
+Industry,2011,44,1136
+Inglewood,2011,808,2582
+Irwindale,2011,26,194
+Lakewood,2011,214,1899
+La Mirada,2011,81,807
+La Puente,2011,157,594
+La Verne,2011,63,647
+Lawndale,2011,175,447
+Lomita,2011,87,334
+Long Beach,2011,2857,12816
+Los Angeles,2011,20045,86330
+Lynwood,2011,609,1393
+Manhattan Beach,2011,44,891
+Maywood,2011,155,358
+Monrovia,2011,75,904
+Montebello,2011,174,1837
+Monterey Park,2011,102,1039
+Norwalk,2011,371,2274
+Palmdale,2011,785,3273
+Palos Verdes Estates,2011,5,118
+Paramount,2011,255,1621
+Pasadena,2011,434,3712
+Pico Rivera,2011,243,1568
+Pomona,2011,928,4442
+Redondo Beach,2011,168,1601
+Rolling Hills,2011,0,14
+Rolling Hills Estates,2011,6,162
+Rosemead,2011,170,1140
+San Dimas,2011,78,562
+San Fernando,2011,103,430
+San Gabriel,2011,107,553
+San Marino,2011,11,192
+Santa Fe Springs,2011,107,1133
+Santa Monica,2011,369,2971
+Sierra Madre,2011,10,137
+Signal Hill,2011,32,471
+South El Monte,2011,122,376
+South Gate,2011,580,2893
+South Pasadena,2011,33,480
+Temple City,2011,50,344
+Torrance,2011,185,2767
+Vernon,2011,32,308
+Walnut,2011,40,354
+West Covina,2011,280,3249
+Whittier,2011,334,2468
+Carson,2011,444,2492
+Rancho Palos Verdes,2011,36,550
+La Canada Flintridge,2011,14,349
+Lancaster,2011,851,3216
+Alhambra,2012,149,1919
+Arcadia,2012,57,1388
+Artesia,2012,60,262
+Avalon,2012,13,64
+Azusa,2012,220,1204
+Baldwin Park,2012,261,1585
+Bell,2012,225,662
+Bellflower,2012,304,1802
+Bell Gardens,2012,125,728
+La Habra Heights,2012,6,44
+Westlake Village,2012,3,154
+Beverly Hills,2012,89,1081
+Bradbury,2012,0,10
+Burbank,2012,243,2493
+Claremont,2012,40,901
+Commerce,2012,112,1010
+Compton,2012,1218,2399
+Covina,2012,151,1651
+Cudahy,2012,151,347
+Culver City,2012,179,1760
+Cerritos,2012,120,1870
+Agoura Hills,2012,12,236
+West Hollywood,2012,338,1642
+Santa Clarita,2012,342,2742
+Diamond Bar,2012,55,952
+Downey,2012,381,3537
+Duarte,2012,71,507
+El Monte,2012,395,2230
+El Segundo,2012,38,595
+Gardena,2012,287,1321
+Glendale,2012,233,3043
+Glendora,2012,59,1293
+Hawaiian Gardens,2012,69,193
+Hawthorne,2012,637,2181
+Hermosa Beach,2012,54,678
+Calabasas,2012,13,238
+Malibu,2012,15,329
+Hidden Hills,2012,0,4
+Huntington Park,2012,373,1917
+Industry,2012,68,1110
+Inglewood,2012,780,2673
+Irwindale,2012,15,243
+Lakewood,2012,227,2062
+La Mirada,2012,98,776
+La Puente,2012,121,521
+La Verne,2012,50,823
+Lawndale,2012,167,397
+Lomita,2012,95,391
+Long Beach,2012,2705,14131
+Los Angeles,2012,18547,87478
+Lynwood,2012,541,1373
+Manhattan Beach,2012,62,855
+Maywood,2012,175,286
+Monrovia,2012,81,948
+Montebello,2012,146,1775
+Monterey Park,2012,75,1022
+Norwalk,2012,433,2609
+Palmdale,2012,812,3393
+Palos Verdes Estates,2012,6,136
+Paramount,2012,244,1536
+Pasadena,2012,433,3379
+Pico Rivera,2012,261,1780
+Pomona,2012,1021,5055
+Redondo Beach,2012,190,1596
+Rolling Hills,2012,0,27
+Rolling Hills Estates,2012,9,129
+Rosemead,2012,143,913
+San Dimas,2012,51,668
+San Fernando,2012,77,380
+San Gabriel,2012,88,550
+San Marino,2012,13,183
+Santa Fe Springs,2012,99,1272
+Santa Monica,2012,395,3398
+Sierra Madre,2012,4,112
+Signal Hill,2012,43,536
+South El Monte,2012,88,399
+South Gate,2012,553,2545
+South Pasadena,2012,27,443
+Temple City,2012,38,354
+Torrance,2012,190,2690
+Vernon,2012,27,311
+Walnut,2012,37,382
+West Covina,2012,281,3224
+Whittier,2012,247,2502
+Carson,2012,520,2709
+Rancho Palos Verdes,2012,35,498
+La Canada Flintridge,2012,12,324
+Lancaster,2012,859,3498
+Alhambra,2013,163,1774
+Arcadia,2013,77,1518
+Artesia,2013,63,323
+Avalon,2013,4,88
+Azusa,2013,246,1098
+Baldwin Park,2013,220,1370
+Bell,2013,208,535
+Bellflower,2013,279,1882
+Bell Gardens,2013,120,763
+La Habra Heights,2013,3,55
+Westlake Village,2013,11,148
+Beverly Hills,2013,77,1179
+Bradbury,2013,1,16
+Burbank,2013,171,2430
+Claremont,2013,37,894
+Commerce,2013,83,893
+Compton,2013,1242,2538
+Covina,2013,138,1344
+Cudahy,2013,111,320
+Culver City,2013,161,1616
+Cerritos,2013,82,1802
+Agoura Hills,2013,19,306
+West Hollywood,2013,216,1435
+Santa Clarita,2013,276,2713
+Diamond Bar,2013,62,886
+Downey,2013,326,3292
+Duarte,2013,41,366
+El Monte,2013,340,2182
+El Segundo,2013,37,538
+Gardena,2013,245,1331
+Glendale,2013,181,3198
+Glendora,2013,65,1340
+Hawaiian Gardens,2013,56,205
+Hawthorne,2013,580,2242
+Hermosa Beach,2013,27,549
+Calabasas,2013,20,313
+Malibu,2013,28,350
+Hidden Hills,2013,2,7
+Huntington Park,2013,359,1812
+Industry,2013,51,1041
+Inglewood,2013,739,2718
+Irwindale,2013,20,229
+Lakewood,2013,225,2062
+La Mirada,2013,72,841
+La Puente,2013,143,493
+La Verne,2013,37,753
+Lawndale,2013,162,419
+Lomita,2013,66,414
+Long Beach,2013,2346,12999
+Los Angeles,2013,16524,85844
+Lynwood,2013,436,1528
+Manhattan Beach,2013,64,853
+Maywood,2013,112,320
+Monrovia,2013,57,806
+Montebello,2013,183,1756
+Monterey Park,2013,104,1162
+Norwalk,2013,407,2246
+Palmdale,2013,759,3344
+Palos Verdes Estates,2013,6,147
+Paramount,2013,222,1633
+Pasadena,2013,434,3779
+Pico Rivera,2013,207,1521
+Pomona,2013,809,4394
+Redondo Beach,2013,160,1588
+Rolling Hills,2013,0,11
+Rolling Hills Estates,2013,3,118
+Rosemead,2013,149,1067
+San Dimas,2013,65,706
+San Fernando,2013,85,399
+San Gabriel,2013,103,724
+San Marino,2013,20,224
+Santa Fe Springs,2013,75,1206
+Santa Monica,2013,324,3544
+Sierra Madre,2013,13,129
+Signal Hill,2013,32,554
+South El Monte,2013,88,444
+South Gate,2013,496,2698
+South Pasadena,2013,29,568
+Temple City,2013,48,476
+Torrance,2013,187,2786
+Vernon,2013,22,321
+Walnut,2013,37,463
+West Covina,2013,231,3370
+Whittier,2013,223,2383
+Carson,2013,400,2251
+Rancho Palos Verdes,2013,30,580
+La Canada Flintridge,2013,12,303
+Lancaster,2013,832,3495
+Alhambra,2014,168,1743
+Arcadia,2014,60,1159
+Artesia,2014,49,294
+Avalon,2014,20,89
+Azusa,2014,165,1065
+Baldwin Park,2014,219,1342
+Bell,2014,217,718
+Bellflower,2014,293,1623
+Bell Gardens,2014,108,710
+La Habra Heights,2014,8,49
+Westlake Village,2014,7,173
+Beverly Hills,2014,111,1071
+Bradbury,2014,2,9
+Burbank,2014,150,2426
+Claremont,2014,39,853
+Commerce,2014,77,965
+Compton,2014,1129,2619
+Covina,2014,110,1108
+Cudahy,2014,81,332
+Culver City,2014,169,1693
+Cerritos,2014,86,1525
+Agoura Hills,2014,17,234
+West Hollywood,2014,267,1325
+Santa Clarita,2014,307,2437
+Diamond Bar,2014,49,722
+Downey,2014,281,2897
+Duarte,2014,54,352
+El Monte,2014,333,2213
+El Segundo,2014,48,538
+Gardena,2014,276,1389
+Glendale,2014,186,3073
+Glendora,2014,66,1241
+Hawaiian Gardens,2014,55,183
+Hawthorne,2014,658,2588
+Hermosa Beach,2014,37,543
+Calabasas,2014,19,252
+Malibu,2014,25,312
+Hidden Hills,2014,0,12
+Huntington Park,2014,409,1806
+Industry,2014,72,1047
+Inglewood,2014,783,2740
+Irwindale,2014,18,169
+Lakewood,2014,202,1737
+La Mirada,2014,89,635
+La Puente,2014,136,440
+La Verne,2014,46,820
+Lawndale,2014,157,398
+Lomita,2014,77,355
+Long Beach,2014,2304,12438
+Los Angeles,2014,19171,83139
+Lynwood,2014,401,1424
+Manhattan Beach,2014,37,878
+Maywood,2014,88,250
+Monrovia,2014,47,718
+Montebello,2014,134,1449
+Monterey Park,2014,91,1039
+Norwalk,2014,316,2001
+Palmdale,2014,840,3219
+Palos Verdes Estates,2014,5,121
+Paramount,2014,239,1408
+Pasadena,2014,394,3469
+Pico Rivera,2014,275,1360
+Pomona,2014,777,4403
+Redondo Beach,2014,158,1447
+Rolling Hills,2014,1,18
+Rolling Hills Estates,2014,7,114
+Rosemead,2014,147,1186
+San Dimas,2014,69,631
+San Fernando,2014,75,406
+San Gabriel,2014,83,555
+San Marino,2014,5,221
+Santa Fe Springs,2014,74,1124
+Santa Monica,2014,338,3026
+Sierra Madre,2014,13,92
+Signal Hill,2014,40,500
+South El Monte,2014,120,647
+South Gate,2014,506,2687
+South Pasadena,2014,30,475
+Temple City,2014,45,428
+Torrance,2014,155,2623
+Vernon,2014,25,312
+Walnut,2014,29,294
+West Covina,2014,225,2832
+Whittier,2014,239,2247
+Carson,2014,339,2116
+Rancho Palos Verdes,2014,24,472
+La Canada Flintridge,2014,18,306
+Lancaster,2014,891,3661
+Alhambra,2015,168,1929
+Arcadia,2015,68,1272
+Artesia,2015,84,468
+Avalon,2015,12,56
+Azusa,2015,173,1212
+Baldwin Park,2015,299,1442
+Bell,2015,221,772
+Bellflower,2015,373,1825
+Bell Gardens,2015,137,782
+La Habra Heights,2015,2,55
+Westlake Village,2015,6,195
+Beverly Hills,2015,99,1236
+Bradbury,2015,1,10
+Burbank,2015,159,2656
+Claremont,2015,64,985
+Commerce,2015,93,1247
+Compton,2015,988,2410
+Covina,2015,108,1129
+Cudahy,2015,78,307
+Culver City,2015,156,1919
+Cerritos,2015,91,1899
+Agoura Hills,2015,15,310
+West Hollywood,2015,280,1400
+Santa Clarita,2015,351,2925
+Diamond Bar,2015,58,804
+Downey,2015,335,2892
+Duarte,2015,72,367
+El Monte,2015,400,2132
+El Segundo,2015,41,621
+Gardena,2015,301,1519
+Glendale,2015,195,3513
+Glendora,2015,55,1336
+Hawaiian Gardens,2015,86,318
+Hawthorne,2015,628,2482
+Hermosa Beach,2015,44,585
+Calabasas,2015,15,272
+Malibu,2015,25,360
+Hidden Hills,2015,1,8
+Huntington Park,2015,386,2027
+Industry,2015,68,1050
+Inglewood,2015,775,2612
+Irwindale,2015,27,166
+Lakewood,2015,222,2198
+La Mirada,2015,74,857
+La Puente,2015,119,483
+La Verne,2015,68,928
+Lawndale,2015,196,502
+Lomita,2015,67,401
+Long Beach,2015,2766,14337
+Los Angeles,2015,25156,93503
+Lynwood,2015,414,1419
+Manhattan Beach,2015,70,947
+Maywood,2015,73,358
+Monrovia,2015,47,702
+Montebello,2015,158,1682
+Monterey Park,2015,103,1349
+Norwalk,2015,400,1910
+Palmdale,2015,830,2988
+Palos Verdes Estates,2015,7,169
+Paramount,2015,283,1692
+Pasadena,2015,428,3693
+Pico Rivera,2015,199,1451
+Pomona,2015,792,4507
+Redondo Beach,2015,185,1757
+Rolling Hills,2015,1,13
+Rolling Hills Estates,2015,9,109
+Rosemead,2015,155,1247
+San Dimas,2015,81,679
+San Fernando,2015,94,509
+San Gabriel,2015,89,635
+San Marino,2015,17,225
+Santa Fe Springs,2015,85,1254
+Santa Monica,2015,445,3834
+Sierra Madre,2015,11,117
+Signal Hill,2015,58,784
+South El Monte,2015,125,649
+South Gate,2015,561,3278
+South Pasadena,2015,30,708
+Temple City,2015,66,474
+Torrance,2015,214,2881
+Vernon,2015,28,290
+Walnut,2015,31,322
+West Covina,2015,263,2982
+Whittier,2015,238,2531
+Carson,2015,433,2146
+Rancho Palos Verdes,2015,41,551
+La Canada Flintridge,2015,20,287
+Lancaster,2015,1005,3818
+Alhambra,2016,146,2107
+Arcadia,2016,83,1642
+Artesia,2016,89,622
+Avalon,2016,10,37
+Azusa,2016,175,1139
+Baldwin Park,2016,291,1514
+Bell,2016,233,782
+Bellflower,2016,392,1990
+Bell Gardens,2016,155,942
+La Habra Heights,2016,4,109
+Westlake Village,2016,16,204
+Beverly Hills,2016,106,1416
+Bradbury,2016,0,6
+Burbank,2016,210,2927
+Claremont,2016,59,960
+Commerce,2016,130,1223
+Compton,2016,1129,2528
+Covina,2016,164,1289
+Cudahy,2016,76,246
+Culver City,2016,213,2060
+Cerritos,2016,111,2264
+Agoura Hills,2016,15,253
+West Hollywood,2016,275,1601
+Santa Clarita,2016,331,3005
+Diamond Bar,2016,66,931
+Downey,2016,373,3371
+Duarte,2016,72,373
+El Monte,2016,448,2501
+El Segundo,2016,53,731
+Gardena,2016,338,1482
+Glendale,2016,227,3450
+Glendora,2016,70,1361
+Hawaiian Gardens,2016,73,305
+Hawthorne,2016,654,2533
+Hermosa Beach,2016,47,539
+Calabasas,2016,15,291
+Malibu,2016,38,402
+Hidden Hills,2016,1,16
+Huntington Park,2016,463,1988
+Industry,2016,96,1175
+Inglewood,2016,830,2456
+Irwindale,2016,18,206
+Lakewood,2016,223,2521
+La Mirada,2016,85,889
+La Puente,2016,131,560
+La Verne,2016,41,561
+Lawndale,2016,194,528
+Lomita,2016,69,347
+Long Beach,2016,2846,14224
+Los Angeles,2016,28817,99151
+Lynwood,2016,469,1713
+Manhattan Beach,2016,53,1030
+Maywood,2016,122,441
+Monrovia,2016,60,832
+Montebello,2016,214,1978
+Monterey Park,2016,131,1704
+Norwalk,2016,419,1963
+Palmdale,2016,697,2728
+Palos Verdes Estates,2016,4,111
+Paramount,2016,313,1744
+Pasadena,2016,477,3446
+Pico Rivera,2016,220,1621
+Pomona,2016,767,4676
+Redondo Beach,2016,160,1742
+Rolling Hills,2016,0,11
+Rolling Hills Estates,2016,11,126
+Rosemead,2016,167,1249
+San Dimas,2016,82,764
+San Fernando,2016,132,450
+San Gabriel,2016,98,655
+San Marino,2016,15,261
+Santa Fe Springs,2016,112,1184
+Santa Monica,2016,475,4039
+Sierra Madre,2016,25,114
+Signal Hill,2016,69,856
+South El Monte,2016,109,580
+South Gate,2016,660,3435
+South Pasadena,2016,27,667
+Temple City,2016,49,580
+Torrance,2016,258,3221
+Vernon,2016,28,376
+Walnut,2016,25,516
+West Covina,2016,265,2811
+Whittier,2016,258,2790
+Carson,2016,505,2424
+Rancho Palos Verdes,2016,27,417
+La Canada Flintridge,2016,13,303
+Lancaster,2016,1103,3488
+Alhambra,2017,172,1877
+Arcadia,2017,110,1534
+Artesia,2017,103,460
+Avalon,2017,20,58
+Azusa,2017,147,1203
+Baldwin Park,2017,348,1405
+Bell,2017,228,652
+Bellflower,2017,363,1988
+Bell Gardens,2017,100,749
+La Habra Heights,2017,4,95
+Westlake Village,2017,14,208
+Beverly Hills,2017,118,1819
+Bradbury,2017,1,7
+Burbank,2017,253,2944
+Claremont,2017,74,940
+Commerce,2017,106,1174
+Compton,2017,1164,2583
+Covina,2017,172,1180
+Cudahy,2017,74,214
+Culver City,2017,183,1886
+Cerritos,2017,127,2268
+Agoura Hills,2017,16,278
+West Hollywood,2017,254,1705
+Santa Clarita,2017,352,3081
+Diamond Bar,2017,57,1043
+Downey,2017,382,3222
+Duarte,2017,64,352
+El Monte,2017,451,2816
+El Segundo,2017,40,687
+Gardena,2017,393,1393
+Glendale,2017,274,3118
+Glendora,2017,129,1533
+Hawaiian Gardens,2017,86,324
+Hawthorne,2017,587,2273
+Hermosa Beach,2017,28,590
+Calabasas,2017,30,330
+Malibu,2017,38,366
+Hidden Hills,2017,1,12
+Huntington Park,2017,427,1817
+Industry,2017,73,928
+Inglewood,2017,785,2760
+Irwindale,2017,12,212
+Lakewood,2017,318,2422
+La Mirada,2017,104,906
+La Puente,2017,148,444
+La Verne,2017,92,766
+Lawndale,2017,178,433
+Lomita,2017,56,402
+Long Beach,2017,3101,12598
+Los Angeles,2017,30507,101618
+Lynwood,2017,458,1681
+Manhattan Beach,2017,71,875
+Maywood,2017,115,364
+Monrovia,2017,66,848
+Montebello,2017,203,1644
+Monterey Park,2017,112,1613
+Norwalk,2017,437,1956
+Palmdale,2017,681,2659
+Palos Verdes Estates,2017,3,125
+Paramount,2017,324,1613
+Pasadena,2017,574,2946
+Pico Rivera,2017,236,1432
+Pomona,2017,853,4484
+Redondo Beach,2017,176,1570
+Rolling Hills,2017,0,6
+Rolling Hills Estates,2017,12,153
+Rosemead,2017,173,1327
+San Dimas,2017,67,735
+San Fernando,2017,120,360
+San Gabriel,2017,114,666
+San Marino,2017,14,255
+Santa Fe Springs,2017,106,1048
+Santa Monica,2017,705,4374
+Sierra Madre,2017,8,108
+Signal Hill,2017,63,749
+South El Monte,2017,121,684
+South Gate,2017,674,3131
+South Pasadena,2017,18,504
+Temple City,2017,54,552
+Torrance,2017,267,3206
+Vernon,2017,35,424
+Walnut,2017,43,485
+West Covina,2017,275,2733
+Whittier,2017,300,2507
+Carson,2017,475,2250
+Rancho Palos Verdes,2017,33,446
+La Canada Flintridge,2017,16,287
+Lancaster,2017,1219,3318
+Alhambra,2018,193,1930
+Arcadia,2018,76,1420
+Artesia,2018,82,335
+Avalon,2018,4,41
+Azusa,2018,193,1122
+Baldwin Park,2018,287,1386
+Bell,2018,184,495
+Bellflower,2018,335,1688
+Bell Gardens,2018,117,633
+La Habra Heights,2018,6,66
+Westlake Village,2018,12,200
+Beverly Hills,2018,106,1757
+Bradbury,2018,2,13
+Burbank,2018,229,2625
+Claremont,2018,66,930
+Commerce,2018,128,995
+Compton,2018,1174,2559
+Covina,2018,188,1117
+Cudahy,2018,90,187
+Culver City,2018,188,1756
+Cerritos,2018,162,1794
+Agoura Hills,2018,27,274
+West Hollywood,2018,301,2100
+Santa Clarita,2018,292,2437
+Diamond Bar,2018,58,936
+Downey,2018,367,2615
+Duarte,2018,62,403
+El Monte,2018,362,2242
+El Segundo,2018,62,714
+Gardena,2018,326,1306
+Glendale,2018,202,3110
+Glendora,2018,122,1523
+Hawaiian Gardens,2018,81,250
+Hawthorne,2018,617,1705
+Hermosa Beach,2018,30,477
+Calabasas,2018,26,363
+Malibu,2018,37,380
+Hidden Hills,2018,0,15
+Huntington Park,2018,429,1800
+Industry,2018,87,979
+Inglewood,2018,683,2744
+Irwindale,2018,12,194
+Lakewood,2018,270,1848
+La Mirada,2018,89,829
+La Puente,2018,162,501
+La Verne,2018,87,742
+Lawndale,2018,129,348
+Lomita,2018,66,312
+Long Beach,2018,3284,11922
+Los Angeles,2018,30126,101267
+Lynwood,2018,426,1438
+Manhattan Beach,2018,57,844
+Maywood,2018,87,302
+Monrovia,2018,69,914
+Montebello,2018,218,1643
+Monterey Park,2018,124,1589
+Norwalk,2018,449,1948
+Palmdale,2018,591,2442
+Palos Verdes Estates,2018,6,104
+Paramount,2018,329,1427
+Pasadena,2018,547,2928
+Pico Rivera,2018,228,1159
+Pomona,2018,877,4697
+Redondo Beach,2018,171,1452
+Rolling Hills,2018,0,5
+Rolling Hills Estates,2018,8,108
+Rosemead,2018,194,1274
+San Dimas,2018,80,751
+San Fernando,2018,102,312
+San Gabriel,2018,136,691
+San Marino,2018,11,203
+Santa Fe Springs,2018,105,991
+Santa Monica,2018,797,4732
+Sierra Madre,2018,7,95
+Signal Hill,2018,86,690
+South El Monte,2018,126,621
+South Gate,2018,634,2364
+South Pasadena,2018,32,522
+Temple City,2018,64,472
+Torrance,2018,267,2702
+Vernon,2018,27,383
+Walnut,2018,22,483
+West Covina,2018,292,2513
+Whittier,2018,233,2225
+Carson,2018,435,1971
+Rancho Palos Verdes,2018,32,389
+La Canada Flintridge,2018,13,330
+Lancaster,2018,1193,3805
+Alhambra,2019,161,1749
+Arcadia,2019,84,1348
+Artesia,2019,72,284
+Avalon,2019,10,40
+Azusa,2019,144,959
+Baldwin Park,2019,188,1110
+Bell,2019,168,441
+Bellflower,2019,327,1506
+Bell Gardens,2019,147,630
+La Habra Heights,2019,4,79
+Westlake Village,2019,13,189
+Beverly Hills,2019,103,1499
+Bradbury,2019,1,10
+Burbank,2019,189,2617
+Claremont,2019,51,774
+Commerce,2019,138,1004
+Compton,2019,1104,2346
+Covina,2019,171,1189
+Cudahy,2019,89,214
+Culver City,2019,182,1647
+Cerritos,2019,127,1634
+Agoura Hills,2019,21,306
+West Hollywood,2019,294,1898
+Santa Clarita,2019,277,2059
+Diamond Bar,2019,72,908
+Downey,2019,352,2473
+Duarte,2019,55,305
+El Monte,2019,304,1787
+El Segundo,2019,82,625
+Gardena,2019,324,1202
+Glendale,2019,231,3305
+Glendora,2019,155,1501
+Hawaiian Gardens,2019,76,225
+Hawthorne,2019,636,1485
+Hermosa Beach,2019,51,449
+Calabasas,2019,35,331
+Malibu,2019,44,416
+Hidden Hills,2019,1,18
+Huntington Park,2019,458,1595
+Industry,2019,72,1180
+Inglewood,2019,671,2321
+Irwindale,2019,26,240
+Lakewood,2019,222,1846
+La Mirada,2019,86,701
+La Puente,2019,151,449
+La Verne,2019,51,627
+Lawndale,2019,125,411
+Lomita,2019,67,254
+Long Beach,2019,2369,11297
+Los Angeles,2019,29400,95704
+Lynwood,2019,454,1419
+Manhattan Beach,2019,55,851
+Maywood,2019,90,296
+Monrovia,2019,43,845
+Montebello,2019,178,1448
+Monterey Park,2019,126,1355
+Norwalk,2019,432,1571
+Palmdale,2019,658,2230
+Palos Verdes Estates,2019,4,88
+Paramount,2019,347,1246
+Pasadena,2019,613,2866
+Pico Rivera,2019,234,1052
+Pomona,2019,940,4208
+Redondo Beach,2019,160,1370
+Rolling Hills,2019,1,8
+Rolling Hills Estates,2019,10,126
+Rosemead,2019,175,942
+San Dimas,2019,78,833
+San Fernando,2019,80,243
+San Gabriel,2019,98,715
+San Marino,2019,14,208
+Santa Fe Springs,2019,105,1035
+Santa Monica,2019,664,3964
+Sierra Madre,2019,15,79
+Signal Hill,2019,95,678
+South El Monte,2019,102,500
+South Gate,2019,622,2754
+South Pasadena,2019,29,566
+Temple City,2019,64,331
+Torrance,2019,280,2853
+Vernon,2019,27,485
+Walnut,2019,38,386
+West Covina,2019,260,2369
+Whittier,2019,213,1901
+Carson,2019,444,2004
+Rancho Palos Verdes,2019,29,313
+La Canada Flintridge,2019,15,323
+Lancaster,2019,1359,3346
+Alhambra,2020,175,1551
+Arcadia,2020,87,1034
+Artesia,2020,50,306
+Avalon,2020,7,52
+Azusa,2020,155,975
+Baldwin Park,2020,161,862
+Bell,2020,182,502
+Bellflower,2020,348,1799
+Bell Gardens,2020,150,618
+La Habra Heights,2020,3,55
+Westlake Village,2020,9,129
+Beverly Hills,2020,111,1244
+Bradbury,2020,0,7
+Burbank,2020,174,2474
+Claremont,2020,51,696
+Commerce,2020,136,1069
+Compton,2020,1125,2249
+Covina,2020,152,1110
+Cudahy,2020,91,292
+Culver City,2020,196,1600
+Cerritos,2020,100,1362
+Agoura Hills,2020,23,243
+West Hollywood,2020,205,1205
+Santa Clarita,2020,291,2013
+Diamond Bar,2020,62,793
+Downey,2020,301,2153
+Duarte,2020,51,348
+El Monte,2020,348,1775
+El Segundo,2020,114,775
+Gardena,2020,269,1324
+Glendale,2020,206,3197
+Glendora,2020,101,1200
+Hawaiian Gardens,2020,52,197
+Hawthorne,2020,675,1631
+Hermosa Beach,2020,47,475
+Calabasas,2020,39,255
+Malibu,2020,40,355
+Hidden Hills,2020,1,13
+Huntington Park,2020,421,1720
+Industry,2020,58,794
+Inglewood,2020,679,2495
+Irwindale,2020,17,182
+Lakewood,2020,236,1707
+La Mirada,2020,92,698
+La Puente,2020,124,387
+La Verne,2020,44,642
+Lawndale,2020,154,484
+Lomita,2020,78,319
+Long Beach,2020,2343,12707
+Los Angeles,2020,28882,85932
+Lynwood,2020,441,1511
+Manhattan Beach,2020,46,784
+Maywood,2020,117,459
+Monrovia,2020,69,914
+Montebello,2020,178,1064
+Monterey Park,2020,113,1230
+Norwalk,2020,437,1771
+Palmdale,2020,744,2134
+Palos Verdes Estates,2020,4,86
+Paramount,2020,263,1309
+Pasadena,2020,414,3021
+Pico Rivera,2020,173,1166
+Pomona,2020,780,4759
+Redondo Beach,2020,167,1422
+Rolling Hills,2020,0,6
+Rolling Hills Estates,2020,11,119
+Rosemead,2020,189,895
+San Dimas,2020,83,761
+San Fernando,2020,86,254
+San Gabriel,2020,75,525
+San Marino,2020,12,238
+Santa Fe Springs,2020,92,1039
+Santa Monica,2020,541,3852
+Sierra Madre,2020,14,86
+Signal Hill,2020,94,738
+South El Monte,2020,118,567
+South Gate,2020,637,2946
+South Pasadena,2020,26,631
+Temple City,2020,49,322
+Torrance,2020,274,2935
+Vernon,2020,48,860
+Walnut,2020,38,326
+West Covina,2020,206,2212
+Whittier,2020,237,1634
+Carson,2020,392,2044
+Rancho Palos Verdes,2020,43,335
+La Canada Flintridge,2020,14,262
+Lancaster,2020,1198,2690

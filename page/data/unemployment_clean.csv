@@ -1,0 +1,969 @@
+City,Year,Unemployment Rate
+Agoura Hills,2010,10.5
+Agoura Hills,2011,10.2
+Agoura Hills,2012,9.2
+Agoura Hills,2013,8.1
+Agoura Hills,2014,6.8
+Agoura Hills,2015,5.5
+Agoura Hills,2016,4.8
+Agoura Hills,2017,4.1
+Agoura Hills,2018,4.3
+Agoura Hills,2019,4
+Agoura Hills,2020,10.3
+Alhambra,2010,8.4
+Alhambra,2011,8.1
+Alhambra,2012,7.3
+Alhambra,2013,6.4
+Alhambra,2014,5.4
+Alhambra,2015,4.4
+Alhambra,2016,4.6
+Alhambra,2017,4.1
+Alhambra,2018,4
+Alhambra,2019,3.9
+Alhambra,2020,12.9
+Arcadia,2018,3.5
+Arcadia,2017,3.7
+Arcadia,2016,4
+Arcadia,2015,3.9
+Arcadia,2014,4.8
+Arcadia,2013,5.7
+Arcadia,2012,6.5
+Arcadia,2011,7.2
+Arcadia,2010,7.5
+Arcadia,2020,10
+Arcadia,2019,3.5
+Artesia,2010,7.9
+Artesia,2011,7.7
+Artesia,2012,6.9
+Artesia,2013,6.1
+Artesia,2014,5.1
+Artesia,2015,4.1
+Artesia,2016,3.1
+Artesia,2017,2.9
+Artesia,2018,3.8
+Artesia,2019,4.1
+Artesia,2020,11.5
+Avalon,2018,0.4
+Avalon,2017,1.4
+Avalon,2016,2.7
+Avalon,2015,5.6
+Avalon,2014,6.9
+Avalon,2013,8.3
+Avalon,2012,9.3
+Avalon,2011,10.3
+Avalon,2010,10.7
+Avalon,2020,0.1
+Avalon,2019,0
+Azusa,2018,4.4
+Azusa,2017,4.9
+Azusa,2016,5.3
+Azusa,2015,5
+Azusa,2014,6.2
+Azusa,2013,7.4
+Azusa,2012,8.4
+Azusa,2011,9.3
+Azusa,2010,9.6
+Azusa,2020,11.6
+Azusa,2019,4.3
+Baldwin Park,2018,4.9
+Baldwin Park,2017,5.2
+Baldwin Park,2016,5.6
+Baldwin Park,2015,8.9
+Baldwin Park,2014,10.9
+Baldwin Park,2013,12.8
+Baldwin Park,2012,14.4
+Baldwin Park,2011,15.9
+Baldwin Park,2010,16.3
+Baldwin Park,2020,13.7
+Baldwin Park,2019,4.8
+Bell,2018,5.1
+Bell,2017,5.4
+Bell,2016,5.9
+Bell,2015,9.1
+Bell,2014,11.1
+Bell,2013,13.1
+Bell,2012,14.7
+Bell,2011,16.2
+Bell,2010,16.7
+Bell,2020,13.2
+Bell,2019,4.8
+Bellflower,2010,12
+Bellflower,2011,11.6
+Bellflower,2012,10.5
+Bellflower,2013,9.3
+Bellflower,2014,7.8
+Bellflower,2015,6.4
+Bellflower,2016,6
+Bellflower,2017,5.4
+Bellflower,2018,5.2
+Bellflower,2019,5.1
+Bellflower,2020,14.6
+Bell Gardens,2018,4.7
+Bell Gardens,2017,5.1
+Bell Gardens,2016,5.8
+Bell Gardens,2015,7.7
+Bell Gardens,2014,9.5
+Bell Gardens,2013,11.2
+Bell Gardens,2012,12.6
+Bell Gardens,2011,14
+Bell Gardens,2010,14.4
+Bell Gardens,2020,13.2
+Bell Gardens,2019,4.6
+Beverly Hills,2018,4
+Beverly Hills,2017,4.2
+Beverly Hills,2016,4.9
+Beverly Hills,2015,6.4
+Beverly Hills,2014,7.8
+Beverly Hills,2013,9.3
+Beverly Hills,2012,10.5
+Beverly Hills,2011,11.6
+Beverly Hills,2010,12
+Beverly Hills,2020,10.3
+Beverly Hills,2019,4.2
+Bradbury,2018,1.5
+Bradbury,2017,3.2
+Bradbury,2016,2.1
+Bradbury,2015,5
+Bradbury,2014,6
+Bradbury,2013,7
+Bradbury,2012,8.1
+Bradbury,2011,8.9
+Bradbury,2010,9.2
+Bradbury,2020,4.7
+Bradbury,2019,1.7
+Burbank,2010,10.4
+Burbank,2011,10.1
+Burbank,2012,9.1
+Burbank,2013,8
+Burbank,2014,6.8
+Burbank,2015,5.5
+Burbank,2016,5.9
+Burbank,2017,5.3
+Burbank,2018,5.3
+Burbank,2019,5.2
+Burbank,2020,14.1
+Calabasas,2018,2.9
+Calabasas,2017,3.2
+Calabasas,2016,3.1
+Calabasas,2015,4.4
+Calabasas,2014,5.4
+Calabasas,2013,6.4
+Calabasas,2012,7.3
+Calabasas,2011,8.1
+Calabasas,2010,8.4
+Calabasas,2020,8.8
+Calabasas,2019,3
+Carson,2018,4.9
+Carson,2017,5
+Carson,2016,5.7
+Carson,2015,8.6
+Carson,2014,10.5
+Carson,2013,12.5
+Carson,2012,14
+Carson,2011,15.5
+Carson,2010,15.9
+Carson,2020,13.6
+Carson,2019,5
+Cerritos,2018,3.9
+Cerritos,2017,4.2
+Cerritos,2016,4.7
+Cerritos,2015,5
+Cerritos,2014,6.1
+Cerritos,2013,7.3
+Cerritos,2012,8.2
+Cerritos,2011,9.2
+Cerritos,2010,9.5
+Cerritos,2020,10.9
+Cerritos,2019,3.7
+Claremont,2018,4.3
+Claremont,2017,4.4
+Claremont,2016,5
+Claremont,2015,6.4
+Claremont,2014,7.8
+Claremont,2013,9.3
+Claremont,2012,10.5
+Claremont,2011,11.7
+Claremont,2010,12
+Claremont,2020,9.1
+Claremont,2019,4.1
+Commerce,2010,17.9
+Commerce,2011,17.4
+Commerce,2012,15.7
+Commerce,2013,14.1
+Commerce,2014,11.9
+Commerce,2015,9.8
+Commerce,2016,6.9
+Commerce,2017,6.9
+Commerce,2018,5.6
+Commerce,2019,4.6
+Commerce,2020,12.8
+Compton,2018,6.3
+Compton,2017,6.4
+Compton,2016,7
+Compton,2015,10.4
+Compton,2014,12.6
+Compton,2013,14.9
+Compton,2012,16.6
+Compton,2011,18.3
+Compton,2010,18.8
+Compton,2020,16.5
+Compton,2019,6.2
+Covina,2018,4.9
+Covina,2017,5.2
+Covina,2016,5.8
+Covina,2015,8
+Covina,2014,9.8
+Covina,2013,11.6
+Covina,2012,13
+Covina,2011,14.4
+Covina,2010,14.8
+Covina,2020,13.3
+Covina,2019,4.8
+Cudahy,2010,15.6
+Cudahy,2011,15.1
+Cudahy,2012,13.7
+Cudahy,2013,12.2
+Cudahy,2014,10.3
+Cudahy,2015,8.4
+Cudahy,2016,5.4
+Cudahy,2017,5
+Cudahy,2018,4.7
+Cudahy,2019,4.5
+Cudahy,2020,12.7
+Culver City,2018,4.4
+Culver City,2017,4.6
+Culver City,2016,5.1
+Culver City,2015,4.9
+Culver City,2014,6.1
+Culver City,2013,7.2
+Culver City,2012,8.2
+Culver City,2011,9.1
+Culver City,2010,9.4
+Culver City,2020,10.8
+Culver City,2019,4.3
+Diamond Bar,2018,3.7
+Diamond Bar,2017,3.8
+Diamond Bar,2016,4.4
+Diamond Bar,2015,4.3
+Diamond Bar,2014,5.3
+Diamond Bar,2013,6.3
+Diamond Bar,2012,7.1
+Diamond Bar,2011,8
+Diamond Bar,2010,8.2
+Diamond Bar,2020,10.6
+Diamond Bar,2019,3.7
+Downey,2010,11.2
+Downey,2011,10.9
+Downey,2012,9.8
+Downey,2013,8.7
+Downey,2014,7.3
+Downey,2015,5.9
+Downey,2016,5.1
+Downey,2017,4.6
+Downey,2018,4.5
+Downey,2019,4.2
+Downey,2020,12.6
+Duarte,2018,5.6
+Duarte,2017,5.5
+Duarte,2016,6.2
+Duarte,2015,6
+Duarte,2014,7.4
+Duarte,2013,8.8
+Duarte,2012,9.9
+Duarte,2011,11.1
+Duarte,2010,11.4
+Duarte,2020,14.3
+Duarte,2019,5.2
+El Monte,2018,4.6
+El Monte,2017,4.8
+El Monte,2016,5.3
+El Monte,2015,8.3
+El Monte,2014,10.1
+El Monte,2013,12
+El Monte,2012,13.4
+El Monte,2011,14.9
+El Monte,2010,15.3
+El Monte,2020,13.7
+El Monte,2019,4.3
+El Segundo,2010,7.2
+El Segundo,2011,7
+El Segundo,2012,6.2
+El Segundo,2013,5.5
+El Segundo,2014,4.6
+El Segundo,2015,3.7
+El Segundo,2016,4.3
+El Segundo,2017,3.9
+El Segundo,2018,5.4
+El Segundo,2019,4.9
+El Segundo,2020,13.5
+Gardena,2010,12.6
+Gardena,2011,12.2
+Gardena,2012,11
+Gardena,2013,9.8
+Gardena,2014,8.2
+Gardena,2015,6.7
+Gardena,2016,5.5
+Gardena,2017,4.9
+Gardena,2018,4.7
+Gardena,2019,4.7
+Gardena,2020,14.3
+Glendale,2018,4.4
+Glendale,2017,4.4
+Glendale,2016,4.9
+Glendale,2015,6.5
+Glendale,2014,8
+Glendale,2013,9.5
+Glendale,2012,10.7
+Glendale,2011,11.9
+Glendale,2010,12.2
+Glendale,2020,13.2
+Glendale,2019,4.2
+Glendora,2010,10.8
+Glendora,2011,10.5
+Glendora,2012,9.4
+Glendora,2013,8.4
+Glendora,2014,7
+Glendora,2015,5.7
+Glendora,2016,4.8
+Glendora,2017,4.4
+Glendora,2018,4.3
+Glendora,2019,4.1
+Glendora,2020,10.5
+Hawaiian Gardens,2010,11.2
+Hawaiian Gardens,2011,10.9
+Hawaiian Gardens,2012,9.8
+Hawaiian Gardens,2013,8.7
+Hawaiian Gardens,2014,7.3
+Hawaiian Gardens,2015,5.9
+Hawaiian Gardens,2016,6.3
+Hawaiian Gardens,2017,6.4
+Hawaiian Gardens,2018,4.9
+Hawaiian Gardens,2019,4.3
+Hawaiian Gardens,2020,12.1
+Hawthorne,2018,4.8
+Hawthorne,2017,4.8
+Hawthorne,2016,5.3
+Hawthorne,2015,6
+Hawthorne,2014,7.4
+Hawthorne,2013,8.8
+Hawthorne,2012,9.9
+Hawthorne,2011,11
+Hawthorne,2010,11.3
+Hawthorne,2020,15.1
+Hawthorne,2019,4.5
+Hermosa Beach,2010,5.5
+Hermosa Beach,2011,5.4
+Hermosa Beach,2012,4.8
+Hermosa Beach,2013,4.2
+Hermosa Beach,2014,3.5
+Hermosa Beach,2015,2.8
+Hermosa Beach,2016,2.4
+Hermosa Beach,2017,2.3
+Hermosa Beach,2018,2.2
+Hermosa Beach,2019,3
+Hermosa Beach,2020,8.7
+Hidden Hills,2010,3.2
+Hidden Hills,2011,3
+Hidden Hills,2012,2.6
+Hidden Hills,2013,2.2
+Hidden Hills,2014,2.1
+Hidden Hills,2015,1.6
+Hidden Hills,2016,2.8
+Hidden Hills,2017,4
+Hidden Hills,2018,3.8
+Hidden Hills,2019,5.5
+Hidden Hills,2020,15.2
+Huntington Park,2018,4.6
+Huntington Park,2017,4.9
+Huntington Park,2016,5.5
+Huntington Park,2015,8.8
+Huntington Park,2014,10.8
+Huntington Park,2013,12.7
+Huntington Park,2012,14.3
+Huntington Park,2011,15.8
+Huntington Park,2010,16.2
+Huntington Park,2020,11.9
+Huntington Park,2019,4.6
+Industry,2018,5.2
+Industry,2017,7.7
+Industry,2016,7.8
+Industry,2015,1.8
+Industry,2014,1.8
+Industry,2013,3.6
+Industry,2012,3.7
+Industry,2011,3.7
+Industry,2010,3.6
+Industry,2020,16.2
+Industry,2019,5.7
+Inglewood,2010,16.2
+Inglewood,2011,15.8
+Inglewood,2012,14.3
+Inglewood,2013,12.7
+Inglewood,2014,10.8
+Inglewood,2015,8.8
+Inglewood,2016,6.2
+Inglewood,2017,5.5
+Inglewood,2018,5.6
+Inglewood,2019,5.5
+Inglewood,2020,16.4
+Irwindale,2018,6.9
+Irwindale,2017,7.3
+Irwindale,2016,7.9
+Irwindale,2015,8.9
+Irwindale,2014,10.8
+Irwindale,2013,12.8
+Irwindale,2012,14.2
+Irwindale,2011,15.8
+Irwindale,2010,16.3
+Irwindale,2020,15.8
+Irwindale,2019,5.8
+La Canada Flintridge,2018,2.1
+La Canada Flintridge,2017,2.1
+La Canada Flintridge,2016,2.3
+La Canada Flintridge,2015,3.5
+La Canada Flintridge,2014,4.4
+La Canada Flintridge,2013,5.4
+La Canada Flintridge,2012,6.1
+La Canada Flintridge,2011,6.9
+La Canada Flintridge,2010,7.1
+La Canada Flintridge,2020,6.8
+La Canada Flintridge,2019,2.3
+La Habra Heights,2010,4.1
+La Habra Heights,2011,4
+La Habra Heights,2012,3.6
+La Habra Heights,2013,3.1
+La Habra Heights,2014,2.6
+La Habra Heights,2015,2.1
+La Habra Heights,2016,2.9
+La Habra Heights,2017,2.3
+La Habra Heights,2018,3.8
+La Habra Heights,2019,3.1
+La Habra Heights,2020,8.9
+Lakewood,2018,4.4
+Lakewood,2017,4.5
+Lakewood,2016,5
+Lakewood,2015,5.2
+Lakewood,2014,6.4
+Lakewood,2013,7.6
+Lakewood,2012,8.6
+Lakewood,2011,9.6
+Lakewood,2010,9.8
+Lakewood,2020,12.2
+Lakewood,2019,4.2
+La Mirada,2018,4.4
+La Mirada,2017,4.5
+La Mirada,2016,5
+La Mirada,2015,4.7
+La Mirada,2014,5.8
+La Mirada,2013,6.9
+La Mirada,2012,7.8
+La Mirada,2011,8.8
+La Mirada,2010,9
+La Mirada,2020,11.9
+La Mirada,2019,4.2
+Lancaster,2010,14
+Lancaster,2011,13.6
+Lancaster,2012,12.2
+Lancaster,2013,10.9
+Lancaster,2014,9.2
+Lancaster,2015,7.5
+Lancaster,2016,7.2
+Lancaster,2017,6.8
+Lancaster,2018,6.6
+Lancaster,2019,6.7
+Lancaster,2020,15.1
+La Puente,2018,4.8
+La Puente,2017,4.9
+La Puente,2016,5.5
+La Puente,2015,5.9
+La Puente,2014,7.3
+La Puente,2013,8.6
+La Puente,2012,9.7
+La Puente,2011,10.8
+La Puente,2010,11.2
+La Puente,2020,13
+La Puente,2019,4.6
+La Verne,2018,4.4
+La Verne,2017,4.5
+La Verne,2016,5
+La Verne,2015,5.1
+La Verne,2014,6.3
+La Verne,2013,7.5
+La Verne,2012,8.5
+La Verne,2011,9.5
+La Verne,2010,9.8
+La Verne,2020,10.5
+La Verne,2019,4.3
+Lawndale,2010,12.1
+Lawndale,2011,11.7
+Lawndale,2012,10.5
+Lawndale,2013,9.3
+Lawndale,2014,7.9
+Lawndale,2015,6.4
+Lawndale,2016,5
+Lawndale,2017,4.4
+Lawndale,2018,4.3
+Lawndale,2019,4.2
+Lawndale,2020,14.7
+Lomita,2010,9.1
+Lomita,2011,8.8
+Lomita,2012,7.9
+Lomita,2013,7
+Lomita,2014,5.9
+Lomita,2015,4.7
+Lomita,2016,4.8
+Lomita,2017,4.1
+Lomita,2018,4.2
+Lomita,2019,2.4
+Lomita,2020,7
+Long Beach,2010,13.7
+Long Beach,2011,13.3
+Long Beach,2012,12
+Long Beach,2013,10.7
+Long Beach,2014,9
+Long Beach,2015,7.3
+Long Beach,2016,5.5
+Long Beach,2017,4.9
+Long Beach,2018,4.8
+Long Beach,2019,4.7
+Long Beach,2020,13.3
+Los Angeles,2018,4.7
+Los Angeles,2017,4.8
+Los Angeles,2016,5.3
+Los Angeles,2015,7.1
+Los Angeles,2014,8.7
+Los Angeles,2013,10.3
+Los Angeles,2012,11.6
+Los Angeles,2011,12.9
+Los Angeles,2010,13.3
+Los Angeles,2020,12.9
+Los Angeles,2019,4.6
+Lynwood,2018,5.5
+Lynwood,2017,5.7
+Lynwood,2016,6.4
+Lynwood,2015,8.3
+Lynwood,2014,10.1
+Lynwood,2013,12
+Lynwood,2012,13.4
+Lynwood,2011,14.9
+Lynwood,2010,15.3
+Lynwood,2020,14.5
+Lynwood,2019,5.2
+Malibu,2018,2.9
+Malibu,2017,2.9
+Malibu,2016,3.6
+Malibu,2015,3.9
+Malibu,2014,4.8
+Malibu,2013,5.7
+Malibu,2012,6.5
+Malibu,2011,7.2
+Malibu,2010,7.5
+Malibu,2020,7.6
+Malibu,2019,2.6
+Manhattan Beach,2018,3.4
+Manhattan Beach,2017,3.6
+Manhattan Beach,2016,4
+Manhattan Beach,2015,2.7
+Manhattan Beach,2014,3.4
+Manhattan Beach,2013,4.1
+Manhattan Beach,2012,4.6
+Manhattan Beach,2011,5.2
+Manhattan Beach,2010,5.3
+Manhattan Beach,2020,7.3
+Manhattan Beach,2019,3.4
+Maywood,2018,4.4
+Maywood,2017,4.7
+Maywood,2016,5.3
+Maywood,2015,7
+Maywood,2014,8.6
+Maywood,2013,10.2
+Maywood,2012,11.4
+Maywood,2011,12.7
+Maywood,2010,13.1
+Maywood,2020,11.5
+Maywood,2019,4.2
+Monrovia,2010,9.8
+Monrovia,2011,9.5
+Monrovia,2012,8.5
+Monrovia,2013,7.6
+Monrovia,2014,6.3
+Monrovia,2015,5.1
+Monrovia,2016,4.4
+Monrovia,2017,4.1
+Monrovia,2018,3.9
+Monrovia,2019,3.8
+Monrovia,2020,10.8
+Montebello,2010,10.9
+Montebello,2011,10.5
+Montebello,2012,9.5
+Montebello,2013,8.4
+Montebello,2014,7.1
+Montebello,2015,5.7
+Montebello,2016,5.7
+Montebello,2017,5.2
+Montebello,2018,5
+Montebello,2019,5
+Montebello,2020,13.8
+Monterey Park,2018,4.2
+Monterey Park,2017,4.3
+Monterey Park,2016,4.9
+Monterey Park,2015,5.9
+Monterey Park,2014,7.3
+Monterey Park,2013,8.7
+Monterey Park,2012,9.8
+Monterey Park,2011,10.9
+Monterey Park,2010,11.3
+Monterey Park,2020,14.9
+Monterey Park,2019,4.2
+Norwalk,2010,12.9
+Norwalk,2011,12.5
+Norwalk,2012,11.2
+Norwalk,2013,10
+Norwalk,2014,8.4
+Norwalk,2015,6.8
+Norwalk,2016,5.5
+Norwalk,2017,5
+Norwalk,2018,4.6
+Norwalk,2019,4.6
+Norwalk,2020,13.5
+Palmdale,2010,16.5
+Palmdale,2011,16.1
+Palmdale,2012,14.5
+Palmdale,2013,13
+Palmdale,2014,11
+Palmdale,2015,9
+Palmdale,2016,6.9
+Palmdale,2017,6.4
+Palmdale,2018,6.4
+Palmdale,2019,6.3
+Palmdale,2020,15.3
+Palos Verdes Estates,2010,2.2
+Palos Verdes Estates,2011,2.1
+Palos Verdes Estates,2012,1.9
+Palos Verdes Estates,2013,1.6
+Palos Verdes Estates,2014,1.3
+Palos Verdes Estates,2015,1.1
+Palos Verdes Estates,2016,1.1
+Palos Verdes Estates,2017,2
+Palos Verdes Estates,2018,2.3
+Palos Verdes Estates,2019,1.7
+Palos Verdes Estates,2020,5
+Paramount,2010,14.6
+Paramount,2011,14.2
+Paramount,2012,12.8
+Paramount,2013,11.4
+Paramount,2014,9.6
+Paramount,2015,7.8
+Paramount,2016,5.9
+Paramount,2017,5.2
+Paramount,2018,5.1
+Paramount,2019,5
+Paramount,2020,14.2
+Pasadena,2010,11.3
+Pasadena,2011,10.9
+Pasadena,2012,9.8
+Pasadena,2013,8.7
+Pasadena,2014,7.3
+Pasadena,2015,5.9
+Pasadena,2016,4.5
+Pasadena,2017,4.1
+Pasadena,2018,4
+Pasadena,2019,4
+Pasadena,2020,10.4
+Pico Rivera,2010,11.6
+Pico Rivera,2011,11.3
+Pico Rivera,2012,10.2
+Pico Rivera,2013,9
+Pico Rivera,2014,7.6
+Pico Rivera,2015,6.2
+Pico Rivera,2016,5.9
+Pico Rivera,2017,5.2
+Pico Rivera,2018,5.2
+Pico Rivera,2019,5
+Pico Rivera,2020,13.3
+Pomona,2010,14
+Pomona,2011,13.6
+Pomona,2012,12.2
+Pomona,2013,10.9
+Pomona,2014,9.2
+Pomona,2015,7.5
+Pomona,2016,6
+Pomona,2017,5.3
+Pomona,2018,5
+Pomona,2019,5
+Pomona,2020,13.4
+Rancho Palos Verdes,2010,6.3
+Rancho Palos Verdes,2011,6.1
+Rancho Palos Verdes,2012,5.4
+Rancho Palos Verdes,2013,4.8
+Rancho Palos Verdes,2014,4
+Rancho Palos Verdes,2015,3.2
+Rancho Palos Verdes,2016,4.1
+Rancho Palos Verdes,2017,3.9
+Rancho Palos Verdes,2018,3.8
+Rancho Palos Verdes,2019,3.7
+Rancho Palos Verdes,2020,8.5
+Redondo Beach,2018,3.8
+Redondo Beach,2017,3.9
+Redondo Beach,2016,4.3
+Redondo Beach,2015,4.1
+Redondo Beach,2014,5.1
+Redondo Beach,2013,6.1
+Redondo Beach,2012,6.9
+Redondo Beach,2011,7.7
+Redondo Beach,2010,7.9
+Redondo Beach,2020,9.7
+Redondo Beach,2019,3.7
+Rolling Hills,2018,4.2
+Rolling Hills,2017,4.1
+Rolling Hills,2016,2.4
+Rolling Hills,2015,3.8
+Rolling Hills,2014,4.6
+Rolling Hills,2013,5.6
+Rolling Hills,2012,6.3
+Rolling Hills,2011,7.1
+Rolling Hills,2010,7.4
+Rolling Hills,2020,11.4
+Rolling Hills,2019,4
+Rolling Hills Estates,2010,6.2
+Rolling Hills Estates,2011,6
+Rolling Hills Estates,2012,5.4
+Rolling Hills Estates,2013,4.7
+Rolling Hills Estates,2014,4
+Rolling Hills Estates,2015,3.2
+Rolling Hills Estates,2016,2.6
+Rolling Hills Estates,2017,2.5
+Rolling Hills Estates,2018,3.5
+Rolling Hills Estates,2019,3.7
+Rolling Hills Estates,2020,10.6
+Rosemead,2018,4.3
+Rosemead,2017,4.8
+Rosemead,2016,5.2
+Rosemead,2015,7.7
+Rosemead,2014,9.5
+Rosemead,2013,11.2
+Rosemead,2012,12.6
+Rosemead,2011,14
+Rosemead,2010,14.4
+Rosemead,2020,16.2
+Rosemead,2019,4.3
+San Dimas,2018,4.2
+San Dimas,2017,4.4
+San Dimas,2016,4.7
+San Dimas,2015,5.3
+San Dimas,2014,6.5
+San Dimas,2013,7.8
+San Dimas,2012,8.7
+San Dimas,2011,9.8
+San Dimas,2010,10.1
+San Dimas,2020,10.6
+San Dimas,2019,4.2
+San Fernando,2010,14.7
+San Fernando,2011,14.3
+San Fernando,2012,12.8
+San Fernando,2013,11.4
+San Fernando,2014,9.7
+San Fernando,2015,7.9
+San Fernando,2016,5.1
+San Fernando,2017,5
+San Fernando,2018,4.4
+San Fernando,2019,3
+San Fernando,2020,8.7
+San Gabriel,2010,7.9
+San Gabriel,2011,7.6
+San Gabriel,2012,6.8
+San Gabriel,2013,6
+San Gabriel,2014,5.1
+San Gabriel,2015,4.1
+San Gabriel,2016,4.4
+San Gabriel,2017,4
+San Gabriel,2018,3.7
+San Gabriel,2019,3.7
+San Gabriel,2020,13.3
+San Marino,2010,5
+San Marino,2011,4.8
+San Marino,2012,4.3
+San Marino,2013,3.8
+San Marino,2014,3.2
+San Marino,2015,2.6
+San Marino,2016,2.5
+San Marino,2017,2.3
+San Marino,2018,2.4
+San Marino,2019,1.4
+San Marino,2020,4.1
+Santa Clarita,2010,11.6
+Santa Clarita,2011,11.2
+Santa Clarita,2012,10.1
+Santa Clarita,2013,9
+Santa Clarita,2014,7.5
+Santa Clarita,2015,6.1
+Santa Clarita,2016,4.8
+Santa Clarita,2017,4.1
+Santa Clarita,2018,4.4
+Santa Clarita,2019,4.2
+Santa Clarita,2020,11.7
+Santa Fe Springs,2010,14.8
+Santa Fe Springs,2011,14.4
+Santa Fe Springs,2012,12.9
+Santa Fe Springs,2013,11.5
+Santa Fe Springs,2014,9.7
+Santa Fe Springs,2015,8
+Santa Fe Springs,2016,2.9
+Santa Fe Springs,2017,3.1
+Santa Fe Springs,2018,2.8
+Santa Fe Springs,2019,2.7
+Santa Fe Springs,2020,7.7
+Santa Monica,2010,10.8
+Santa Monica,2011,10.5
+Santa Monica,2012,9.4
+Santa Monica,2013,8.3
+Santa Monica,2014,7
+Santa Monica,2015,5.7
+Santa Monica,2016,5.1
+Santa Monica,2017,4.5
+Santa Monica,2018,4.4
+Santa Monica,2019,4.4
+Santa Monica,2020,10.5
+Sierra Madre,2010,8.5
+Sierra Madre,2011,8.3
+Sierra Madre,2012,7.4
+Sierra Madre,2013,6.6
+Sierra Madre,2014,5.5
+Sierra Madre,2015,4.4
+Sierra Madre,2016,3.1
+Sierra Madre,2017,3.9
+Sierra Madre,2018,4.7
+Sierra Madre,2019,5.3
+Sierra Madre,2020,14.6
+Signal Hill,2018,4.3
+Signal Hill,2017,4
+Signal Hill,2016,4.1
+Signal Hill,2015,7.3
+Signal Hill,2014,9
+Signal Hill,2013,10.7
+Signal Hill,2012,12
+Signal Hill,2011,13.3
+Signal Hill,2010,13.7
+Signal Hill,2020,11
+Signal Hill,2019,3.9
+South El Monte,2018,4.5
+South El Monte,2017,4.3
+South El Monte,2016,4.2
+South El Monte,2015,3.6
+South El Monte,2014,4.4
+South El Monte,2013,5.3
+South El Monte,2012,6
+South El Monte,2011,6.7
+South El Monte,2010,6.9
+South El Monte,2020,12.3
+South El Monte,2019,4.4
+South Gate,2010,16.1
+South Gate,2011,15.7
+South Gate,2012,14.2
+South Gate,2013,12.6
+South Gate,2014,10.7
+South Gate,2015,8.7
+South Gate,2016,5.9
+South Gate,2017,5.2
+South Gate,2018,4.9
+South Gate,2019,4.8
+South Gate,2020,13.7
+South Pasadena,2018,3.9
+South Pasadena,2017,3.8
+South Pasadena,2016,4.3
+South Pasadena,2015,4.7
+South Pasadena,2014,5.8
+South Pasadena,2013,7
+South Pasadena,2012,7.9
+South Pasadena,2011,8.8
+South Pasadena,2010,9.1
+South Pasadena,2020,9.9
+South Pasadena,2019,3.9
+Temple City,2017,3.9
+Temple City,2016,4.5
+Temple City,2015,4.4
+Temple City,2014,5.4
+Temple City,2013,6.4
+Temple City,2012,7.3
+Temple City,2011,8.1
+Temple City,2010,8.4
+Temple City,2018,3.8
+Temple City,2020,12.8
+Temple City,2019,3.7
+Torrance,2010,8.9
+Torrance,2011,8.7
+Torrance,2012,7.8
+Torrance,2013,6.9
+Torrance,2014,5.8
+Torrance,2015,4.7
+Torrance,2016,4.4
+Torrance,2017,3.9
+Torrance,2019,3.7
+Torrance,2020,10.3
+Torrance,2018,3.8
+Vernon,2010,6.2
+Vernon,2011,6.1
+Vernon,2012,6.1
+Vernon,2013,4.5
+Vernon,2014,4.4
+Vernon,2015,3
+Vernon,2016,6.6
+Vernon,2017,7.1
+Vernon,2019,0
+Vernon,2020,0
+Vernon,2018,2
+Walnut,2010,9.2
+Walnut,2011,8.9
+Walnut,2012,8
+Walnut,2013,7
+Walnut,2014,5.9
+Walnut,2015,4.8
+Walnut,2016,4.2
+Walnut,2017,3.9
+Walnut,2019,3.6
+Walnut,2020,10.2
+Walnut,2018,3.6
+West Covina,2010,15.2
+West Covina,2011,14.8
+West Covina,2012,13.3
+West Covina,2013,11.9
+West Covina,2014,10
+West Covina,2015,8.2
+West Covina,2016,5.3
+West Covina,2017,4.7
+West Covina,2019,4.5
+West Covina,2020,13.1
+West Covina,2018,4.6
+West Hollywood,2017,5.5
+West Hollywood,2016,6
+West Hollywood,2015,5.5
+West Hollywood,2014,6.8
+West Hollywood,2013,8.1
+West Hollywood,2012,9.2
+West Hollywood,2011,10.2
+West Hollywood,2010,10.5
+West Hollywood,2018,5.3
+West Hollywood,2020,13.6
+West Hollywood,2019,5.1
+Westlake Village,2010,11.5
+Westlake Village,2011,11.2
+Westlake Village,2012,10.1
+Westlake Village,2013,8.9
+Westlake Village,2014,7.5
+Westlake Village,2015,6.1
+Westlake Village,2016,3.4
+Westlake Village,2017,2.5
+Westlake Village,2019,1.9
+Westlake Village,2020,5.5
+Westlake Village,2018,2.5
+Whittier,2017,4.7
+Whittier,2016,5.3
+Whittier,2015,5.3
+Whittier,2014,6.5
+Whittier,2013,7.7
+Whittier,2012,8.7
+Whittier,2011,9.7
+Whittier,2010,10
+Whittier,2018,4.5
+Whittier,2020,12
+Whittier,2019,4.6

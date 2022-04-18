@@ -15,15 +15,17 @@ for (let i = 0; i < attrBtn.length; i++) {
 };
 const zoomSlideRange = { min: 1, max: 6 };
 const timeSlideRange = { min: new Date("2010"), max: new Date("2020") };
-const selectedPath = { selected: null, path: null, pointer: null };
+const selectedPath = { property: null, path: null, pointer: null };
 
 // Link svg elements to variables
 const svg = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
 const gRegion = svg.append("g").attr("id", "svgGeoRegion");
 
 // define any other global variables 
-const pathToJSON = "data/LA_County_City_Boundaries.geojson";
-const pathToCSV = "data/crime_clean.csv";
+const pathToJSON = "data/LA_County_Boundaries_rewind.geojson";
+const pathToCrimeCSV = "data/crime_clean.csv";
+const pathToHouseCSV = "data/house_price_clean.csv";
+const pathToEmployCSV = "data/unemployment_clean.csv";
 const zoom = d3.zoom()
     .scaleExtent([zoomSlideRange.min, zoomSlideRange.max])
     .on("zoom", zoomed);
@@ -88,11 +90,11 @@ const regionDropdown = d3.select("#location-select");
 
 // enter code to define projection and path required for Choropleth
 const projection = d3.geoMercator();
-const path = d3.geoPath(projection);
+const path = d3.geoPath().projection(projection);
 
 // import csv/json data
-const csvPromise = new Promise((resolve, reject) => {
-    d3.dsv(",", pathToCSV, d => {
+const crimeCSVPromise = new Promise((resolve, reject) => {
+    d3.dsv(",", pathToCrimeCSV, d => {
         return {
             year: parseInt(d["Year"]),
             crimeViolent: parseInt(d["Violent_sum"]),
@@ -101,7 +103,23 @@ const csvPromise = new Promise((resolve, reject) => {
         };
     })
         .then(temp => resolve(temp))
-        .catch(err => reject("CSV\n" + err));
+        .catch(err => reject("CSV for Crime Data\n" + err));
+});
+const houseCSVPromise = new Promise((resolve, reject) => {
+    d3.dsv(",", pathToHouseCSV, d => d)
+        .then(temp => resolve(temp))
+        .catch(err => reject("CSV for House Price Data\n" + err));
+});
+const employCSVPromise = new Promise((resolve, reject) => {
+    d3.dsv(",", pathToEmployCSV, d => {
+        return {
+            city: d["City"],
+            year: parseInt(d["Year"]),
+            employ: parseFloat(d["Unemployment Rate"])
+        }
+    })
+        .then(temp => resolve(temp))
+        .catch(err => reject("CSV for Umployment Rate Data\n" + err));
 });
 const jsonPromise = new Promise((resolve, reject) => {
     d3.json(pathToJSON)
@@ -110,17 +128,20 @@ const jsonPromise = new Promise((resolve, reject) => {
 });
 
 
-let error = "", region, crimeTemp, yearRange;
-const crimeData = {};
-Promise.all([jsonPromise, csvPromise]).then(value => {
-    region = value[0];
-    crimeTemp = value[1];
-}).catch(err => {
-    error = "Error in " + err;
-}).then(() => ready(error, region, crimeTemp, regionNameObj));
+let error = "", region, crimeTemp, houseTemp, employTemp, yearRange;
+const chartData = {};
+Promise.all([jsonPromise, crimeCSVPromise, houseCSVPromise, employCSVPromise])
+    .then(value => {
+        region = value[0];
+        crimeTemp = value[1];
+        houseTemp = value[2];
+        employTemp = value[3];
+    }).catch(err => {
+        error = "Error in " + err;
+    }).then(() => ready(error, region, crimeTemp, houseTemp, employTemp, regionNameObj));
 
 
-function ready(error, region, crimeTemp, regionNameObj) {
+function ready(error, region, crimeTemp, houseTemp, employTemp, regionNameObj) {
     if (error.length != 0) {
         console.log(error);
         alert(error);
@@ -129,15 +150,26 @@ function ready(error, region, crimeTemp, regionNameObj) {
         alert("Error:\nNo error in Promise.\nBut some data is empty!");
     } else {
         crimeTemp.forEach(data => {
-            if (!crimeData.hasOwnProperty(data.city)) {
-                crimeData[data.city] = {};
+            if (!chartData.hasOwnProperty(data.city)) {
+                chartData[data.city] = {};
             }
-            crimeData[data.city][data.year] = {
-                violent: data.crimeViolent,
-                property: data.crimeProperty
-            };
+            if (!chartData[data.city].hasOwnProperty(data.year)) {
+                chartData[data.city][data.year] = {};
+            }
+            chartData[data.city][data.year].violent = data.crimeViolent;
+            chartData[data.city][data.year].property = data.crimeProperty;
         });
-        yearRange = Object.keys(crimeData[Object.keys(crimeData)[0]]);
+        houseTemp.columns.forEach(column => {
+            if (column != "City") {
+                houseTemp.forEach(data => {
+                    chartData[data["City"]][column].house = parseInt(data[column]);
+                });
+            }
+        });
+        employTemp.forEach(data => {
+            chartData[data.city][data.year].unemploy = data.employ;
+        });
+        yearRange = Object.keys(chartData[Object.keys(chartData)[0]]);
         // y-axis !!!
         // could redefine timeSlideRange{min, max} here
 
@@ -169,7 +201,7 @@ function dropdownChange(event, d) {
 
     switch (selectedRegion) {
         case "Los Angeles":
-            createMap(region, crimeTemp);
+            createMap(region, chartData);
             timeSlide.property("max", -1)
                 .property("min", -findYearDiff(timeSlideRange.min, timeSlideRange.max))
                 .property("value", -findYearDiff(timeSlideRange.min, timeSlideRange.max));
@@ -182,23 +214,29 @@ function dropdownChange(event, d) {
     svg.call(zoom.scaleTo, zoomSlide.property("value"));
 }
 
-function createMap(region, crimeData) {
+function createMap(region, chartData) {
     const svgRect = svgPos();
     projection.fitSize([svgRect.svgWidth, svgRect.svgHeight], region);
 
     const regionFeatures = [...region.features];
     regionFeatures.forEach(feature => {
-        feature.values = {
-            selected: false
-            // more crime data here !!!
-        };
+        feature.properties.selected = false;
+        if (Object.keys(chartData).includes(feature.properties["CITY_NAME"])) {
+            feature.properties.data = chartData[feature.properties["CITY_NAME"]];
+        }
     });
 
     gRegion.selectAll("path")
         .data(regionFeatures).enter()
         .append("path")
         .attr("d", path)
-        .attr("id", "gRegion")
+        .attr("id", d => {
+            if (d.properties["CITY_NAME"] == "Unincorporated") {
+                return "gUnincorporated";
+            } else {
+                return "gRegion";
+            }
+        })
         .on("pointerover", mapPointerOver)
         .on("pointerout", mapPointerOut)
         .on("pointermove", mapPointerMove)
@@ -226,7 +264,7 @@ function clearSVG(svgRect) {
     timeSlide.property("max", 0).property("min", 0);
     timeSlideColor();
     timeOutput.text("Please Select\nThe Location");
-    selectedPath.pointer = [0, 0]; // !!!
+    selectedPath.pointer = [svgRect.svgWidth / 2, svgRect.svgHeight / 2];
 }
 
 function updateAttr(d) {
@@ -269,9 +307,9 @@ function timeSlideColor() {
 }
 
 function mapPointerOver(event, d) {
-    // let textStr = d.values.city.toString();
-    // if (d.values.isSegment) {
-    //     textStr = textStr + ", " + d.properties.name
+    // let textStr = d.properties.city.toString();
+    // if (d.properties.isSegment) {
+    //     textStr = textStr + ", " + d.properties["CITY_NAME"]
     // }
     titleDiv.style("display", "block").text(d.properties["CITY_NAME"]);
 }
@@ -292,17 +330,17 @@ function mapPointerMove(event, d) {
 function regionClicked(event, d) {
     const [[x0, y0], [x1, y1]] = path.bounds(d);
     const svgRect = svgPos();
-    if (d.values.selected) {
-        changeRegionColor(false);
+    if (d.properties.selected) {
+        changeRegionColor(d, false);
         removeTooltip(svgRect, (x0 + x1) / 2, (y0 + y1) / 2);
     } else {
         if (selectedPath.path !== null) {
-            changeRegionColor(false);
+            changeRegionColor(d, false);
         }
         selectedPath.path = d3.select(this);
-        selectedPath.selected = d.values;
+        selectedPath.property = d.properties;
         selectedPath.pointer = [(x0 + x1) / 2, (y0 + y1) / 2];
-        changeRegionColor(true);
+        changeRegionColor(d, true);
         createTooltip(svgRect, (x0 + x1) / 2, (y0 + y1) / 2, d);
     }
 }
@@ -344,19 +382,25 @@ function createTooltip(svgRect, centerX, centerY, d) {
         });
 }
 
-function changeRegionColor(boo) {
+function changeRegionColor(d, boo) {
     if (boo) {
-        selectedPath.path.raise().transition()
-            .style("stroke-width", "1px")
-            .style("fill", "goldenrod");
-        selectedPath.selected.selected = boo;
+        if (d.properties["CITY_NAME"] == "Unincorporated") {
+            selectedPath.path.raise().transition()
+                .style("stroke-width", "1px")
+                .style("fill", "darkslategray");
+        } else {
+            selectedPath.path.raise().transition()
+                .style("stroke-width", "1px")
+                .style("fill", "goldenrod");
+        }
+        selectedPath.property.selected = boo;
     } else {
         selectedPath.path.raise().transition()
             .style("stroke-width", null)
             .style("fill", null);
-        selectedPath.selected.selected = boo;
+        selectedPath.property.selected = boo;
         selectedPath.path = null;
-        selectedPath.selected = null;
+        selectedPath.property = null;
     }
 }
 
