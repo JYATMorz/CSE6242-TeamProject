@@ -16,14 +16,14 @@ for (let i = 0; i < attrBtn.length; i++) {
 };
 const zoomSlideRange = { min: 1, max: 6 };
 const timeSlideRange = { min: new Date("2010-01"), max: new Date("2020-12") };
-const selectedPath = { selectedValue: null, path: null };
+const selectedPath = { selected: null, path: null, pointer: null };
 
 // enter code to create svg
 const svg = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
 const gRegion = svg.append("g").attr("id", "svgGeoRegion");
 
 // define any other global variables 
-const pathToJSON = "data/lapd_divisions.geojson";
+const pathToJSON = "data/la-county-neighborhoods-v6.geojson";
 const pathToCSV = "data/crime_clean_v1.0.csv";
 const zoom = d3.zoom()
     .scaleExtent([zoomSlideRange.min, zoomSlideRange.max])
@@ -43,7 +43,7 @@ const tipDiv = d3.select("#region-tip");
 d3.select(window).on("resize", function () {
     const svgRect = svgPos();
     tipDiv
-        .style("left", svgRect.svgLeft + svgRect.width / 2 + "px")
+        .style("left", svgRect.svgLeft + svgRect.svgWidth / 2 + "px")
         .style("top", svgRect.svgTop + "px")
         .style("width", svgRect.svgWidth / 2 + "px")
         .style("height", svgRect.svgHeight + "px");
@@ -75,24 +75,19 @@ zoomIn.on("click", function (event, d) {
     let zoomLevel = zoomSlide.property("value");
     if (zoomLevel < zoomSlideRange.max) {
         zoomSlide.property("value", ++zoomLevel);
-        if (selectedPath.path !== null) {
-            // adjust zoom center point here !!!
-            svg.transition().call(zoom.scaleTo, zoomLevel);
-        } else {
-            svg.transition().call(zoom.scaleTo, zoomLevel);
-        }
+        zoomMap(zoomLevel);
     }
 });
 zoomOut.on("click", function (event, d) {
     let zoomLevel = zoomSlide.property("value");
     if (zoomLevel > zoomSlideRange.min) {
         zoomSlide.property("value", --zoomLevel);
-        svg.transition().call(zoom.scaleTo, zoomLevel);
+        zoomMap(zoomLevel);
     }
 });
 zoomSlide.on("input", function (event, d) {
     let zoomLevel = zoomSlide.property("value");
-    svg.transition().call(zoom.scaleTo, zoomLevel);
+    zoomMap(zoomLevel);
 });
 
 // enter code to control time range
@@ -117,7 +112,8 @@ const path = d3.geoPath(projection);
 // import csv/json data
 const csvPromise = new Promise((resolve, reject) => {
     d3.dsv(",", pathToCSV, d => {
-        return d["area"];
+        return;
+        // data configuration here
     })
         .then(temp => resolve(temp))
         .catch(err => reject("CSV\n" + err));
@@ -132,7 +128,7 @@ const jsonPromise = new Promise((resolve, reject) => {
 let error = "", region = {}, crimeData = [];
 Promise.all([jsonPromise, csvPromise]).then(value => {
     region = value[0];
-    crimeData = value[1];
+    // crimeData = value[1];
 }).catch(err => {
     error = "Error in " + err;
 }).then(() => ready(error, region, crimeData, regionNameObj));
@@ -147,8 +143,8 @@ function ready(error, region, crimeData, regionNameObj) {
         alert("Error:\nNo error in Promise.\nBut some data is empty!");
     } else {
         // enter code to extract all datas from crimeData
-        
-        console.log(new Set(crimeData));
+
+        // console.log(new Set(crimeData));
 
         // enter code to append the region options to the dropdown
         regionDropdown.selectAll("optgroup")
@@ -280,40 +276,58 @@ function mapPointerMove(event, d) {
 }
 
 function regionClicked(event, d) {
-    const translate = translateValue(d3.pointer(event, svg));
+    const [[x0, y0], [x1, y1]] = path.bounds(d);
     const svgRect = svgPos();
     if (d.values.selected) {
         changeRegionColor(false);
-        svg.transition().duration(800)
-            .call(zoom.translateBy, translate.xHallf, translate.y);
-        tipDiv.text(null)
-            .transition().duration(800)
-            .style("transform", "translateX(800px)")
-            .style("left", null).style("top", null)
-            .style("width", null).style("height", null)
-            .on("end", function () {
-                tipDiv.style("display", null)
-                    .style("transform", null);
-            });
+        removeTooltip(svgRect, (x0 + x1) / 2, (y0 + y1) / 2);
     } else {
         if (selectedPath.path !== null) {
             changeRegionColor(false);
         }
         selectedPath.path = d3.select(this);
-        selectedPath.selectedValue = d.values;
+        selectedPath.selected = d.values;
+        selectedPath.pointer = [(x0 + x1) / 2, (y0 + y1) / 2];
         changeRegionColor(true);
-        svg.transition().duration(800)
-            .call(zoom.translateBy, translate.xLeft, translate.y);
-        tipDiv.style("display", "block")
-            .transition().duration(800)
-            .style("left", svgRect.svgLeft + svgRect.width / 2 + "px")
-            .style("top", svgRect.svgTop + "px")
-            .style("width", svgRect.svgWidth / 2 + "px")
-            .style("height", svgRect.svgHeight + "px")
-            .on("end", function () {
-                tipDiv.text(d.properties.name);
-            });
+        createTooltip(svgRect, (x0 + x1) / 2, (y0 + y1) / 2, d);
     }
+}
+
+function removeTooltip(svgRect, centerX, centerY) {
+    svg.transition().duration(800)
+        .call(zoom.transform, d3.zoomIdentity
+            .translate(svgRect.svgWidth / 2, svgRect.svgHeight / 2)
+            .scale(zoomSlide.property("value"))
+            .translate(-centerX, -centerY));
+    d3.select("body").style("overflow-x", "hidden");
+    tipDiv.text(null)
+        .transition().duration(800)
+        .style("transform", "translateX(800px)")
+        .style("left", null).style("top", null)
+        .style("width", null).style("height", null)
+        .on("end", function () {
+            tipDiv.style("display", null)
+                .style("transform", null);
+            d3.select("body").style("overflow-x", null);
+        });
+}
+
+function createTooltip(svgRect, centerX, centerY, d) {
+    svg.transition().duration(800)
+        .call(zoom.transform, d3.zoomIdentity
+            .translate(svgRect.svgWidth / 4, svgRect.svgHeight / 2)
+            .scale(zoomSlide.property("value"))
+            .translate(-centerX, -centerY));
+    tipDiv.style("display", "block")
+        .transition().duration(800)
+        .style("left", svgRect.svgLeft + svgRect.svgWidth / 2 + "px")
+        .style("top", svgRect.svgTop + "px")
+        .style("width", svgRect.svgWidth / 2 + "px")
+        .style("height", svgRect.svgHeight + "px")
+        .on("end", function () {
+            tipDiv.text(d.properties.name);
+            // add charts here !!!
+        });
 }
 
 function changeRegionColor(boo) {
@@ -321,25 +335,15 @@ function changeRegionColor(boo) {
         selectedPath.path.raise().transition()
             .style("stroke-width", "1px")
             .style("fill", "goldenrod");
-        selectedPath.selectedValue.selected = boo;
+        selectedPath.selected.selected = boo;
     } else {
         selectedPath.path.raise().transition()
             .style("stroke-width", null)
             .style("fill", null);
-        selectedPath.selectedValue.selected = boo;
+        selectedPath.selected.selected = boo;
         selectedPath.path = null;
-        selectedPath.selectedValue = null;
+        selectedPath.selected = null;
     }
-}
-
-function translateValue([pointerX, pointerY]) {
-    const svgRect = svg.node().getBoundingClientRect();
-    const zoomLevel = zoomSlide.property("value");
-    return {
-        xHallf: (svgRect.width / 2 - (pointerX - svgRect.x)) / zoomLevel,
-        xLeft: (svgRect.width / 4 - (pointerX - svgRect.x)) / zoomLevel,
-        y: (svgRect.height / 2 - (pointerY - svgRect.y)) / zoomLevel,
-    };
 }
 
 function svgPos() {
@@ -354,4 +358,18 @@ function svgPos() {
 
 function zoomed({ transform }) {
     gRegion.attr("transform", transform);
+}
+
+function zoomMap(zoomLevel) {
+    if (selectedPath.path !== null) {
+        const svgRect = svgPos();
+        svg.transition().duration(500)
+            .call(zoom.transform,
+                d3.zoomIdentity
+                    .translate(svgRect.svgWidth / 4, svgRect.svgHeight / 2)
+                    .scale(zoomLevel)
+                    .translate(-selectedPath.pointer[0], -selectedPath.pointer[1]));
+    } else {
+        svg.transition().call(zoom.scaleTo, zoomLevel);
+    }
 }
