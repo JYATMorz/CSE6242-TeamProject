@@ -1,8 +1,7 @@
-/**
- * source\la-county-neighborhoods-v6.geojson:
- * https://apps.gis.ucla.edu/geodata/dataset/los-angeles-county-neighborhoods
- */
+// Map created by:
+// Data collected from: 
 
+// Define constant variables.
 const regionNameObj = {
     China: ["Shenzhen", "Shanghai"],
     USA: ["Atlanta", "Los Angeles"]
@@ -18,12 +17,12 @@ const zoomSlideRange = { min: 1, max: 6 };
 const timeSlideRange = { min: new Date("2010"), max: new Date("2020") };
 const selectedPath = { selected: null, path: null, pointer: null };
 
-// enter code to create svg
+// Link svg elements to variables
 const svg = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
 const gRegion = svg.append("g").attr("id", "svgGeoRegion");
 
 // define any other global variables 
-const pathToJSON = "data/la-county-neighborhoods-v6.geojson";
+const pathToJSON = "data/LA_County_City_Boundaries.geojson";
 const pathToCSV = "data/crime_clean.csv";
 const zoom = d3.zoom()
     .scaleExtent([zoomSlideRange.min, zoomSlideRange.max])
@@ -64,30 +63,12 @@ attrBtnList.selectAll("button")
     });
 
 // enter code to control zoom
-const zoomIn = d3.select("#zoom-in");
-const zoomOut = d3.select("#zoom-out");
+const zoomIn = d3.select("#zoom-in").on("click", zoomInBtn);
+const zoomOut = d3.select("#zoom-out").on("click", zoomOutBtn);
 const zoomSlide = d3.select("#zoom-slide")
     .property("min", zoomSlideRange.min)
-    .property("max", zoomSlideRange.max);
-
-zoomIn.on("click", function (event, d) {
-    let zoomLevel = zoomSlide.property("value");
-    if (zoomLevel < zoomSlideRange.max) {
-        zoomSlide.property("value", ++zoomLevel);
-        zoomMap(zoomLevel);
-    }
-});
-zoomOut.on("click", function (event, d) {
-    let zoomLevel = zoomSlide.property("value");
-    if (zoomLevel > zoomSlideRange.min) {
-        zoomSlide.property("value", --zoomLevel);
-        zoomMap(zoomLevel);
-    }
-});
-zoomSlide.on("input", function (event, d) {
-    let zoomLevel = zoomSlide.property("value");
-    zoomMap(zoomLevel);
-});
+    .property("max", zoomSlideRange.max)
+    .on("input", zoomRangeSlider);
 
 // enter code to control time range
 const timeSlide = d3.select("#time-slide")
@@ -106,7 +87,7 @@ timeSlide.on("input", function () {
 const regionDropdown = d3.select("#location-select");
 
 // enter code to define projection and path required for Choropleth
-const projection = d3.geoAlbers();
+const projection = d3.geoMercator();
 const path = d3.geoPath(projection);
 
 // import csv/json data
@@ -129,7 +110,8 @@ const jsonPromise = new Promise((resolve, reject) => {
 });
 
 
-let error = "", region = {}, crimeTemp = [], crimeData = {};
+let error = "", region, crimeTemp, yearRange;
+const crimeData = {};
 Promise.all([jsonPromise, csvPromise]).then(value => {
     region = value[0];
     crimeTemp = value[1];
@@ -146,16 +128,6 @@ function ready(error, region, crimeTemp, regionNameObj) {
         console.log("Error:\nNo error in Promise.\nBut some data is empty!");
         alert("Error:\nNo error in Promise.\nBut some data is empty!");
     } else {
-        /*
-        crimeData = {
-            cityName1: {
-                date1: {violent: 1, property: 2},
-                date2: {violent: 1, property: 2}
-            }, cityName2: {
-                date1: {violent: 1, property: 2},
-                date2: {violent: 1, property: 2}
-            }
-        };*/
         crimeTemp.forEach(data => {
             if (!crimeData.hasOwnProperty(data.city)) {
                 crimeData[data.city] = {};
@@ -165,6 +137,8 @@ function ready(error, region, crimeTemp, regionNameObj) {
                 property: data.crimeProperty
             };
         });
+        yearRange = Object.keys(crimeData[Object.keys(crimeData)[0]]);
+        // y-axis !!!
         // could redefine timeSlideRange{min, max} here
 
         // enter code to append the region options to the dropdown
@@ -211,7 +185,6 @@ function dropdownChange(event, d) {
 function createMap(region, crimeData) {
     const svgRect = svgPos();
     projection.fitSize([svgRect.svgWidth, svgRect.svgHeight], region);
-    // console.log(region); Too Many Regions find 88 !!!
 
     const regionFeatures = [...region.features];
     regionFeatures.forEach(feature => {
@@ -226,7 +199,6 @@ function createMap(region, crimeData) {
         .append("path")
         .attr("d", path)
         .attr("id", "gRegion")
-        .classed("selectedRegion", false)
         .on("pointerover", mapPointerOver)
         .on("pointerout", mapPointerOut)
         .on("pointermove", mapPointerMove)
@@ -254,6 +226,7 @@ function clearSVG(svgRect) {
     timeSlide.property("max", 0).property("min", 0);
     timeSlideColor();
     timeOutput.text("Please Select\nThe Location");
+    selectedPath.pointer = [0, 0]; // !!!
 }
 
 function updateAttr(d) {
@@ -296,7 +269,11 @@ function timeSlideColor() {
 }
 
 function mapPointerOver(event, d) {
-    titleDiv.style("display", "block").text(d.properties.name);
+    // let textStr = d.values.city.toString();
+    // if (d.values.isSegment) {
+    //     textStr = textStr + ", " + d.properties.name
+    // }
+    titleDiv.style("display", "block").text(d.properties["CITY_NAME"]);
 }
 
 function mapPointerOut(event, d) {
@@ -362,7 +339,7 @@ function createTooltip(svgRect, centerX, centerY, d) {
         .style("width", svgRect.svgWidth / 2 + "px")
         .style("height", svgRect.svgHeight + "px")
         .on("end", function () {
-            tipDiv.text(d.properties.name);
+            tipDiv.text(d.properties["CITY_NAME"]);
             // add charts here !!!
         });
 }
@@ -397,6 +374,26 @@ function zoomed({ transform }) {
     gRegion.attr("transform", transform);
 }
 
+function zoomInBtn(event, d) {
+    let zoomLevel = zoomSlide.property("value");
+    if (zoomLevel < zoomSlideRange.max) {
+        zoomSlide.property("value", ++zoomLevel);
+        zoomMap(zoomLevel);
+    }
+}
+
+function zoomOutBtn(event, d) {
+    let zoomLevel = zoomSlide.property("value");
+    if (zoomLevel > zoomSlideRange.min) {
+        zoomSlide.property("value", --zoomLevel);
+        zoomMap(zoomLevel);
+    }
+}
+
+function zoomRangeSlider(event, d) {
+    zoomMap(zoomSlide.property("value"));
+}
+
 function zoomMap(zoomLevel) {
     if (selectedPath.path !== null) {
         const svgRect = svgPos();
@@ -409,4 +406,12 @@ function zoomMap(zoomLevel) {
     } else {
         svg.transition().call(zoom.scaleTo, zoomLevel);
     }
+}
+
+function cityUpperCase(str) {
+    let strArr = str.split("-");
+    for (let i = 0; i < strArr.length; i++) {
+        strArr[i] = strArr[i].slice(0, 1).toUpperCase() + strArr[i].slice(1).toLowerCase();
+    }
+    return strArr.join(" ");
 }
