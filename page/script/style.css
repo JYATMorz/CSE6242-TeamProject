@@ -418,3 +418,12 @@ input[type=range]:focus {
     stroke: red;
     stroke-width: 2px;
 }
+
+.axis text {
+    font-size: medium;
+}
+
+.chartLabel {
+    text-anchor: middle;
+    fill: black;
+}

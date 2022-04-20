@@ -13,17 +13,16 @@ const attrBtn = [
     { attrName: "House Price", label: "house" },
     { attrName: "Unemployment", label: "unemploy" },
     { attrName: "Education", label: "education" },
-    { attrName: "Income Levels", label: "income" },
-    { attrName: "Current Trend", label: "predict" }];
+    { attrName: "Income Levels", label: "income" }];
 for (let i = 0; i < attrBtn.length; i++) {
     attrBtn[i].attrSelected = false;
 };
 
-let chartCreated = false;
+const chartInfo = { chartCreated: false, chartData: null };
 const parseTime = d3.timeParse("%Y");
 const zoomSlideRange = { min: 1, max: 6 };
 const timeSlideRange = { min: parseTime("2010"), max: parseTime("2020") };
-const chartTranslate = { y: 500 };
+const chartTranslate = { y: 500, top: 100 };
 const selectedPath = { property: null, path: null, pointer: null };
 const zoom = d3.zoom()
     .scaleExtent([zoomSlideRange.min, zoomSlideRange.max])
@@ -73,9 +72,9 @@ const gRegion = svgMap.append("g").attr("id", "gRegion");
 const svgChart = tipDiv.append("svg").attr("id", "svgChart");
 const gChart = svgChart.append("g").attr("class", "gChart");
 const gLines = gChart.append("g").attr("class", "gLines");
-const gXAxis = gChart.append("g").attr("class", "xAxis");
-const gYAxisLeft = gChart.append("g").attr("class", "yAxis");
-const gYAxisRight = gChart.append("g").attr("class", "yAxis");
+const gXAxis = gChart.append("g").attr("class", "axis");
+const gYAxisLeft = gChart.append("g").attr("class", "axis");
+const gYAxisRight = gChart.append("g").attr("class", "axis");
 const textChart = svgChart.append("text").attr("id", "textChartTitle").attr("x", "50%");
 
 
@@ -109,7 +108,7 @@ timeSlide.on("input", function () {
     if (timeSlide.property("max") !== timeSlide.property("min")) {
         timeSlideColor();
         timeOutput.text(outputStr());
-        if (chartCreated) {
+        if (chartInfo.chartCreated) {
             xAxisScale.domain([
                 findYearBefore(timeSlideRange.max, timeSlide.property("value")),
                 timeSlideRange.max]);
@@ -129,8 +128,8 @@ const path = d3.geoPath().projection(projection);
 // enter code to init x-axis and y-axis
 const xAxisScale = d3.scaleTime();
 const xAxis = d3.axisBottom().ticks(d3.timeYear.every(1)).tickSizeOuter(0);
-const yAxisScaleLeft = d3.scaleLinear().range([chartTranslate.y, 100]);
-const yAxisScaleRight = d3.scaleLinear().range([chartTranslate.y, 100]);
+const yAxisScaleLeft = d3.scaleLinear().range([chartTranslate.y, chartTranslate.top]);
+const yAxisScaleRight = d3.scaleLinear().range([chartTranslate.y, chartTranslate.top]);
 const yAxisLeft = d3.axisLeft().tickSizeOuter(0);
 const yAxisRight = d3.axisRight().tickSizeOuter(0);
 
@@ -384,17 +383,18 @@ function noData(svgRect) {
  * @param {Object} d data in attrBtn that stored and passed to the attrBtnGrid
  */
 function updateAttr(d) {
-    console.log(d.label);
     if (d.attrSelected) {
         switch (d.label) {
             case "violent":
             case "property":
+                unClickBtn(["violent", "property", "unemploy", "education"]);
+                break;
             case "unemploy":
                 unClickBtn(["violent", "property", "unemploy"]);
                 break;
-            case "house": unClickBtn("house");
+            case "house": unClickBtn(["house", "unemploy", "education"]);
                 break;
-            case "education": unClickBtn("education");
+            case "education": unClickBtn(["violent", "property", "house", "education"]);
                 break;
             case "income": unClickBtn("income");
                 break;
@@ -403,7 +403,9 @@ function updateAttr(d) {
         }
     }
     attrBtnGrid.selectAll("button").classed("selectedBtn", d => d.attrSelected);
-    // upadte chart !!! redraw chart
+    if (chartInfo.chartCreated) {
+        refreshChart(chartInfo.chartData, svgPos());
+    }
 
     /**
      * set unnnecessay button to unselected
@@ -478,6 +480,8 @@ function mapPointerMove(event, d) {
 function regionClicked(event, d) {
     const [[x0, y0], [x1, y1]] = path.bounds(d);
     const svgRect = svgPos();
+    chartInfo.chartData = d;
+
     if (d.properties.selected) {
         changeRegionColor(d, false);
         removeTooltip(svgRect, (x0 + x1) / 2, (y0 + y1) / 2);
@@ -489,7 +493,7 @@ function regionClicked(event, d) {
         selectedPath.property = d.properties;
         selectedPath.pointer = [(x0 + x1) / 2, (y0 + y1) / 2];
         changeRegionColor(d, true);
-        createTooltip(svgRect, (x0 + x1) / 2, (y0 + y1) / 2, d);
+        createTooltip(svgRect, (x0 + x1) / 2, (y0 + y1) / 2);
     }
 }
 
@@ -512,7 +516,7 @@ function removeTooltip(svgRect, centerX, centerY) {
     removeAllChart();
 }
 
-function createTooltip(svgRect, centerX, centerY, regionData) {
+function createTooltip(svgRect, centerX, centerY) {
     // move map center to left side of svgMap
     svgMap.transition().duration(800)
         .call(zoom.transform, d3.zoomIdentity
@@ -529,26 +533,33 @@ function createTooltip(svgRect, centerX, centerY, regionData) {
         .style("height", svgRect.svgHeight + "px")
         .on("end", function () {
             // create new charts when ease-in finish
-            removeAllChart();
-            if (regionData.properties["CITY_NAME"] == "Unincorporated") {
-                textChart.attr("y", "50%")
-                    .text(regionData.properties["CITY_NAME"] + ": No data for Unincorporated City");
-            } else {
-                let selectedBtn = attrBtn.filter(btn => btn.attrSelected);
-                if (selectedBtn.length == 0) {
-                    // show which city region is clicked
-                    textChart.attr("y", "50%").text(regionData.properties["CITY_NAME"]);
-                } else {
-                    // show which city region is clicked
-                    textChart.attr("y", "50px").text(regionData.properties["CITY_NAME"]);
-                    // set the location of all charts
-                    gChart.attr("transform",
-                        "translate(" + svgRect.svgWidth * 0.1 + ", " + chartTranslate.y + ")");
-                    //  and select data for creating chart
-                    createChart(getChartData(selectedBtn, regionData), svgRect);
-                }
-            }
+            refreshChart(chartInfo.chartData, svgRect);
         });
+}
+
+function refreshChart(regionData, svgRect) {
+    removeAllChart();
+    if (regionData.properties["CITY_NAME"] == "Unincorporated") {
+        textChart.attr("y", "50%")
+            .text(regionData.properties["CITY_NAME"] + ": No data for Unincorporated City");
+    } else {
+        let selectedBtn = attrBtn.filter(btn => btn.attrSelected);
+        if (selectedBtn.length == 0) {
+            // show which city region is clicked
+            textChart.text(regionData.properties["CITY_NAME"])
+                .attr("y", "50%");
+        } else {
+            // show which city region is clicked
+            textChart.text(regionData.properties["CITY_NAME"])
+                .attr("y", "50px");
+            // set the location of all charts
+            gChart.attr("transform",
+                "translate(" + svgRect.svgWidth * 0.1 + ", " + chartTranslate.y + ")");
+            //  and select data for creating chart
+            createChart(getChartData(selectedBtn, regionData), svgRect);
+        }
+        chartInfo.chartCreated = true;
+    }
 }
 
 function getChartData(selectedBtn, regionData) {
@@ -576,12 +587,22 @@ function createChart(dataset, svgRect) {
 
     // clean data
     let leftData = [], rightData = [];
-    const leftTypeArr = ["violent", "property", "house", "high", "income"];
-    const rightTypeArr = ["unemploy", "bachelor", "poverty"];
+    const leftTypeArr = {
+        "violent": ["Numbers of Crimes", "Violent Crime"],
+        "property": ["Numbers of Crimes", "Property Crime"],
+        "house": ["House Price", "Average House Price"],
+        "income": ["Average Income", "Average Income"]
+    };
+    const rightTypeArr = {
+        "unemploy": ["Unemployment Rate", "Unemployment Rate"],
+        "high": ["Graduation Rate", "High School Graduation Rate"],
+        "bachelor": ["Graduation Rate", "Undergraduate Graduation Rate"],
+        "poverty": ["Poverty Rate", "Poverty Rate"]
+    };
     dataset.forEach(data => {
-        if (leftTypeArr.includes(data.id)) {
+        if (Object.keys(leftTypeArr).includes(data.id)) {
             leftData.push(data);
-        } else if (rightTypeArr.includes(data.id)) {
+        } else if (Object.keys(rightTypeArr).includes(data.id)) {
             rightData.push(data);
         }
     });
@@ -613,7 +634,10 @@ function createChart(dataset, svgRect) {
             .x(function (d) { return xAxisScale(d.date); })
             .y(function (d) { return yAxisScaleLeft(d.value); });
         gYAxisLeft.call(yAxisLeft.scale(yAxisScaleLeft))
-            .attr("transform", "translate(0, -" + chartTranslate.y + ")");
+            .attr("transform", "translate(0, -" + chartTranslate.y + ")")
+            .append("text").attr("class", "chartLabel")
+            .attr("y", chartTranslate.top * 0.85)
+            .text(leftTypeArr[leftData[0].id][0]);
     }
 
     if (rightData.length > 0) {
@@ -625,20 +649,22 @@ function createChart(dataset, svgRect) {
             .x(function (d) { return xAxisScale(d.date); })
             .y(function (d) { return yAxisScaleRight(d.value); });
         gYAxisRight.call(yAxisRight.scale(yAxisScaleRight))
-            .attr("transform", "translate(" + svgRect.svgWidth * 0.5 + ", -" + chartTranslate.y + ")");
+            .attr("transform", "translate(" + svgRect.svgWidth * 0.5 + ", -" + chartTranslate.y + ")")
+            .append("text").attr("class", "chartLabel")
+            .attr("y", chartTranslate.top * 0.85)
+            .text(rightTypeArr[rightData[0].id][0]);
     }
 
     lines.append("path").attr("class", "line")
         .attr("transform", "translate(0, -" + chartTranslate.y + ")")
         .attr("d", function (d) {
-            if (leftTypeArr.includes(d.id)) { return lineLeft(d.elements); }
-            else if (rightTypeArr.includes(d.id)) { return lineRight(d.elements); }
+            if (Object.keys(leftTypeArr).includes(d.id)) { return lineLeft(d.elements); }
+            else if (Object.keys(rightTypeArr).includes(d.id)) { return lineRight(d.elements); }
         }).attr("class", d => {
-            if (leftTypeArr.includes(d.id)) { return "lineLeft"; }
-            else if (rightTypeArr.includes(d.id)) { return "lineRight"; }
+            if (Object.keys(leftTypeArr).includes(d.id)) { return "lineLeft"; }
+            else if (Object.keys(rightTypeArr).includes(d.id)) { return "lineRight"; }
         });
 
-    chartCreated = true;
 }
 
 
@@ -721,4 +747,5 @@ function removeAllChart() {
     gYAxisLeft.selectAll("*").remove();
     gYAxisRight.selectAll("*").remove();
     gLines.selectAll("*").remove();
+    chartInfo.chartCreated = false;
 }
