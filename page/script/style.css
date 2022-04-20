@@ -375,27 +375,37 @@ input[type=range]:focus {
     position: absolute;
     display: none;
     pointer-events: none;
+    opacity: 75%;
 }
 
-#region-title {
+#region-tip {
     padding: 5px;
     font-size: larger;
     color: white;
     outline-width: 1px;
     border-radius: 5px;
     background-color: darkolivegreen;
-    opacity: 80%;
 }
 
-#region-tip {
+#region-chart {
     top: 200px;
     right: 0px;
     height: 500px;
     background-color: white;
-    opacity: 75%;
     border-radius: 0px 25px 25px 0px;
     text-align: center;
     font-size: larger;
+    transform: translateX(800px);
+}
+
+#chart-tip {
+    padding: 10px;
+    font-size: large;
+    color: whitesmoke;
+    stroke: black;
+    outline-width: 1px;
+    border-radius: 5px;
+    background-color: dimgray;
 }
 
 #svgChart {
@@ -426,4 +436,17 @@ input[type=range]:focus {
 .chartLabel {
     text-anchor: middle;
     fill: black;
+}
+
+.dataPoint {
+    stroke: none;
+    fill: lightsalmon;
+    opacity: 10%;
+    pointer-events: fill;
+    transition: opacity 0.5s;
+}
+
+.dataPoint:hover {
+    opacity: 80%;
+    transition: opacity 0.5s;
 }

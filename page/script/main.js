@@ -17,6 +17,18 @@ const attrBtn = [
 for (let i = 0; i < attrBtn.length; i++) {
     attrBtn[i].attrSelected = false;
 };
+const leftTypeArr = {
+    "violent": ["Numbers of Crimes", "Violent Crime"],
+    "property": ["Numbers of Crimes", "Property Crime"],
+    "house": ["House Price", "Average House Price"],
+    "income": ["Average Income", "Average Income"]
+};
+const rightTypeArr = {
+    "unemploy": ["Unemployment Rate", "Unemployment Rate"],
+    "high": ["Graduation Rate", "High School Graduation Rate"],
+    "bachelor": ["Graduation Rate", "Undergraduate Graduation Rate"],
+    "poverty": ["Poverty Rate", "Poverty Rate"]
+};
 
 const chartInfo = { chartCreated: false, chartData: null };
 const parseTime = d3.timeParse("%Y");
@@ -29,15 +41,6 @@ const zoom = d3.zoom()
     .on("zoom", zoomed);
 
 
-// enter code to create color scale
-const colorHue = ["#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"];
-const colorScale = d3.scaleQuantile().range(colorHue);
-const legendColor = new Array(colorHue.length);
-for (let i = 0; i < legendColor.length; i++) {
-    legendColor[i] = { index: i, colorHex: colorHue[i] };
-}
-
-
 // define any other global variables 
 const pathToJSON = "data/LA_County_Boundaries_rewind.geojson";
 const pathToCrimeCSV = "data/crime_clean.csv";
@@ -48,20 +51,20 @@ const pathToIncomeCSV = "data/income_and_poverty.csv";
 
 
 // enter code to control region title & tip
-const titleDiv = d3.select("#region-title");
-const tipDiv = d3.select("#region-tip");
+const regionTipDiv = d3.select("#region-tip");
+const regionChartDiv = d3.select("#region-chart");
+const chartTipDiv = d3.select("#chart-tip");
 d3.select(window).on("resize", function () {
     const svgRect = svgPos();
-    tipDiv
+    regionChartDiv
         .style("left", svgRect.svgLeft + svgRect.svgWidth * 0.3 + "px")
         .style("top", svgRect.svgTop + "px")
         .style("width", svgRect.svgWidth * 0.7 + "px")
         .style("height", svgRect.svgHeight + "px");
 
-    xAxisScale.range([0, svgRect.svgWidth * 0.5]);
-    gChart.attr("transform", "translate(" + svgRect.svgWidth * 0.1 + ", 500)");
-    gXAxis.call(xAxis.scale(xMainAxisScale));
-
+    if (chartInfo.chartCreated) {
+        refreshChart(chartInfo.chartData, svgRect);
+    }
 });
 
 
@@ -69,7 +72,7 @@ d3.select(window).on("resize", function () {
 const svgMap = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
 const gRegion = svgMap.append("g").attr("id", "gRegion");
 
-const svgChart = tipDiv.append("svg").attr("id", "svgChart");
+const svgChart = regionChartDiv.append("svg").attr("id", "svgChart");
 const gChart = svgChart.append("g").attr("class", "gChart");
 const gLines = gChart.append("g").attr("class", "gLines");
 const gXAxis = gChart.append("g").attr("class", "axis");
@@ -86,7 +89,7 @@ attrBtnGrid.selectAll("button")
     .attr("type", "button")
     .text(d => d.attrName)
     .classed("selectedBtn", d => d.attrSelected)
-    .on("click", function (event, d) {
+    .on("click", (event, d) => {
         d.attrSelected = !d.attrSelected;
         updateAttr(d);
     });
@@ -112,8 +115,8 @@ timeSlide.on("input", function () {
             xAxisScale.domain([
                 findYearBefore(timeSlideRange.max, timeSlide.property("value")),
                 timeSlideRange.max]);
-            gXAxis.transition().call(xAxis.scale(xAxisScale));
-            //!!! update lines value with new x-axis
+            gXAxis.transition().duration(500).call(xAxis.scale(xAxisScale));
+            refreshChart(chartInfo.chartData, svgPos());
         }
     }
 });
@@ -333,7 +336,7 @@ function dropdownChange(event, d) {
     svgMap.call(zoom.scaleTo, zoomSlide.property("value"));
 
     function clearMapSVG(svgRect) {
-        titleDiv.style("display", null).text(null);
+        regionTipDiv.style("display", null).text(null);
         removeTooltip(svgRect, 0, 0);
         gRegion.selectAll("path").remove();
         gRegion.selectAll("text").remove();
@@ -367,6 +370,22 @@ function createMap(regionFeatures) {
     svgMap.call(zoom)
         .on("wheel.zoom", null)
         .on("dblclick.zoom", null);
+
+
+    function mapPointerOver(event, d) {
+        regionTipDiv.style("display", "block").text(d.properties["CITY_NAME"]);
+    }
+
+    function mapPointerOut(event, d) {
+        regionTipDiv.style("display", null).text(null);
+    }
+
+    function mapPointerMove(event, d) {
+        regionTipDiv
+            .style("left", event.pageX - 30 + "px")
+            .style("top", event.pageY - 50 + "px");
+    }
+
 }
 
 function noData(svgRect) {
@@ -460,22 +479,6 @@ function timeSlideColor() {
     timeSlide.style("background", style);
 }
 
-function mapPointerOver(event, d) {
-    titleDiv.style("display", "block").text(d.properties["CITY_NAME"]);
-}
-
-function mapPointerOut(event, d) {
-    titleDiv.style("display", null).text(null);
-}
-
-function mapPointerMove(event, d) {
-    const coordinate = d3.pointer(event, d3.select("body"));
-    const title = {
-        x: coordinate[0] - 30 + "px",
-        y: coordinate[1] - 50 + "px"
-    }
-    titleDiv.style("left", title.x).style("top", title.y);
-}
 
 function regionClicked(event, d) {
     const [[x0, y0], [x1, y1]] = path.bounds(d);
@@ -504,16 +507,16 @@ function removeTooltip(svgRect, centerX, centerY) {
             .scale(zoomSlide.property("value"))
             .translate(-centerX, -centerY));
     d3.select("body").style("overflow-x", "hidden");
-    tipDiv.transition().duration(800)
-        .style("transform", "translateX(800px)")
+    regionChartDiv.transition().duration(800)
+        .style("transform", null)
         .style("left", null).style("top", null)
         .style("width", null).style("height", null)
         .on("end", function () {
-            tipDiv.style("display", null)
-                .style("transform", null);
+            regionChartDiv.style("display", null);
             d3.select("body").style("overflow-x", null);
         });
     removeAllChart();
+    chartInfo.chartCreated = false;
 }
 
 function createTooltip(svgRect, centerX, centerY) {
@@ -524,27 +527,38 @@ function createTooltip(svgRect, centerX, centerY) {
             .scale(zoomSlide.property("value"))
             .translate(-centerX, -centerY));
 
-    // ease in tooltip (right to left)
-    tipDiv.style("display", "block")
-        .transition().duration(800)
-        .style("left", svgRect.svgLeft + svgRect.svgWidth * 0.3 + "px")
-        .style("top", svgRect.svgTop + "px")
-        .style("width", svgRect.svgWidth * 0.7 + "px")
-        .style("height", svgRect.svgHeight + "px")
-        .on("end", function () {
-            // create new charts when ease-in finish
-            refreshChart(chartInfo.chartData, svgRect);
-        });
+    if (chartInfo.chartCreated) {
+        refreshChart(chartInfo.chartData, svgRect);
+    } else {
+        // ease in tooltip (right to left)
+        d3.select("body").style("overflow-x", "hidden");
+        regionChartDiv.style("display", "block")
+            .transition().duration(800)
+            .style("left", svgRect.svgLeft + svgRect.svgWidth * 0.3 + "px")
+            .style("top", svgRect.svgTop + "px")
+            .style("width", svgRect.svgWidth * 0.7 + "px")
+            .style("height", svgRect.svgHeight + "px")
+            .style("transform", "none")
+            .on("end", function () {
+                d3.select("body").style("overflow-x", null);
+                // create new charts when ease-in finish
+                refreshChart(chartInfo.chartData, svgRect);
+            });
+    }
+
 }
 
 function refreshChart(regionData, svgRect) {
-    removeAllChart();
+    gLines.selectAll("*").remove();
+
     if (regionData.properties["CITY_NAME"] == "Unincorporated") {
+        removeAllChart();
         textChart.attr("y", "50%")
             .text(regionData.properties["CITY_NAME"] + ": No data for Unincorporated City");
     } else {
         let selectedBtn = attrBtn.filter(btn => btn.attrSelected);
         if (selectedBtn.length == 0) {
+            removeAllChart();
             // show which city region is clicked
             textChart.text(regionData.properties["CITY_NAME"])
                 .attr("y", "50%");
@@ -558,8 +572,8 @@ function refreshChart(regionData, svgRect) {
             //  and select data for creating chart
             createChart(getChartData(selectedBtn, regionData), svgRect);
         }
-        chartInfo.chartCreated = true;
     }
+    chartInfo.chartCreated = true;
 }
 
 function getChartData(selectedBtn, regionData) {
@@ -572,14 +586,22 @@ function getChartData(selectedBtn, regionData) {
     let data = [];
     regionData.properties.data.forEach(dataset => {
         let index = dataType.indexOf(dataset.id);
-        if (index > -1) { data.push(dataset); }
+        if (index > -1) { data.push(Object.assign({}, dataset)); }
     });
     return data;
 }
 
-function createChart(dataset, svgRect) {
+function createChart(data, svgRect) {
+    // clean the data
+    const minYearDate = findYearBefore(timeSlideRange.max, timeSlide.property("value"));
+    let dataset = [...data];
+    dataset.forEach(set => {
+        set.elements = set.elements.filter(element => (element.date - minYearDate) >= 0);
+    })
+
     // prepare the lines
-    const lines = gLines.selectAll("lines")
+    const lines = gLines.attr("transform", "translate(0, -" + chartTranslate.y + ")")
+        .selectAll("lines")
         .data(dataset).enter()
         .append("g");
     const lineLeft = d3.line();
@@ -587,18 +609,6 @@ function createChart(dataset, svgRect) {
 
     // clean data
     let leftData = [], rightData = [];
-    const leftTypeArr = {
-        "violent": ["Numbers of Crimes", "Violent Crime"],
-        "property": ["Numbers of Crimes", "Property Crime"],
-        "house": ["House Price", "Average House Price"],
-        "income": ["Average Income", "Average Income"]
-    };
-    const rightTypeArr = {
-        "unemploy": ["Unemployment Rate", "Unemployment Rate"],
-        "high": ["Graduation Rate", "High School Graduation Rate"],
-        "bachelor": ["Graduation Rate", "Undergraduate Graduation Rate"],
-        "poverty": ["Poverty Rate", "Poverty Rate"]
-    };
     dataset.forEach(data => {
         if (Object.keys(leftTypeArr).includes(data.id)) {
             leftData.push(data);
@@ -623,41 +633,40 @@ function createChart(dataset, svgRect) {
     }
 
     // get path coordinates if relative data exists and draw axes
-    xAxisScale.range([0, svgRect.svgWidth * 0.5]).domain([
-        findYearBefore(timeSlideRange.max, timeSlide.property("value")),
-        timeSlideRange.max
-    ]);
-    gXAxis.call(xAxis.scale(xAxisScale));
+    xAxisScale.range([0, svgRect.svgWidth * 0.5])
+        .domain([minYearDate, timeSlideRange.max]);
+    gXAxis.transition().duration(500).call(xAxis.scale(xAxisScale));
 
     if (leftData.length > 0) {
+        gYAxisLeft.selectAll(".chartLabel").remove();
         lineLeft
-            .x(function (d) { return xAxisScale(d.date); })
-            .y(function (d) { return yAxisScaleLeft(d.value); });
-        gYAxisLeft.call(yAxisLeft.scale(yAxisScaleLeft))
-            .attr("transform", "translate(0, -" + chartTranslate.y + ")")
+            .x(d => { return xAxisScale(d.date); })
+            .y(d => { return yAxisScaleLeft(d.value); });
+        gYAxisLeft.transition().duration(500).call(yAxisLeft.scale(yAxisScaleLeft));
+        gYAxisLeft.attr("transform", "translate(0, -" + chartTranslate.y + ")")
             .append("text").attr("class", "chartLabel")
             .attr("y", chartTranslate.top * 0.85)
             .text(leftTypeArr[leftData[0].id][0]);
-    }
+    } else { gYAxisLeft.selectAll("*").remove(); }
 
     if (rightData.length > 0) {
+        gYAxisRight.selectAll(".chartLabel").remove();
         yAxisScaleRight.domain([
             Math.floor(0.95 * d3.min(rightData[0].elements.map(element => element.value))),
             Math.ceil(1.05 * d3.max(rightData[0].elements.map(element => element.value)))
         ]);
         lineRight
-            .x(function (d) { return xAxisScale(d.date); })
-            .y(function (d) { return yAxisScaleRight(d.value); });
-        gYAxisRight.call(yAxisRight.scale(yAxisScaleRight))
-            .attr("transform", "translate(" + svgRect.svgWidth * 0.5 + ", -" + chartTranslate.y + ")")
+            .x(d => { return xAxisScale(d.date); })
+            .y(d => { return yAxisScaleRight(d.value); });
+        gYAxisRight.transition().duration(500).call(yAxisRight.scale(yAxisScaleRight));
+        gYAxisRight.attr("transform", "translate(" + svgRect.svgWidth * 0.5 + ", -" + chartTranslate.y + ")")
             .append("text").attr("class", "chartLabel")
             .attr("y", chartTranslate.top * 0.85)
             .text(rightTypeArr[rightData[0].id][0]);
-    }
+    } else { gYAxisRight.selectAll("*").remove(); }
 
     lines.append("path").attr("class", "line")
-        .attr("transform", "translate(0, -" + chartTranslate.y + ")")
-        .attr("d", function (d) {
+        .attr("d", d => {
             if (Object.keys(leftTypeArr).includes(d.id)) { return lineLeft(d.elements); }
             else if (Object.keys(rightTypeArr).includes(d.id)) { return lineRight(d.elements); }
         }).attr("class", d => {
@@ -665,8 +674,39 @@ function createChart(dataset, svgRect) {
             else if (Object.keys(rightTypeArr).includes(d.id)) { return "lineRight"; }
         });
 
-}
+    // create data tooltips on lines
+    lines.selectAll("points")
+        .data(d => {
+            d.elements.forEach(element => { element.id = d.id; })
+            return d.elements;
+        }).enter()
+        .append("circle").attr("class", "dataPoint")
+        .attr("cx", d => xAxisScale(d.date))
+        .attr("cy", d => {
+            if (Object.keys(leftTypeArr).includes(d.id)) { return yAxisScaleLeft(d.value); }
+            else if (Object.keys(rightTypeArr).includes(d.id)) { return yAxisScaleRight(d.value); }
+        }).attr("r", 10)
+        .on("pointerover", chartPointerOver)
+        .on("pointerout", chartPointerOut)
+        .on("pointermove", chartPointerMove);
 
+
+    function chartPointerOver(event, d) {
+        chartTipDiv.style("display", "block")
+            .text(Object.assign({}, leftTypeArr, rightTypeArr)[d.id][1] + ": " + d.value);
+    }
+
+    function chartPointerOut(event, d) {
+        chartTipDiv.style("display", null).text(null);
+    }
+
+    function chartPointerMove(event, d) {
+        chartTipDiv
+            .style("left", event.pageX - 100 + "px")
+            .style("top", event.pageY - 60 + "px")
+    }
+
+}
 
 function changeRegionColor(d, boo) {
     if (boo) {
@@ -746,6 +786,6 @@ function removeAllChart() {
     gXAxis.selectAll("*").remove();
     gYAxisLeft.selectAll("*").remove();
     gYAxisRight.selectAll("*").remove();
+    d3.selectAll(".axis").attr("transform", null);
     gLines.selectAll("*").remove();
-    chartInfo.chartCreated = false;
 }
