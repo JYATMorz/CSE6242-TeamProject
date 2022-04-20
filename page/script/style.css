@@ -1,5 +1,5 @@
 body {
-    min-width: 1000px;
+    min-width: 1200px;
 }
 
 button {
@@ -348,24 +348,24 @@ input[type=range]:focus {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-#gRegion {
+#pathRegion {
     stroke: white;
     stroke-width: 0.2px;
     fill: lightslategray;
     cursor: pointer;
 }
 
-#gRegion:hover {
+#pathRegion:hover {
     fill: lightgray;
     stroke: blanchedalmond;
     stroke-width: 1px;
 }
 
-#gRegion:active {
+#pathRegion:active {
     stroke-width: 2px;
 }
 
-#gUnincorporated {
+#pathUnincorporated {
     stroke: white;
     stroke-width: 0.2px;
     fill: gray;
@@ -396,4 +396,32 @@ input[type=range]:focus {
     border-radius: 0px 25px 25px 0px;
     text-align: center;
     font-size: larger;
+}
+
+#svgMainChart {
+    width: 100%;
+    height: 54%;
+}
+
+.svgOtherChart {
+    width: 50%;
+    height: 45%;
+}
+
+#textChartTitle {
+    text-anchor: middle;
+}
+
+.lineLeft {
+    fill: none;
+    stroke: orange;
+    stroke-width: 2px;
+    transform: translateY(-280px);
+}
+
+.lineRight {
+    fill: none;
+    stroke: red;
+    stroke-width: 2px;
+    transform: translateY(-280px);
 }

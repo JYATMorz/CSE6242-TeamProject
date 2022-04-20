@@ -1,34 +1,36 @@
 // Map created by:
 // Data collected from: 
 
+
 // Define constant variables.
 const regionNameObj = {
     China: ["Shenzhen", "Shanghai"],
     USA: ["Atlanta", "Los Angeles"]
 };
-const attrBtn = new Array(5);
+const attrBtn = [
+    { attrName: "Violent Crime", label: "violent", hasCityData: true },
+    { attrName: "Property Crime", label: "property", hasCityData: true },
+    { attrName: "House Price", label: "house", hasCityData: true },
+    { attrName: "Unemployment", label: "unemploy", hasCityData: true },
+    { attrName: "Education", label: "education", hasCityData: false },
+    { attrName: "Income Levels", label: "income", hasCityData: false },
+    { attrName: "Current Trend", label: "predict", hasCityData: false }];
+const atttList = [];
 for (let i = 0; i < attrBtn.length; i++) {
-    attrBtn[i] = {
-        attrName: "Attrbute Type " + (i + 1),
-        attrSelected: false
-    };
+    atttList.push(attrBtn[i].label);
+    attrBtn[i].attrSelected = false;
 };
+attrBtn[0].attrSelected = true;
+
+let chartCreated = false;
+const parseTime = d3.timeParse("%Y");
 const zoomSlideRange = { min: 1, max: 6 };
-const timeSlideRange = { min: new Date("2010"), max: new Date("2020") };
+const timeSlideRange = { min: parseTime("2010"), max: parseTime("2020") };
 const selectedPath = { property: null, path: null, pointer: null };
-
-// Link svg elements to variables
-const svg = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
-const gRegion = svg.append("g").attr("id", "svgGeoRegion");
-
-// define any other global variables 
-const pathToJSON = "data/LA_County_Boundaries_rewind.geojson";
-const pathToCrimeCSV = "data/crime_clean.csv";
-const pathToHouseCSV = "data/house_price_clean.csv";
-const pathToEmployCSV = "data/unemployment_clean.csv";
 const zoom = d3.zoom()
     .scaleExtent([zoomSlideRange.min, zoomSlideRange.max])
     .on("zoom", zoomed);
+
 
 // enter code to create color scale
 const colorHue = ["#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"];
@@ -38,21 +40,71 @@ for (let i = 0; i < legendColor.length; i++) {
     legendColor[i] = { index: i, colorHex: colorHue[i] };
 }
 
+
+// define any other global variables 
+const pathToJSON = "data/LA_County_Boundaries_rewind.geojson";
+const pathToCrimeCSV = "data/crime_clean.csv";
+const pathToHouseCSV = "data/house_price_clean.csv";
+const pathToEmployCSV = "data/unemployment_clean.csv";
+const pathToEduCSV = "data/education.csv";
+const pathToIncomeCSV = "data/income_and_poverty.csv";
+
+
 // enter code to control region title & tip
 const titleDiv = d3.select("#region-title");
 const tipDiv = d3.select("#region-tip");
 d3.select(window).on("resize", function () {
     const svgRect = svgPos();
     tipDiv
-        .style("left", svgRect.svgLeft + svgRect.svgWidth / 2 + "px")
+        .style("left", svgRect.svgLeft + svgRect.svgWidth * 0.3 + "px")
         .style("top", svgRect.svgTop + "px")
-        .style("width", svgRect.svgWidth / 2 + "px")
+        .style("width", svgRect.svgWidth * 0.7 + "px")
         .style("height", svgRect.svgHeight + "px");
+    /*
+    xMainAxisScale.range([0, svgRect.svgWidth * 0.5]);
+    gMainChart.attr("transform", "translate(" + svgRect.svgWidth * 0.1 + ", 300)");
+    gMainXAxis.call(xMainAxis.scale(xMainAxisScale));
+
+    xOtherAxisScale.range([0, svgRect.svgWidth * 0.3]);
+    gLeftChart.attr("transform", "translate(" + svgRect.svgWidth * 0.05 + ", 250)");
+    gLeftXAxis.call(xOtherAxis.scale(xOtherAxisScale));
+    gRightChart.attr("transform", "translate(" + svgRect.svgWidth * 0.05 + ", 250)");
+    gRightXAxis.call(xOtherAxis.scale(xOtherAxisScale));
+    */
 });
 
+
+// Link svg elements to variables
+const svgMap = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
+const gRegion = svgMap.append("g").attr("id", "gRegion");
+/*
+const svgMainChart = tipDiv.append("svg").attr("id", "svgMainChart");
+const gMainChart = svgMainChart.append("g").attr("class", "gChart");
+const gMainLines = gMainChart.append("g").attr("class", "gLines");
+const gMainXAxis = gMainChart.append("g").attr("class", "xAxis");
+const gMainYAxis_1 = gMainChart.append("g").attr("class", "yAxis")
+    .attr("transform", "translate(0, -280)");
+const gMainYAxis_2 = gMainChart.append("g").attr("class", "yAxis")
+    .attr("transform", "translate(0, -280)");
+const textChart = svgMainChart.append("text").attr("id", "textChartTitle")
+    .attr("x", "50%").attr("y", "25px");
+
+const svgLeftChart = tipDiv.append("svg").attr("class", "svgOtherChart");
+const gLeftChart = svgLeftChart.append("g").attr("class", "gChart");
+const gLeftLines = gLeftChart.append("g").attr("class", "gLines");
+const gLeftXAxis = gLeftChart.append("g").attr("class", "xAxis");
+const gLeftYAxis = gLeftChart.append("g").attr("class", "yAxis");
+
+const svgRightChart = tipDiv.append("svg").attr("class", "svgOtherChart");
+const gRightChart = svgRightChart.append("g").attr("class", "gChart");
+const gRightLines = gRightChart.append("g").attr("class", "gLines");
+const gRightXAxis = gRightChart.append("g").attr("class", "xAxis");
+const gRightYAxis = gRightChart.append("g").attr("class", "yAxis");
+*/
+
 // enter code to control Attribute Buttons
-const attrBtnList = d3.select("#attr-selection");
-attrBtnList.selectAll("button")
+const attrBtnGrid = d3.select("#attr-selection");
+attrBtnGrid.selectAll("button")
     .data(attrBtn).enter()
     .append("button").attr("class", "navigator-bar")
     .attr("type", "button")
@@ -81,7 +133,11 @@ timeSlide.on("input", function () {
     if (timeSlide.property("max") !== timeSlide.property("min")) {
         timeSlideColor();
         timeOutput.text(outputStr());
-        console.log("Call Time Selection Function Here");
+        xMainAxisScale.domain([
+            findYearBefore(timeSlideRange.max, timeSlide.property("value")),
+            timeSlideRange.max]);
+        // call x-axis update here !!!
+        gMainXAxis.transition().call(xMainAxis.scale(xMainAxisScale));
     }
 });
 
@@ -92,13 +148,25 @@ const regionDropdown = d3.select("#location-select");
 const projection = d3.geoMercator();
 const path = d3.geoPath().projection(projection);
 
+// enter code to init x-axis and y-axis
+const xMainAxisScale = d3.scaleTime();
+const xMainAxis = d3.axisBottom().ticks(d3.timeYear.every(1)).tickSizeOuter(0);
+const xOtherAxisScale = d3.scaleTime();
+const xOtherAxis = d3.axisBottom().ticks(d3.timeYear.every(2)).tickSizeOuter(0);
+const yMainAxisScale_1 = d3.scaleLinear().range([280, 25]);
+const yMainAxisScale_2 = d3.scaleLinear().range([280, 25]);
+const yMainAxis_1 = d3.axisLeft().tickSizeOuter(0);
+const yMainAxis_2 = d3.axisRight().tickSizeOuter(0);
+const yOtherAxisScale = d3.scaleLinear().range([250, 0]);
+const yOtherAxis = d3.axisLeft().tickSizeOuter(0);
+
 // import csv/json data
 const crimeCSVPromise = new Promise((resolve, reject) => {
     d3.dsv(",", pathToCrimeCSV, d => {
         return {
             year: parseInt(d["Year"]),
-            crimeViolent: parseInt(d["Violent_sum"]),
-            crimeProperty: parseInt(d["Property_sum"]),
+            violent: parseInt(d["Violent_sum"]),
+            property: parseInt(d["Property_sum"]),
             city: d["City"]
         };
     })
@@ -121,27 +189,54 @@ const employCSVPromise = new Promise((resolve, reject) => {
         .then(temp => resolve(temp))
         .catch(err => reject("CSV for Umployment Rate Data\n" + err));
 });
+const eduCSVPromise = new Promise((resolve, reject) => {
+    d3.dsv(",", pathToEduCSV, d => {
+        return {
+            year: parseInt(d["Year"]),
+            high: parseFloat(d["high school graduate percentage"]),
+            bachelor: parseFloat(d["bachelor percentage"])
+        }
+    })
+        .then(temp => resolve(temp))
+        .catch(err => reject("CSV for Education Data\n" + err));
+});
+const incomeCSVPromise = new Promise((resolve, reject) => {
+    d3.dsv(",", pathToIncomeCSV, d => {
+        return {
+            year: parseInt(d["Year"]),
+            income: parseInt(d["annual income"]),
+            poverty: parseFloat(d["poverty rate"])
+        }
+    })
+        .then(temp => resolve(temp))
+        .catch(err => reject("CSV for Income Data\n" + err));
+});
 const jsonPromise = new Promise((resolve, reject) => {
     d3.json(pathToJSON)
         .then(temp => resolve(temp))
         .catch(err => reject("JSON\n" + err));
 });
-
-
-let error = "", region, crimeTemp, houseTemp, employTemp, yearRange;
-const chartData = {};
-Promise.all([jsonPromise, crimeCSVPromise, houseCSVPromise, employCSVPromise])
+// handle csv/json data
+let error = "", region, crimeTemp, houseTemp, employTemp, eduTemp, incomeTemp, yearRange;
+const chartCityData = {};
+const chartAllData = [];
+Promise.all(
+    [jsonPromise, crimeCSVPromise, houseCSVPromise, employCSVPromise, eduCSVPromise, incomeCSVPromise])
     .then(value => {
         region = value[0];
         crimeTemp = value[1];
         houseTemp = value[2];
         employTemp = value[3];
+        eduTemp = value[4];
+        incomeTemp = value[5];
     }).catch(err => {
         error = "Error in " + err;
-    }).then(() => ready(error, region, crimeTemp, houseTemp, employTemp, regionNameObj));
+    }).then(() =>
+        ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeTemp, regionNameObj)
+    );
 
 
-function ready(error, region, crimeTemp, houseTemp, employTemp, regionNameObj) {
+function ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeTemp, regionNameObj) {
     if (error.length != 0) {
         console.log(error);
         alert(error);
@@ -149,29 +244,23 @@ function ready(error, region, crimeTemp, houseTemp, employTemp, regionNameObj) {
         console.log("Error:\nNo error in Promise.\nBut some data is empty!");
         alert("Error:\nNo error in Promise.\nBut some data is empty!");
     } else {
-        crimeTemp.forEach(data => {
-            if (!chartData.hasOwnProperty(data.city)) {
-                chartData[data.city] = {};
-            }
-            if (!chartData[data.city].hasOwnProperty(data.year)) {
-                chartData[data.city][data.year] = {};
-            }
-            chartData[data.city][data.year].violent = data.crimeViolent;
-            chartData[data.city][data.year].property = data.crimeProperty;
-        });
-        houseTemp.columns.forEach(column => {
-            if (column != "City") {
-                houseTemp.forEach(data => {
-                    chartData[data["City"]][column].house = parseInt(data[column]);
-                });
-            }
-        });
-        employTemp.forEach(data => {
-            chartData[data.city][data.year].unemploy = data.employ;
-        });
-        yearRange = Object.keys(chartData[Object.keys(chartData)[0]]);
-        // y-axis !!!
-        // could redefine timeSlideRange{min, max} here
+        // data set with city info
+        getCrimeData("violent");
+        getCrimeData("property");
+        getHouseData();
+        getUnemployData();
+
+        // data set without city info
+        getNoTimeData("high", eduTemp);
+        getNoTimeData("bachelor", eduTemp);
+        getNoTimeData("income", incomeTemp);
+        getNoTimeData("poverty", incomeTemp);
+
+        // Set up slider for Date Selection
+        yearRange = [...houseTemp.columns];
+        yearRange.splice(yearRange.indexOf("City"), 1).sort();
+        timeSlideRange.min = parseTime(yearRange[0]);
+        timeSlideRange.max = parseTime(yearRange[yearRange.length - 1]);
 
         // enter code to append the region options to the dropdown
         regionDropdown.selectAll("optgroup")
@@ -192,6 +281,61 @@ function ready(error, region, crimeTemp, houseTemp, employTemp, regionNameObj) {
         }
         regionDropdown.on("change", dropdownChange);
     }
+
+    function getCrimeData(keyType) {
+        crimeTemp.forEach(data => {
+            if (!chartCityData.hasOwnProperty(data.city)) {
+                chartCityData[data.city] = [];
+            }
+            if (chartCityData[data.city].length == 0 || chartCityData[data.city][0].id !== keyType) {
+                chartCityData[data.city].unshift({ id: keyType, elements: [] });
+            }
+            chartCityData[data.city][0].elements.unshift({ date: data.year, value: data[keyType] });
+        });
+    }
+
+    function getHouseData() {
+        houseTemp.forEach(data => {
+            if (chartCityData[data["City"]][0].id !== "house") {
+                chartCityData[data["City"]].unshift({ id: "house", elements: [] });
+            }
+            houseTemp.columns.forEach(year => {
+                if (year !== "City") {
+                    chartCityData[data["City"]][0].elements.unshift(
+                        { date: parseInt(year), value: parseInt(data[year]) });
+                }
+            });
+        });
+    }
+
+    function getUnemployData() {
+        employTemp.forEach(data => {
+            if (chartCityData[data.city][0].id !== "unemploy") {
+                chartCityData[data.city].unshift({ id: "unemploy", elements: [] });
+            }
+            chartCityData[data.city][0].elements.unshift({ date: data.year, value: data.employ });
+        });
+    }
+
+    function getNoTimeData(keyType, temp) {
+        temp.forEach(data => {
+            if (chartAllData.length == 0 || chartAllData[0].id !== keyType) {
+                chartAllData.unshift({ id: keyType, elements: [] });
+            }
+            chartAllData[0].elements.unshift({ date: data.year, value: data[keyType] });
+        });
+        if (keyType == "high" || keyType == "bachelor") {
+            if (!attrBtn[atttList.indexOf("education")].hasOwnProperty("data")) {
+                attrBtn[atttList.indexOf("education")].data = [];
+            }
+            attrBtn[atttList.indexOf("education")].data.push(chartAllData[0]);
+        } else if (keyType == "income" || keyType == "poverty") {
+            if (!attrBtn[atttList.indexOf("income")].hasOwnProperty("data")) {
+                attrBtn[atttList.indexOf("income")].data = [];
+            }
+            attrBtn[atttList.indexOf("income")].data.push(chartAllData[0]);
+        }
+    }
 }
 
 function dropdownChange(event, d) {
@@ -201,7 +345,7 @@ function dropdownChange(event, d) {
 
     switch (selectedRegion) {
         case "Los Angeles":
-            createMap(region, chartData);
+            createMap(region, chartCityData);
             timeSlide.property("max", -1)
                 .property("min", -findYearDiff(timeSlideRange.min, timeSlideRange.max))
                 .property("value", -findYearDiff(timeSlideRange.min, timeSlideRange.max));
@@ -211,13 +355,26 @@ function dropdownChange(event, d) {
             noData(svgRect);
             break;
     }
-    svg.call(zoom.scaleTo, zoomSlide.property("value"));
+    svgMap.call(zoom.scaleTo, zoomSlide.property("value"));
+
+    function clearSVG(svgRect) {
+        titleDiv.style("display", null).text(null);
+        removeTooltip(svgRect, 0, 0);
+        gRegion.selectAll("path").remove();
+        gRegion.selectAll("text").remove();
+        timeSlide.property("max", 0).property("min", 0);
+        timeSlideColor();
+        timeOutput.text("Please Select\nThe Location");
+        selectedPath.pointer = [svgRect.svgWidth / 2, svgRect.svgHeight / 2];
+    }
 }
 
 function createMap(region, chartData) {
+    // get SVG size and set Map size
     const svgRect = svgPos();
     projection.fitSize([svgRect.svgWidth, svgRect.svgHeight], region);
 
+    // set data for map regions
     const regionFeatures = [...region.features];
     regionFeatures.forEach(feature => {
         feature.properties.selected = false;
@@ -226,29 +383,27 @@ function createMap(region, chartData) {
         }
     });
 
+    // create map region
     gRegion.selectAll("path")
         .data(regionFeatures).enter()
         .append("path")
         .attr("d", path)
         .attr("id", d => {
-            if (d.properties["CITY_NAME"] == "Unincorporated") {
-                return "gUnincorporated";
-            } else {
-                return "gRegion";
-            }
+            if (d.properties["CITY_NAME"] == "Unincorporated") { return "pathUnincorporated"; }
+            else { return "pathRegion"; }
         })
         .on("pointerover", mapPointerOver)
         .on("pointerout", mapPointerOut)
         .on("pointermove", mapPointerMove)
         .on("click", regionClicked);
 
-    svg.call(zoom)
+    svgMap.call(zoom)
         .on("wheel.zoom", null)
         .on("dblclick.zoom", null);
 }
 
 function noData(svgRect) {
-    svg.call(zoom.translateTo, svgRect.svgWidth / 2, svgRect.svgHeight / 2);
+    svgMap.call(zoom.translateTo, svgRect.svgWidth / 2, svgRect.svgHeight / 2);
     gRegion.append("text")
         .attr("class", "notification-text")
         .attr("x", 0.5 * svgRect.svgWidth)
@@ -256,41 +411,38 @@ function noData(svgRect) {
         .text("No Data");
 }
 
-function clearSVG(svgRect) {
-    titleDiv.style("display", null).text(null);
-    removeTooltip(svgRect, 0, 0);
-    gRegion.selectAll("path").remove();
-    gRegion.selectAll("text").remove();
-    timeSlide.property("max", 0).property("min", 0);
-    timeSlideColor();
-    timeOutput.text("Please Select\nThe Location");
-    selectedPath.pointer = [svgRect.svgWidth / 2, svgRect.svgHeight / 2];
-}
-
+/**
+ * update the charts based on the new btn selection AFTER the charts are created
+ * @param {Object} d data in attrBtn that stored and passed to the attrBtnGrid
+ */
 function updateAttr(d) {
-    if (d.attrSelected) {
-        // upadte chart !!!
-        console.log(d);
-        console.log("Update Information Box Using Given Object");
+    if (chartCreated) {
+        if (d.attrSelected) {
+            // new select chart, add more axis
+            console.log(d.data);
+            // upadte chart !!!
+        } else {
+            // remove select chart, delete relative axis
+        }
     }
 }
 
 function findYearDiff(startDate, endDate) {
-    const startDateYear = startDate.getUTCFullYear();
-    const endDateYear = endDate.getUTCFullYear();
+    const startDateYear = startDate.getFullYear();
+    const endDateYear = endDate.getFullYear();
     return endDateYear - startDateYear;
 }
 
 function findYearBefore(endDate, years) {
-    const startYear = endDate.getUTCFullYear() + parseInt(years);
-    const startDate = new Date(startYear.toString());
+    const startYear = endDate.getFullYear() + parseInt(years);
+    const startDate = parseTime(startYear.toString());
     return startDate;
 }
 
 function outputStr() {
     return "From "
-        + findYearBefore(timeSlideRange.max, timeSlide.property("value")).getUTCFullYear()
-        + "\nTo " + timeSlideRange.max.getUTCFullYear();
+        + findYearBefore(timeSlideRange.max, timeSlide.property("value")).getFullYear()
+        + "\nTo " + timeSlideRange.max.getFullYear();
 }
 
 function timeSlideColor() {
@@ -307,10 +459,6 @@ function timeSlideColor() {
 }
 
 function mapPointerOver(event, d) {
-    // let textStr = d.properties.city.toString();
-    // if (d.properties.isSegment) {
-    //     textStr = textStr + ", " + d.properties["CITY_NAME"]
-    // }
     titleDiv.style("display", "block").text(d.properties["CITY_NAME"]);
 }
 
@@ -346,14 +494,13 @@ function regionClicked(event, d) {
 }
 
 function removeTooltip(svgRect, centerX, centerY) {
-    svg.transition().duration(800)
+    svgMap.transition().duration(800)
         .call(zoom.transform, d3.zoomIdentity
             .translate(svgRect.svgWidth / 2, svgRect.svgHeight / 2)
             .scale(zoomSlide.property("value"))
             .translate(-centerX, -centerY));
     d3.select("body").style("overflow-x", "hidden");
-    tipDiv.text(null)
-        .transition().duration(800)
+    tipDiv.transition().duration(800)
         .style("transform", "translateX(800px)")
         .style("left", null).style("top", null)
         .style("width", null).style("height", null)
@@ -362,24 +509,165 @@ function removeTooltip(svgRect, centerX, centerY) {
                 .style("transform", null);
             d3.select("body").style("overflow-x", null);
         });
+    //removeAllChart();
 }
 
 function createTooltip(svgRect, centerX, centerY, d) {
-    svg.transition().duration(800)
+    // move map center to left side of svgMap
+    svgMap.transition().duration(800)
         .call(zoom.transform, d3.zoomIdentity
-            .translate(svgRect.svgWidth / 4, svgRect.svgHeight / 2)
+            .translate(svgRect.svgWidth * 0.15, svgRect.svgHeight / 2)
             .scale(zoomSlide.property("value"))
             .translate(-centerX, -centerY));
-    tipDiv.style("display", "block")
+
+    // ease in tooltip (right to left)
+    tipDiv.style("display", "grid")
         .transition().duration(800)
-        .style("left", svgRect.svgLeft + svgRect.svgWidth / 2 + "px")
+        .style("left", svgRect.svgLeft + svgRect.svgWidth * 0.3 + "px")
         .style("top", svgRect.svgTop + "px")
-        .style("width", svgRect.svgWidth / 2 + "px")
+        .style("width", svgRect.svgWidth * 0.7 + "px")
         .style("height", svgRect.svgHeight + "px")
         .on("end", function () {
-            tipDiv.text(d.properties["CITY_NAME"]);
-            // add charts here !!!
+            // create new charts when ease-in finish
+            //removeAllChart();
+            if (d.properties["CITY_NAME"] == "Unincorporated") {
+                //textChart.attr("y", "50%")
+                //    .text(d.properties["CITY_NAME"] + ": No data for Unincorporated City");
+            } else {
+                let selectedBtn = attrBtn.filter(btn => btn.attrSelected);
+                if (selectedBtn.length == 0) {
+                    // show which city region is clicked
+                    //textChart.attr("y", "50%").text(d.properties["CITY_NAME"]);
+                } else {
+                    // show which city region is clicked
+                    //textChart.attr("y", "20px").text(d.properties["CITY_NAME"]);
+                    //  and select data for creating chart
+                    createChart(getChartData(selectedBtn));
+                }
+            }
         });
+
+    function getChartData(selectedBtn) {
+        let dataType = [];
+        selectedBtn.forEach(btn => {
+            if (btn.label == "education") { dataType.push(...["high", "bachelor"]); }
+            else if (btn.label == "income") { dataType.push(...["income", "poverty"]); }
+            else { dataType.push(btn.label); }
+        });
+        let data = [];
+        d.properties.data.forEach(dataset => {
+            let index = dataType.indexOf(dataset.id);
+            if (index > -1) { data.push(dataset); }
+        });
+        chartAllData.forEach(dataset => {
+            let index = dataType.indexOf(dataset.id);
+            if (index > -1) { data.push(dataset); }
+        });
+        return data;
+    }
+
+    function createChart(dataset) {
+        console.log(dataset);
+        // add charts here !!!
+        dataset.forEach(data => {
+            switch (data.id) {
+                case "violent":
+                    if (tipDiv.select("#crime").node() == null) {
+                        tipDiv.insert("div").attr("id", "crime")
+                            .attr("class", "chartDiv");
+                    }
+                    break;
+                case "property":
+                    if (tipDiv.select("#crime").node() == null) {
+                        tipDiv.insert("div").attr("id", "crime")
+                            .attr("class", "chartDiv");
+                    }
+                    break;
+                case "house":
+                    if (tipDiv.select("#house").node() == null) {
+                        tipDiv.append("div").attr("id", "house")
+                            .attr("class", "chartDiv");
+                    }
+                    break;
+                case "unemploy":
+                    if (tipDiv.select("#crime").node() == null) {
+                        tipDiv.insert("div").attr("id", "crime")
+                            .attr("class", "chartDiv");
+                    }
+                    break;
+                case "income":
+                    if (tipDiv.select("#income").node() == null) {
+                        tipDiv.append("div").attr("id", "income")
+                            .attr("class", "chartDiv");
+                    }
+                    break;
+                case "high":
+                    if (tipDiv.select("#education").node() == null) {
+                        tipDiv.append("div").attr("id", "education")
+                            .attr("class", "chartDiv");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+        console.log(tipDiv.selectAll("div").nodes().length);
+        const firstChartDiv = tipDiv.selectChild("div");
+
+        /*
+        gMainChart.attr("transform", "translate(" + svgRect.svgWidth * 0.1 + ", 300)");
+        gLeftChart.attr("transform", "translate(" + svgRect.svgWidth * 0.035 + ", 250)");
+        gRightChart.attr("transform", "translate(" + svgRect.svgWidth * 0.035 + ", 250)");
+
+        xMainAxisScale.range([0, svgRect.svgWidth * 0.5]).domain([
+            findYearBefore(timeSlideRange.max, timeSlide.property("value")),
+            timeSlideRange.max
+        ]);
+        yMainAxisScale_1.domain([Math.floor(0.95 * d3.min(violent.concat(property))), d3.max(violent.concat(property))]);
+        yMainAxisScale_2.domain([Math.floor(0.95 * d3.min(unemploy)), d3.max(unemploy)]);
+        xOtherAxisScale.range([0, svgRect.svgWidth * 0.3]).domain([
+            findYearBefore(timeSlideRange.max, timeSlide.property("value")),
+            timeSlideRange.max
+        ]);
+        //yOtherAxisScale.domain
+
+        const lineLeft = d3.line()
+            .x(function (d) { return xMainAxisScale(d.date); })
+            .y(function (d) { return yMainAxisScale_1(d.value); });
+        const linesMain = gMainLines.selectAll(".line")
+            .data([useData_1, useData_2, useData_3])
+            .enter()
+            .append("g");
+        const lineRight = d3.line()
+            .x(function (d) { return xMainAxisScale(d.date); })
+            .y(function (d) { return yMainAxisScale_2(d.value); });
+        linesMain.append("path").attr("class", "line")
+            .attr("d", function (d) {
+                if (d.id == "unemploy") {
+                    return lineRight(d.useData);
+                } else {
+                    return lineLeft(d.useData);
+                }
+            }).attr("class", d => {
+                if (d.id == "unemploy") {
+                    return "lineLeft";
+                } else {
+                    return "lineRight";
+                }
+            });
+
+
+        gMainXAxis.call(xMainAxis.scale(xMainAxisScale));
+        gMainYAxis_1.call(yMainAxis_1.scale(yMainAxisScale_1));
+        gMainYAxis_2.attr("transform", "translate(" + svgRect.svgWidth * 0.5 + ", -280)")
+            .call(yMainAxis_2.scale(yMainAxisScale_2));
+
+        //gLeftXAxis.call(xOtherAxis.scale(xOtherAxisScale));
+        //gRightXAxis.call(xOtherAxis.scale(xOtherAxisScale));
+        */
+
+        chartCreated = true;
+    }
 }
 
 function changeRegionColor(d, boo) {
@@ -405,7 +693,7 @@ function changeRegionColor(d, boo) {
 }
 
 function svgPos() {
-    const svgRect = svg.node().getBoundingClientRect();
+    const svgRect = svgMap.node().getBoundingClientRect();
     return {
         svgLeft: svgRect.x + window.scrollX,
         svgTop: svgRect.y + window.scrollY,
@@ -441,21 +729,28 @@ function zoomRangeSlider(event, d) {
 function zoomMap(zoomLevel) {
     if (selectedPath.path !== null) {
         const svgRect = svgPos();
-        svg.transition().duration(500)
+        svgMap.transition().duration(500)
             .call(zoom.transform,
                 d3.zoomIdentity
-                    .translate(svgRect.svgWidth / 4, svgRect.svgHeight / 2)
+                    .translate(svgRect.svgWidth * 0.15, svgRect.svgHeight / 2)
                     .scale(zoomLevel)
                     .translate(-selectedPath.pointer[0], -selectedPath.pointer[1]));
     } else {
-        svg.transition().call(zoom.scaleTo, zoomLevel);
+        svgMap.transition().call(zoom.scaleTo, zoomLevel);
     }
 }
 
-function cityUpperCase(str) {
-    let strArr = str.split("-");
-    for (let i = 0; i < strArr.length; i++) {
-        strArr[i] = strArr[i].slice(0, 1).toUpperCase() + strArr[i].slice(1).toLowerCase();
-    }
-    return strArr.join(" ");
+/**
+ * Remove all elements in all "g" under all "svg" from "div #region-tip"
+ */
+function removeAllChart() {
+    textChart.text(null);
+    gMainXAxis.selectAll("*").remove();
+    gMainYAxis_1.selectAll("*").remove();
+    gMainYAxis_2.selectAll("*").remove();
+    gLeftXAxis.selectAll("*").remove();
+    gLeftYAxis.selectAll("*").remove();
+    gRightXAxis.selectAll("*").remove();
+    gRightYAxis.selectAll("*").remove();
+    gMainLines.selectAll("*").remove();
 }
