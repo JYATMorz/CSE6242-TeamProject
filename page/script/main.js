@@ -5,7 +5,7 @@
 // Define constant variables.
 const regionNameObj = {
     China: ["Shenzhen", "Shanghai"],
-    USA: ["Atlanta", "Los Angeles"]
+    USA: ["Fulton County", "Los Angeles County"]
 };
 const attrBtn = [
     { attrName: "Violent Crime", label: "violent" },
@@ -313,7 +313,7 @@ function dropdownChange(event, d) {
     const selectedRegion = this.options[this.selectedIndex].value;
 
     switch (selectedRegion) {
-        case "Los Angeles":
+        case "Los Angeles County":
             // set data for map regions
             const regionFeatures = [...region.features];
             regionFeatures.forEach(feature => {
@@ -631,6 +631,19 @@ function createChart(data, svgRect) {
             Math.ceil(1.05 * d3.max(leftData[0].elements.map(element => element.value)))
         ]);
     }
+    if (rightData.length > 1) {
+        yAxisScaleRight.domain([
+            Math.floor(0.95 * d3.min(rightData[0].elements.map(element => element.value)
+                .concat(rightData[1].elements.map(element => element.value)))),
+            Math.ceil(1.05 * d3.max(rightData[0].elements.map(element => element.value)
+                .concat(rightData[1].elements.map(element => element.value))))
+        ]);
+    } else if (rightData.length == 1) {
+        yAxisScaleRight.domain([
+            Math.floor(0.95 * d3.min(rightData[0].elements.map(element => element.value))),
+            Math.ceil(1.05 * d3.max(rightData[0].elements.map(element => element.value)))
+        ]);
+    }
 
     // get path coordinates if relative data exists and draw axes
     xAxisScale.range([0, svgRect.svgWidth * 0.5])
@@ -648,13 +661,8 @@ function createChart(data, svgRect) {
             .attr("y", chartTranslate.top * 0.85)
             .text(leftTypeArr[leftData[0].id][0]);
     } else { gYAxisLeft.selectAll("*").remove(); }
-
     if (rightData.length > 0) {
         gYAxisRight.selectAll(".chartLabel").remove();
-        yAxisScaleRight.domain([
-            Math.floor(0.95 * d3.min(rightData[0].elements.map(element => element.value))),
-            Math.ceil(1.05 * d3.max(rightData[0].elements.map(element => element.value)))
-        ]);
         lineRight
             .x(d => { return xAxisScale(d.date); })
             .y(d => { return yAxisScaleRight(d.value); });
