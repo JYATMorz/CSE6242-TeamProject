@@ -1,12 +1,18 @@
-// Map created by:
-// Data collected from: 
+/**
+ * @file Data Visualization Webpage for CSE-6242 Team Project
+ * @author Huang Zili
+ * @link Github Repository: https://github.com/JYATMorz/CSE6242-TeamProject
+ * @link Original LA County Map geojson: https://hub.arcgis.com/datasets/lacounty::la-county-city-boundaries/about
+ * @link Geojson Rewind: https://observablehq.com/@bumbeishvili/rewind-geojson
+ */
 
-
-// Define constant variables.
+// define global constant variables.
+const chartInfo = { chartCreated: false, chartData: null };
 const regionNameObj = {
     China: ["Shenzhen", "Shanghai"],
     USA: ["Fulton County", "Los Angeles County"]
 };
+// Attribute should be displayed on the buttons
 const attrBtn = [
     { attrName: "Violent Crime", label: "violent" },
     { attrName: "Property Crime", label: "property" },
@@ -17,20 +23,20 @@ const attrBtn = [
 for (let i = 0; i < attrBtn.length; i++) {
     attrBtn[i].attrSelected = false;
 };
+// Attribute should be displayed on the left axis
 const leftTypeArr = {
     "violent": ["Numbers of Crimes", "Violent Crime"],
     "property": ["Numbers of Crimes", "Property Crime"],
     "house": ["House Price", "Average House Price"],
     "income": ["Average Income", "Average Income"]
 };
+// Attribute should be displayed on the right axis
 const rightTypeArr = {
     "unemploy": ["Unemployment Rate", "Unemployment Rate"],
     "high": ["Graduation Rate", "High School Graduation Rate"],
     "bachelor": ["Graduation Rate", "Undergraduate Graduation Rate"],
     "poverty": ["Poverty Rate", "Poverty Rate"]
 };
-
-const chartInfo = { chartCreated: false, chartData: null };
 const parseTime = d3.timeParse("%Y");
 const zoomSlideRange = { min: 1, max: 6 };
 const timeSlideRange = { min: parseTime("2010"), max: parseTime("2020") };
@@ -41,7 +47,7 @@ const zoom = d3.zoom()
     .on("zoom", zoomed);
 
 
-// define any other global variables 
+// define csv/json files path 
 const pathToJSON = "data/LA_County_Boundaries_rewind.geojson";
 const pathToCrimeCSV = "data/crime_clean.csv";
 const pathToHouseCSV = "data/house_price_clean.csv";
@@ -54,24 +60,12 @@ const pathToIncomeCSV = "data/income_and_poverty.csv";
 const regionTipDiv = d3.select("#region-tip");
 const regionChartDiv = d3.select("#region-chart");
 const chartTipDiv = d3.select("#chart-tip");
-d3.select(window).on("resize", function () {
-    const svgRect = svgPos();
-    regionChartDiv
-        .style("left", svgRect.svgLeft + svgRect.svgWidth * 0.3 + "px")
-        .style("top", svgRect.svgTop + "px")
-        .style("width", svgRect.svgWidth * 0.7 + "px")
-        .style("height", svgRect.svgHeight + "px");
-
-    if (chartInfo.chartCreated) {
-        refreshChart(chartInfo.chartData, svgRect);
-    }
-});
 
 
-// Link svg elements to variables
+// Link svg elements to variables: Map Elements
 const svgMap = d3.select("#svg-div").append("svg").attr("id", "svgGeoMap");
 const gRegion = svgMap.append("g").attr("id", "gRegion");
-
+// Link svg elements to variables: Chart Elements
 const svgChart = regionChartDiv.append("svg").attr("id", "svgChart");
 const gChart = svgChart.append("g").attr("class", "gChart");
 const gLines = gChart.append("g").attr("class", "gLines");
@@ -136,7 +130,22 @@ const yAxisScaleRight = d3.scaleLinear().range([chartTranslate.y, chartTranslate
 const yAxisLeft = d3.axisLeft().tickSizeOuter(0);
 const yAxisRight = d3.axisRight().tickSizeOuter(0);
 
-// import csv/json data
+// change eery size or position when the browser size change to fit the new window
+d3.select(window).on("resize", function () {
+    const svgRect = svgPos();
+    regionChartDiv
+        .style("left", svgRect.svgLeft + svgRect.svgWidth * 0.3 + "px")
+        .style("top", svgRect.svgTop + "px")
+        .style("width", svgRect.svgWidth * 0.7 + "px")
+        .style("height", svgRect.svgHeight + "px");
+
+    if (chartInfo.chartCreated) {
+        refreshChart(chartInfo.chartData, svgRect);
+    }
+});
+
+
+// use Promise to import csv/json data
 const crimeCSVPromise = new Promise((resolve, reject) => {
     d3.dsv(",", pathToCrimeCSV, d => {
         return {
@@ -192,7 +201,7 @@ const jsonPromise = new Promise((resolve, reject) => {
         .then(temp => resolve(temp))
         .catch(err => reject("JSON\n" + err));
 });
-// handle csv/json data
+// handle csv/json data for visualization
 let error = "", region, crimeTemp, houseTemp, employTemp, eduTemp, incomeTemp, yearRange;
 const chartCityData = {};
 const chartAllData = [];
@@ -211,7 +220,17 @@ Promise.all(
         ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeTemp, regionNameObj)
     );
 
-
+/**
+ * turn data from csv/json files to usable data for d3 and be ready for data binding
+ * @param {string} error error(s) occured in Promise
+ * @param {Object} region region data from geojson file
+ * @param {Array} crimeTemp crime data from csv file
+ * @param {Array} houseTemp house price data from csv file
+ * @param {Array} employTemp unemployment rate data from csv file
+ * @param {Array} eduTemp education rate data from csv file
+ * @param {Array} incomeTemp average income and poverty rate data from csv file
+ * @param {Object} regionNameObj regions displayed in drop-down input
+ */
 function ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeTemp, regionNameObj) {
     if (error.length != 0) {
         console.log(error);
@@ -258,6 +277,10 @@ function ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeT
         regionDropdown.on("change", dropdownChange);
     }
 
+    /**
+     * clean the crime(violent/property) data and store in chartCityData
+     * @param {string} keyType "violent" or "property"
+     */
     function getCrimeData(keyType) {
         crimeTemp.forEach(data => {
             if (!chartCityData.hasOwnProperty(data.city)) {
@@ -271,6 +294,9 @@ function ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeT
         });
     }
 
+    /**
+     * clean the house price data and store in chartCityData
+     */
     function getHouseData() {
         houseTemp.forEach(data => {
             if (chartCityData[data["City"]][0].id !== "house") {
@@ -286,6 +312,9 @@ function ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeT
         });
     }
 
+    /**
+     * clean the unemployment rate data and store in chartCityData
+     */
     function getUnemployData() {
         employTemp.forEach(data => {
             if (chartCityData[data.city][0].id !== "unemploy") {
@@ -296,6 +325,11 @@ function ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeT
         });
     }
 
+    /**
+     * clean the data without region information and store in chartAllData
+     * @param {string} keyType "income"/"poverty"/"hight"/"bachelor"
+     * @param {Array} temp 'keyType' data
+     */
     function getNoTimeData(keyType, temp) {
         temp.forEach(data => {
             if (chartAllData.length == 0 || chartAllData[0].id !== keyType) {
@@ -307,6 +341,11 @@ function ready(error, region, crimeTemp, houseTemp, employTemp, eduTemp, incomeT
     }
 }
 
+/**
+ * draw the map area with map or text according to the drop-down value when drop-down change
+ * @param {object} event HTML DOM event: change
+ * @param {object} d data bined with the drop-down input
+ */
 function dropdownChange(event, d) {
     const svgRect = svgPos();
     clearMapSVG(svgRect);
@@ -335,6 +374,10 @@ function dropdownChange(event, d) {
     }
     svgMap.call(zoom.scaleTo, zoomSlide.property("value"));
 
+    /**
+     * turn the page to the initial state, including svgMap, regionTip and sliderOutput
+     * @param {object} svgRect the size and location of the svgMap
+     */
     function clearMapSVG(svgRect) {
         regionTipDiv.style("display", null).text(null);
         removeTooltip(svgRect, 0, 0);
@@ -347,6 +390,10 @@ function dropdownChange(event, d) {
     }
 }
 
+/**
+ * create map with given region data
+ * @param {array} regionFeatures an array contained every region geo info and project data
+ */
 function createMap(regionFeatures) {
     // get SVG size and set Map size
     const svgRect = svgPos();
@@ -367,27 +414,45 @@ function createMap(regionFeatures) {
         .on("pointermove", mapPointerMove)
         .on("click", regionClicked);
 
+    // disable double click and wheel roll to zoom
     svgMap.call(zoom)
         .on("wheel.zoom", null)
         .on("dblclick.zoom", null);
 
-
+    /**
+     * show the region tip with corresponding region name
+     * @param {object} event HTML DOM event pointerover
+     * @param {object} d binded region data
+     */
     function mapPointerOver(event, d) {
         regionTipDiv.style("display", "block").text(d.properties["CITY_NAME"]);
     }
 
+    /**
+     * hide the region tip
+     * @param {object} event HTML DOM event pointerout
+     * @param {object} d binded region data
+     */
     function mapPointerOut(event, d) {
         regionTipDiv.style("display", null).text(null);
     }
 
+    /**
+     * move the region tip with the mouse
+     * @param {object} event HTML DOM event pointermove
+     * @param {object} d binded region data
+     */
     function mapPointerMove(event, d) {
         regionTipDiv
             .style("left", event.pageX - 30 + "px")
             .style("top", event.pageY - 50 + "px");
     }
-
 }
 
+/**
+ * center the map in the middle of the div and show "no data" to user
+ * @param {object} svgRect the size and location of the svgMap
+ */
 function noData(svgRect) {
     svgMap.call(zoom.translateTo, svgRect.svgWidth / 2, svgRect.svgHeight / 2);
     gRegion.append("text")
@@ -447,25 +512,43 @@ function updateAttr(d) {
     }
 }
 
-
+/**
+ * calculate the number of years between 2 years (used to be month)
+ * @param {Date} startDate the earlier date
+ * @param {Date} endDate the later date
+ * @returns {int} number of years between 2 years
+ */
 function findYearDiff(startDate, endDate) {
     const startDateYear = startDate.getFullYear();
     const endDateYear = endDate.getFullYear();
     return endDateYear - startDateYear;
 }
 
+/**
+ * calculate the date with the start date and gap number
+ * @param {Date} endDate the start year
+ * @param {int} years desired gap between 2 years (is negative in current use)
+ * @returns {Date} the date with desired gap from given date
+ */
 function findYearBefore(endDate, years) {
     const startYear = endDate.getFullYear() + parseInt(years);
     const startDate = parseTime(startYear.toString());
     return startDate;
 }
 
+/**
+ * the string for output element beside the input range (slider)
+ * @returns {string} the date range in string
+ */
 function outputStr() {
     return "From "
         + findYearBefore(timeSlideRange.max, timeSlide.property("value")).getFullYear()
         + "\nTo " + timeSlideRange.max.getFullYear();
 }
 
+/**
+ * change slider background color according to slider value
+ */
 function timeSlideColor() {
     let value = 0;
     if (timeSlide.property("max") === timeSlide.property("min")) {
@@ -479,7 +562,11 @@ function timeSlideColor() {
     timeSlide.style("background", style);
 }
 
-
+/**
+ * draw or clear data in different situation
+ * @param {object} event HTML DOM event click
+ * @param {object} d region binded data
+ */
 function regionClicked(event, d) {
     const [[x0, y0], [x1, y1]] = path.bounds(d);
     const svgRect = svgPos();
@@ -500,6 +587,12 @@ function regionClicked(event, d) {
     }
 }
 
+/**
+ * ease out the chart div and clear the chart
+ * @param {object} svgRect the size and position of svgMap
+ * @param {float} centerX the center X of selected region
+ * @param {float} centerY the center Y of selected region
+ */
 function removeTooltip(svgRect, centerX, centerY) {
     svgMap.transition().duration(800)
         .call(zoom.transform, d3.zoomIdentity
@@ -519,6 +612,12 @@ function removeTooltip(svgRect, centerX, centerY) {
     chartInfo.chartCreated = false;
 }
 
+/**
+ * ease in the chart div and draw empty/detailed chart
+ * @param {object} svgRect the size and position of svgMap
+ * @param {float} centerX the center X of selected region
+ * @param {float} centerY the center Y of selected region
+ */
 function createTooltip(svgRect, centerX, centerY) {
     // move map center to left side of svgMap
     svgMap.transition().duration(800)
@@ -548,6 +647,11 @@ function createTooltip(svgRect, centerX, centerY) {
 
 }
 
+/**
+ * redraw everything in chart div (clear and draw)
+ * @param {object} regionData region binded data
+ * @param {object} svgRect the size and position of svgMap
+ */
 function refreshChart(regionData, svgRect) {
     gLines.selectAll("*").remove();
 
@@ -576,6 +680,12 @@ function refreshChart(regionData, svgRect) {
     chartInfo.chartCreated = true;
 }
 
+/**
+ * get the data that needed to be drawed
+ * @param {Array} selectedBtn array stored all selected button data
+ * @param {object} regionData region binded data
+ * @returns {Array} the data needed to be draw based on selected button(s)
+ */
 function getChartData(selectedBtn, regionData) {
     let dataType = [];
     selectedBtn.forEach(btn => {
@@ -591,6 +701,11 @@ function getChartData(selectedBtn, regionData) {
     return data;
 }
 
+/**
+ * create chart with given data
+ * @param {Array} data the data needed to be draw
+ * @param {object} svgRect the size and position of svgMap
+ */
 function createChart(data, svgRect) {
     // clean the data
     const minYearDate = findYearBefore(timeSlideRange.max, timeSlide.property("value"));
@@ -698,24 +813,42 @@ function createChart(data, svgRect) {
         .on("pointerout", chartPointerOut)
         .on("pointermove", chartPointerMove);
 
-
+    /**
+     * show the line chart tip and set its value with corresponding data
+     * @param {object} event HTML DOM event pointerover
+     * @param {object} d region binded data
+     */
     function chartPointerOver(event, d) {
         chartTipDiv.style("display", "block")
             .text(Object.assign({}, leftTypeArr, rightTypeArr)[d.id][1] + ": " + d.value);
     }
 
+    /**
+     * hide the line chart tip
+     * @param {object} event HTML DOM event pointerout
+     * @param {object} d region binded data
+     */
     function chartPointerOut(event, d) {
         chartTipDiv.style("display", null).text(null);
     }
 
+    /**
+     * move the line chart tip with the mouse
+     * @param {object} event HTML DOM event pointermove
+     * @param {object} d region binded data
+     */
     function chartPointerMove(event, d) {
         chartTipDiv
             .style("left", event.pageX - 100 + "px")
             .style("top", event.pageY - 60 + "px")
     }
-
 }
 
+/**
+ * highlight the selected region or not
+ * @param {object} d region binded data
+ * @param {boolean} boo whether the region is selected to be highlighted
+ */
 function changeRegionColor(d, boo) {
     if (boo) {
         if (d.properties["CITY_NAME"] == "Unincorporated") {
@@ -738,6 +871,10 @@ function changeRegionColor(d, boo) {
     }
 }
 
+/**
+ * calculate the size and location of the svgMap using DOM function
+ * @returns the size and location of the svgMap
+ */
 function svgPos() {
     const svgRect = svgMap.node().getBoundingClientRect();
     return {
@@ -748,10 +885,19 @@ function svgPos() {
     };
 }
 
+/**
+ * d3 default zoom function
+ * @param {*} transformObj d3 default zoom variable
+ */
 function zoomed({ transform }) {
     gRegion.attr("transform", transform);
 }
 
+/**
+ * click the zoom in button to zoom in the map
+ * @param {object} event HTML DOM event click
+ * @param {object} d zoom button binded data (null)
+ */
 function zoomInBtn(event, d) {
     let zoomLevel = zoomSlide.property("value");
     if (zoomLevel < zoomSlideRange.max) {
@@ -760,6 +906,11 @@ function zoomInBtn(event, d) {
     }
 }
 
+/**
+ * click the zoom out button to zoom out the map
+ * @param {object} event HTML DOM event click
+ * @param {object} d zoom button binded data (null)
+ */
 function zoomOutBtn(event, d) {
     let zoomLevel = zoomSlide.property("value");
     if (zoomLevel > zoomSlideRange.min) {
@@ -768,10 +919,19 @@ function zoomOutBtn(event, d) {
     }
 }
 
+/**
+ * slide the input range slider to zoom in/out the map
+ * @param {object} event HTML DOM event input
+ * @param {object} d zoom slider binded data (null)
+ */
 function zoomRangeSlider(event, d) {
     zoomMap(zoomSlide.property("value"));
 }
 
+/**
+ * zoom the map with given scale value
+ * @param {int} zoomLevel zoom scale value
+ */
 function zoomMap(zoomLevel) {
     if (selectedPath.path !== null) {
         const svgRect = svgPos();
